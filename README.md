@@ -1,3 +1,5 @@
+This is a replication of the original repository. The changes made and the current replication status are documented in REPLICATION.md. The original README follows below.
+
 # DeFi Protocols for Loanable Funds:Interest Rates, Liquidity and Market Efficiency
 
 This repository contains the source code and data used for the paper: DeFi Protocols for Loanable Funds:Interest Rates, Liquidity and Market Efficiency, to be presented at the second ACM conference on Advances in Financial Technologies (AFT'20).
