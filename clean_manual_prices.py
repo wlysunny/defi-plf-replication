@@ -1,0 +1,132 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "7b340fec-74c1-4538-904d-b47c784bab97",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "REP cleaned: 147 rows, 2020-01-15 00:00:00 to 2020-06-15 00:00:00\n",
+      "date\n",
+      "2020-01-15    16.56\n",
+      "2020-01-16    15.91\n",
+      "2020-01-17    15.02\n",
+      "2020-01-18    14.12\n",
+      "2020-01-19    13.76\n",
+      "Name: rep, dtype: float64\n",
+      "\n",
+      "SAI cleaned: 153 rows, 2020-01-15 00:00:00+00:00 to 2020-06-15 00:00:00+00:00\n",
+      "date\n",
+      "2020-01-15 00:00:00+00:00    0.999087\n",
+      "2020-01-16 00:00:00+00:00    0.990463\n",
+      "2020-01-17 00:00:00+00:00    0.997438\n",
+      "2020-01-18 00:00:00+00:00    0.994456\n",
+      "2020-01-19 00:00:00+00:00    0.987310\n",
+      "Name: sai, dtype: float64\n",
+      "\n",
+      "Saved to data/manual/rep_usd_prices_cleaned.csv and data/manual/sai_usd_prices_cleaned.csv\n"
+     ]
+    }
+   ],
+   "source": [
+    "\"\"\"\n",
+    "This script cleans manually-downloaded REP and SAI historical price CSVs\n",
+    "(obtained via web download since neither token is covered by DefiLlama's\n",
+    "free price API — see repo_verification_notes.md, Issue #12) into a standard\n",
+    "daily USD price Series matching the format used by fetch_exchange_rates_defillama.py.\n",
+    "\n",
+    "Directory convention:\n",
+    "- data/manual/raw/REP.csv, data/manual/raw/SAI.csv\n",
+    "    Original, unmodified downloads — kept as-is so the cleaning logic below\n",
+    "    can be checked against the exact source file at any time.\n",
+    "- data/manual/rep_usd_prices_cleaned.csv, data/manual/sai_usd_prices_cleaned.csv\n",
+    "    Output of this script — the cleaned, sample-window-filtered series\n",
+    "    actually used by downstream analysis.\n",
+    "\n",
+    "These two files came from different sources with different formats:\n",
+    "- REP.csv: CoinMarketCap-style export. Dates as text (\"August 20 2026\"),\n",
+    "  prices prefixed with \"$\", rows in descending (newest-first) date order.\n",
+    "- SAI.csv: a data-warehouse-style export (column names like \"event_date\"\n",
+    "  suggest Dune Analytics or similar). Already numeric, ascending date order.\n",
+    "\"\"\"\n",
+    "\n",
+    "import pandas as pd\n",
+    "\n",
+    "SAMPLE_START = '2020-01-15'\n",
+    "SAMPLE_END = '2020-06-15'\n",
+    "\n",
+    "\n",
+    "def clean_rep(path: str) -> pd.Series:\n",
+    "    df = pd.read_csv(path)\n",
+    "    df['date'] = pd.to_datetime(df['Date'], format='%B %d %Y')\n",
+    "    # Strip '$' and convert to float\n",
+    "    df['close_usd'] = df['Close'].replace(r'[\\$,]', '', regex=True).astype(float)\n",
+    "    df = df.sort_values('date')  # file is newest-first; put in ascending order\n",
+    "    df = df.set_index('date')['close_usd']\n",
+    "    df = df.loc[SAMPLE_START:SAMPLE_END]\n",
+    "    df.name = 'rep'\n",
+    "    return df\n",
+    "\n",
+    "\n",
+    "def clean_sai(path: str) -> pd.Series:\n",
+    "    df = pd.read_csv(path)\n",
+    "    df['date'] = pd.to_datetime(df['event_date']).dt.normalize()  # drop the \"00:00:00 UTC\" time component\n",
+    "    df = df.set_index('date')['close_price_usd']\n",
+    "    df = df.loc[SAMPLE_START:SAMPLE_END]\n",
+    "    df.name = 'sai'\n",
+    "    return df\n",
+    "\n",
+    "\n",
+    "if __name__ == '__main__':\n",
+    "    import os\n",
+    "    os.makedirs('data/manual', exist_ok=True)\n",
+    "\n",
+    "    rep = clean_rep('data/manual/raw/rep_usd.csv')\n",
+    "    sai = clean_sai('data/manual/raw/sai_usd.csv')\n",
+    "\n",
+    "    print('REP cleaned:', len(rep), 'rows,', rep.index.min(), 'to', rep.index.max())\n",
+    "    print(rep.head())\n",
+    "    print()\n",
+    "    print('SAI cleaned:', len(sai), 'rows,', sai.index.min(), 'to', sai.index.max())\n",
+    "    print(sai.head())\n",
+    "\n",
+    "    rep.to_csv('data/manual/rep_usd_prices_cleaned.csv')\n",
+    "    sai.to_csv('data/manual/sai_usd_prices_cleaned.csv')\n",
+    "    print('\\nSaved to data/manual/rep_usd_prices_cleaned.csv and data/manual/sai_usd_prices_cleaned.csv')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "e8f92b9c-213f-475b-a5b2-63c31e3100c5",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.14.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
