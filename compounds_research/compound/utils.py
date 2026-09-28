@@ -32,17 +32,28 @@ def make_original_df(token, resampling_frequency):
     df_regimes = pd.DataFrame(PARAM_REGIMES).transpose()
     df_regimes['regime'] = range(len(df_regimes))
 
-    merged = pd.merge(df, df_regimes, how='outer', left_index=True, right_index=True) 
-    merged['base_rate_per_block'] = merged['base_rate_per_block'].fillna(method='ffill')
-    merged['multiplier_per_block'] = merged['multiplier_per_block'].fillna(method='ffill')
-    merged['jump_multiplier_per_block'] = merged['jump_multiplier_per_block'].fillna(method='ffill')
-    merged['kink'] = merged['kink'].fillna(method='ffill')
-    merged['regime'] = merged['regime'].fillna(method='ffill')
-    merged['model'] = merged['model'].fillna(method='ffill')
-    merged['jump'] = merged['jump'].fillna(method='ffill')
-    merged['reserve_factor'] = merged['reserve_factor'].fillna(method='ffill')
+
+    merged = pd.merge(df, df_regimes, how='outer', left_index=True, right_index=True)
+
+    merged['kink'] = pd.to_numeric(merged['kink'], errors='coerce')
     
-    df_master = merged.resample(resampling_frequency).mean()
+    merged['base_rate_per_block'] = pd.to_numeric(merged['base_rate_per_block'], errors='coerce')
+    merged['multiplier_per_block'] = pd.to_numeric(merged['multiplier_per_block'], errors='coerce')
+    merged['jump_multiplier_per_block'] = pd.to_numeric(merged['jump_multiplier_per_block'], errors='coerce')
+    merged['kink'] = pd.to_numeric(merged['kink'], errors='coerce')
+    merged['jump'] = pd.to_numeric(merged['jump'], errors='coerce')
+    merged['reserve_factor'] = pd.to_numeric(merged['reserve_factor'], errors='coerce')
+    
+    merged['base_rate_per_block'] = merged['base_rate_per_block'].ffill()
+    merged['multiplier_per_block'] = merged['multiplier_per_block'].ffill()
+    merged['jump_multiplier_per_block'] = merged['jump_multiplier_per_block'].ffill()
+    merged['kink'] = merged['kink'].ffill()
+    merged['regime'] = merged['regime'].ffill()
+    merged['model'] = merged['model'].ffill()
+    merged['jump'] = merged['jump'].ffill()
+    merged['reserve_factor'] = merged['reserve_factor'].ffill()
+    
+    df_master = merged.resample(resampling_frequency).mean(numeric_only=True)
     
     return df_master
 
@@ -82,9 +93,10 @@ def make_ex_rate_and_interest_rate_df(quote_token: str,
     interest_rate_quote = interest_rates[quote_token]
     interest_rate_base = interest_rates[base_token]
 
-    ex_rate = get_exchange_rates(base_symbol=base_token,
-                                quote_symbol=quote_token,
-                                limit=1000)['close']
+    from fetch_exchange_rates_defillama import get_exchange_rates_defillama
+    ex_rate = get_exchange_rates_defillama(base_symbol=base_token,
+                            quote_symbol=quote_token,
+                            limit=1000)['close']
     ex_rate.rename(str(base_token) + '_' + str(quote_token), inplace=True)
 
     master_df = pd.concat([ex_rate, interest_rate_quote, interest_rate_base], axis=1, join='outer')
