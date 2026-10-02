@@ -1,0 +1,43 @@
+{
+  "status": "exploratory, post hoc",
+  "near_kink_threshold_pp": 0.25,
+  "blocks_per_year": 2102400,
+  "periods": [
+    {
+      "period": "paper: 2020-02-21 to 2020-03-13",
+      "hours": 477,
+      "median_util_onchain_pct": 75.50339126260224,
+      "median_util_api_pct": 79.47900950985162,
+      "median_abs_util_gap_pp": 6.9964717603325965,
+      "median_kink_rate_pct": 8.1511622334936,
+      "share_rate_near_kink_onchain": 0.9350104821802935,
+      "share_rate_near_kink_api": 0.010482180293501049,
+      "slope_below_kink_pp_per_100pp": 0.05555555523359999,
+      "slope_above_kink_pp_per_100pp": 119.9999999998397
+    },
+    {
+      "period": "paper: 2020-03-14 to 2020-04-05",
+      "hours": 496,
+      "median_util_onchain_pct": 75.03187246449528,
+      "median_util_api_pct": 59.369419571541115,
+      "median_abs_util_gap_pp": 11.154211144799717,
+      "median_kink_rate_pct": 4.1784961225176,
+      "share_rate_near_kink_onchain": 0.7056451612903226,
+      "share_rate_near_kink_api": 0.7842741935483871,
+      "slope_below_kink_pp_per_100pp": 0.05555555523359999,
+      "slope_above_kink_pp_per_100pp": 119.9999999998397
+    },
+    {
+      "period": "paper: 2020-04-06 to 2020-04-21",
+      "hours": 345,
+      "median_util_onchain_pct": 86.20602276105542,
+      "median_util_api_pct": 88.10827046836201,
+      "median_abs_util_gap_pp": 3.5874146938547398,
+      "median_kink_rate_pct": 0.5487541481479681,
+      "share_rate_near_kink_onchain": 0.7536231884057971,
+      "share_rate_near_kink_api": 0.553623188405797,
+      "slope_below_kink_pp_per_100pp": 0.60972683127552,
+      "slope_above_kink_pp_per_100pp": 119.9999999998397
+    }
+  ]
+}

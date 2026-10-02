@@ -63,3 +63,11 @@ Synthetic panels with a known utilisation process were analysed with the same co
 - With only 16 to 23 days per paper period, a one-day bootstrap block may understate uncertainty if utilisation is persistent over several days.
 - The kink and the rest of the rate model changed several times over the period; measuring distance from the active kink at each sample accounts for this, but periods may mix different rate models.
 - After September 2022 Ethereum blocks are about 12 seconds apart rather than 13, so a fixed block step gives slightly more frequent samples in later periods. This affects the number of samples per period, not the definition.
+
+## Post-hoc note (2026-10-02, written after the results were seen)
+
+This note does not change the plan or the reported results. It records a flaw in the reasoning of the section "Claim being tested", found only after the results were seen.
+
+That section states that, because the borrow rate increases with utilisation, rates clustering at the kink is equivalent to utilisation clustering at the kink. This is not correct for the models in use. In the paper's first period, the on-chain model parameters give a slope below the kink of about 0.06 percentage points of interest per 100 points of utilisation, against about 120 points above it. Below the kink the rate is therefore almost flat: any utilisation below the kink produces a rate very close to the rate at the kink. Rates can cluster at the kink rate while utilisation is far below the kink.
+
+The pre-specified test examines utilisation and its result stands as a test of whether utilisation clusters at the kink. The paper's second observation ("utilization of above 90%") shows that the paper links the phenomenon to utilisation, so this reading is reasonable, but it is not the only one. Read literally as a statement about rates, the paper's claim largely holds in its periods, as a consequence of the model's shape rather than of how market participants behave. The supporting analysis is exploratory and is in `exploratory_kink_followup.py` and `results/exploratory/kink_followup.json`.
