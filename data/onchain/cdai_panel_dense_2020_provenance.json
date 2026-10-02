@@ -1,0 +1,32 @@
+{
+  "source": "Ethereum mainnet state read via eth_call at historical blocks",
+  "rpc_provider": "eth-mainnet.g.alchemy.com",
+  "collected_utc": "2026-10-02 09:49:39",
+  "contract": "0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643",
+  "start_block": 9523259,
+  "end_block": 9918900,
+  "end_date_exclusive": "2020-04-22",
+  "block_step": 300,
+  "rows": 1319,
+  "columns": [
+    "block",
+    "timestamp",
+    "utc",
+    "cdai_borrowRatePerBlock",
+    "cdai_supplyRatePerBlock",
+    "cdai_getCash",
+    "cdai_totalBorrows",
+    "cdai_totalReserves",
+    "cdai_reserveFactorMantissa",
+    "cdai_interestRateModel",
+    "irm_baseRatePerBlock",
+    "irm_multiplierPerBlock",
+    "irm_jumpMultiplierPerBlock",
+    "irm_kink"
+  ],
+  "notes": [
+    "All on-chain integers are exact decimal strings; rates are per block, scaled by 1e18.",
+    "Compound V2 annualises with 2,102,400 blocks per year (15 s blocks); actual block times were about 13 s before September 2022 and 12 s after.",
+    "Blank model fields mean the model contract has no such getter."
+  ]
+}
