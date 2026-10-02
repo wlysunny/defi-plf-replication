@@ -73,3 +73,23 @@ The benchmark is the larger of the MdAE values for regimes 0 and 4.
 - **Otherwise**, the mis-dated switch is not the main cause of the poor fit. The next hypothesis to test is that parameter changes within regime 1, which are linked to MakerDAO's Dai Savings Rate and stability fee, occurred at times different from those recorded in the parameter table.
 
 All results, including the checks and the auxiliary labelling, are reported regardless of which rule applies.
+
+## Amendment 1 (2026-10-02, before any analysis of the real data)
+
+Before the analysis was run on the real data, the analysis script was tested on simulated data constructed from the original parameter table, in which the true cause of poor fit is known. In a simulation where the mis-dated model switch is the only cause of poor fit in regime 1, and correcting it removes the problem completely, the rules above return "the mis-dated switch is not the main cause". The rules therefore cannot detect the effect they were designed to test. Two reasons were identified:
+
+1. **The median is insensitive to the problem being tested.** The mis-dated window covers about 10% of the hours in regime 1. Those hours lie far from the modelled surface, but the median error of the whole regime barely changes (simulated MdAE 0.029 with the error, 0.025 without), whereas the mean error changes markedly (0.218 and 0.034). The original authors' judgement was visual, and a cluster of points lying off the surface is exactly what a visual judgement responds to. A robust statistic suppresses that cluster, so it does not measure the construct the authors observed.
+2. **The success condition was unattainable.** Requiring the entire confidence interval of the corrected window to lie at or below the benchmark means that, if the correction works perfectly, the corrected error equals the benchmark only on average and the condition fails about half the time or more.
+
+The following replace the corresponding parts of the plan. Everything else is unchanged.
+
+- **Metric.** The primary measure is the mean absolute error (MAE) of the hourly borrow-rate errors, in annual percentage points, with a 95% confidence interval from the same moving-block bootstrap. The MdAE is reported as a secondary measure.
+- **Construct validity.** As before, but using the MAE: every regime labelled "poor fit" must have a higher MAE than every regime labelled "good fit".
+- **Benchmark.** The larger of the MAE values for regimes 0 and 4.
+- **Decision rules.**
+  - *Inconclusive* if the construct validity check fails or the window contains fewer than 24 hourly observations.
+  - *The correction explains the fit within the window* if all three hold: the lower bound of the confidence interval of the original window MAE is above the benchmark (the window clearly fits poorly before correction); the lower bound of the confidence interval of the corrected window MAE is at or below the benchmark (after correction the window cannot be distinguished from regimes that fit well); and the upper bound of the corrected interval is below the lower bound of the original interval (the improvement is not due to chance).
+  - *The correction explains the fit of regime 1 as a whole* if, in addition, the lower bound of the confidence interval of the corrected regime 1 MAE is at or below the benchmark.
+  - *Otherwise*, the mis-dated switch is not the main cause of the poor fit, and the next hypothesis is the one stated above.
+
+The simulation code and its results are kept with the analysis so that this amendment can be checked.
