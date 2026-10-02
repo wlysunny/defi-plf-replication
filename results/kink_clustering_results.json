@@ -1,0 +1,211 @@
+{
+  "criterion": "analysis_plans/kink_clustering_criterion.md",
+  "panel": "data/onchain/cdai_panel.csv",
+  "dense_panel": "data/onchain/cdai_panel_dense_2020.csv",
+  "bin_width_pp": 5.0,
+  "paper_periods": [
+    {
+      "period": "paper: 2020-02-21 to 2020-03-13",
+      "start": "2020-02-21",
+      "end_exclusive": "2020-03-14",
+      "n_samples": 477,
+      "excluded": {},
+      "decision": "Does not hold",
+      "kink_bin_share": 0.020964360587002098,
+      "modal_bin_range_pp": [
+        -17.5,
+        -12.5
+      ],
+      "modal_bin_share": 0.44025157232704404,
+      "share_above_kink_bin": 0.05450733752620545,
+      "bootstrap_mode_proportion": 0.0,
+      "sensitivity_kink_is_mode": {
+        "2pp": false,
+        "10pp": false
+      },
+      "median_distance_pp": -14.496608737397779
+    },
+    {
+      "period": "paper: 2020-03-14 to 2020-04-05",
+      "start": "2020-03-14",
+      "end_exclusive": "2020-04-06",
+      "n_samples": 497,
+      "excluded": {},
+      "decision": "Does not hold",
+      "kink_bin_share": 0.17706237424547283,
+      "modal_bin_range_pp": [
+        -37.5,
+        -32.5
+      ],
+      "modal_bin_share": 0.2112676056338028,
+      "share_above_kink_bin": 0.14285714285714285,
+      "bootstrap_mode_proportion": 0.172,
+      "sensitivity_kink_is_mode": {
+        "2pp": false,
+        "10pp": false
+      },
+      "median_distance_pp": -14.973232030181066
+    },
+    {
+      "period": "paper: 2020-04-06 to 2020-04-21",
+      "start": "2020-04-06",
+      "end_exclusive": "2020-04-22",
+      "n_samples": 345,
+      "excluded": {},
+      "decision": "Does not hold",
+      "kink_bin_share": 0.263768115942029,
+      "modal_bin_range_pp": [
+        -7.5,
+        -2.5
+      ],
+      "modal_bin_share": 0.2927536231884058,
+      "share_above_kink_bin": 0.15072463768115943,
+      "bootstrap_mode_proportion": 0.355,
+      "sensitivity_kink_is_mode": {
+        "2pp": false,
+        "10pp": true
+      },
+      "median_distance_pp": -3.793977238944578
+    }
+  ],
+  "new_periods": [
+    {
+      "period": "new: 2020-05 to 2020-12",
+      "start": "2020-05-01",
+      "end_exclusive": "2021-01-01",
+      "n_samples": 265,
+      "excluded": {},
+      "decision": "Holds",
+      "kink_bin_share": 0.5471698113207547,
+      "modal_bin_range_pp": [
+        -2.5,
+        2.5
+      ],
+      "modal_bin_share": 0.5471698113207547,
+      "share_above_kink_bin": 0.07169811320754717,
+      "bootstrap_mode_proportion": 0.9995,
+      "sensitivity_kink_is_mode": {
+        "2pp": true,
+        "10pp": true
+      },
+      "median_distance_pp": -1.2905640358916912
+    },
+    {
+      "period": "new: 2021",
+      "start": "2021-01-01",
+      "end_exclusive": "2022-01-01",
+      "n_samples": 392,
+      "excluded": {},
+      "decision": "Holds, but not robustly",
+      "kink_bin_share": 0.336734693877551,
+      "modal_bin_range_pp": [
+        -2.5,
+        2.5
+      ],
+      "modal_bin_share": 0.336734693877551,
+      "share_above_kink_bin": 0.25510204081632654,
+      "bootstrap_mode_proportion": 0.66,
+      "sensitivity_kink_is_mode": {
+        "2pp": true,
+        "10pp": true
+      },
+      "median_distance_pp": -0.9892065816525886
+    },
+    {
+      "period": "new: 2022",
+      "start": "2022-01-01",
+      "end_exclusive": "2023-01-01",
+      "n_samples": 398,
+      "excluded": {},
+      "decision": "Does not hold",
+      "kink_bin_share": 0.01507537688442211,
+      "modal_bin_range_pp": [
+        -37.5,
+        -32.5
+      ],
+      "modal_bin_share": 0.3165829145728643,
+      "share_above_kink_bin": 0.0,
+      "bootstrap_mode_proportion": 0.0,
+      "sensitivity_kink_is_mode": {
+        "2pp": false,
+        "10pp": false
+      },
+      "median_distance_pp": -33.12404019430896
+    },
+    {
+      "period": "new: 2023",
+      "start": "2023-01-01",
+      "end_exclusive": "2024-01-01",
+      "n_samples": 434,
+      "excluded": {},
+      "decision": "Does not hold",
+      "kink_bin_share": 0.2073732718894009,
+      "modal_bin_range_pp": [
+        -27.5,
+        -22.5
+      ],
+      "modal_bin_share": 0.22811059907834103,
+      "share_above_kink_bin": 0.002304147465437788,
+      "bootstrap_mode_proportion": 0.282,
+      "sensitivity_kink_is_mode": {
+        "2pp": false,
+        "10pp": false
+      },
+      "median_distance_pp": -21.544930308003703
+    },
+    {
+      "period": "new: 2024",
+      "start": "2024-01-01",
+      "end_exclusive": "2025-01-01",
+      "n_samples": 436,
+      "excluded": {},
+      "decision": "Does not hold",
+      "kink_bin_share": 0.23394495412844038,
+      "modal_bin_range_pp": [
+        2.5,
+        7.5
+      ],
+      "modal_bin_share": 0.3577981651376147,
+      "share_above_kink_bin": 0.4793577981651376,
+      "bootstrap_mode_proportion": 0.0795,
+      "sensitivity_kink_is_mode": {
+        "2pp": false,
+        "10pp": true
+      },
+      "median_distance_pp": 2.3197075839968733
+    },
+    {
+      "period": "new: 2025-01 to 2025-11",
+      "start": "2025-01-01",
+      "end_exclusive": "2025-12-01",
+      "n_samples": 398,
+      "excluded": {},
+      "decision": "Holds",
+      "kink_bin_share": 0.3417085427135678,
+      "modal_bin_range_pp": [
+        -2.5,
+        2.5
+      ],
+      "modal_bin_share": 0.3417085427135678,
+      "share_above_kink_bin": 0.18341708542713567,
+      "bootstrap_mode_proportion": 0.9075,
+      "sensitivity_kink_is_mode": {
+        "2pp": true,
+        "10pp": true
+      },
+      "median_distance_pp": -2.132074736646132
+    }
+  ],
+  "summary": {
+    "paper_periods_holding": 0,
+    "consistency_check": "does not reproduce the paper",
+    "new_periods_holding": 3,
+    "generalisation": "mixed evidence"
+  },
+  "bootstrap": {
+    "block_samples_daily": 14,
+    "block_samples_hourly": 24,
+    "reps": 2000,
+    "seed": 20261002
+  }
+}
