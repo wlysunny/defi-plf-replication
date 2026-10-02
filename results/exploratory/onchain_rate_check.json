@@ -1,0 +1,131 @@
+{
+  "status": "exploratory, post hoc",
+  "cdai": "0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643",
+  "rates": [
+    {
+      "time": "2019-11-26 12:00",
+      "block": 9004055,
+      "note": "regime 0",
+      "onchain_pct": 1.9999999999728,
+      "observed_pct": 3.099616319188031,
+      "authors_model_pct": 3.0526759520496003,
+      "error": null
+    },
+    {
+      "time": "2019-12-05 12:00",
+      "block": 9054776,
+      "note": "regime 0",
+      "onchain_pct": 3.74188722211584,
+      "observed_pct": 4.251444133589959,
+      "authors_model_pct": 3.41176302455904,
+      "error": null
+    },
+    {
+      "time": "2019-12-16 12:00",
+      "block": 9115424,
+      "note": "regime 0",
+      "onchain_pct": 3.2890948377523204,
+      "observed_pct": 4.242302397080088,
+      "authors_model_pct": 3.06094788416448,
+      "error": null
+    },
+    {
+      "time": "2019-12-18 12:00",
+      "block": 9125472,
+      "note": "authors regime 1, before on-chain switch",
+      "onchain_pct": 3.2829278592124798,
+      "observed_pct": 4.24270867282319,
+      "authors_model_pct": 4.1554096682227195,
+      "error": null
+    },
+    {
+      "time": "2019-12-21 12:00",
+      "block": 9140569,
+      "note": "after on-chain switch",
+      "onchain_pct": 4.1583273160809595,
+      "observed_pct": 4.242660754885783,
+      "authors_model_pct": 4.1553636838992,
+      "error": null
+    },
+    {
+      "time": "2020-01-15 12:00",
+      "block": 9285583,
+      "note": "regime 2",
+      "onchain_pct": 6.1645468577472,
+      "observed_pct": 8.20821524860302,
+      "authors_model_pct": 6.1659171768384,
+      "error": null
+    },
+    {
+      "time": "2020-01-30 12:00",
+      "block": 9383411,
+      "note": "regime 3",
+      "onchain_pct": 7.8884085036384,
+      "observed_pct": 7.9920575179235485,
+      "authors_model_pct": 7.8860219108774405,
+      "error": null
+    },
+    {
+      "time": "2020-02-06 12:00",
+      "block": 9428935,
+      "note": "regime 4",
+      "onchain_pct": 8.8593592596624,
+      "observed_pct": 7.994278294146441,
+      "authors_model_pct": 8.85920763730752,
+      "error": null
+    },
+    {
+      "time": "2020-04-10 12:00",
+      "block": 9844387,
+      "note": "regime 8",
+      "onchain_pct": 0.49436747534304,
+      "observed_pct": 0.5270060674199084,
+      "authors_model_pct": 0.52562604936672,
+      "error": null
+    },
+    {
+      "time": "2020-05-01 12:00",
+      "block": 9980209,
+      "note": "regime 10",
+      "onchain_pct": 4.15984978543968,
+      "observed_pct": 4.001295017841058,
+      "authors_model_pct": 5.87352950098272,
+      "error": null
+    }
+  ],
+  "models": [
+    {
+      "address": "0x5562024784cc914069d67D89a28e3201bF7b57E7",
+      "block": 9100000,
+      "note": "in use 2019-11-23 to 2019-12-20",
+      "values": {
+        "baseRatePerBlock()": 9512937595,
+        "multiplierPerBlock()": 10569930661,
+        "jumpMultiplierPerBlock()": "n/a (execution reverted)",
+        "kink()": 900000000000000000
+      }
+    },
+    {
+      "address": "0xec163986cC9a6593D6AdDcBFf5509430D348030F",
+      "block": 9500000,
+      "note": "in use 2019-12-20 to 2020-05-02",
+      "values": {
+        "baseRatePerBlock()": 36209575847,
+        "multiplierPerBlock()": 705029680,
+        "jumpMultiplierPerBlock()": 570776255707,
+        "kink()": 900000000000000000
+      }
+    },
+    {
+      "address": "0x000000007675b5E1dA008f037A0800B309e0C493",
+      "block": 10100000,
+      "note": "in use 2020-05-02 to 2020-07-28",
+      "values": {
+        "baseRatePerBlock()": 0,
+        "multiplierPerBlock()": 10569930661,
+        "jumpMultiplierPerBlock()": 570776255707,
+        "kink()": 900000000000000000
+      }
+    }
+  ]
+}
