@@ -1,0 +1,11 @@
+0|Good fit|The comment describes performance as perhaps as desired without mentioning a mismatch.
+1|Poor fit|The comment explicitly states that observations do not map well to the predicted surface.
+2|Poor fit|The comment explicitly states that observations do not map well to the predicted surface.
+3|Poor fit|The comment explicitly states that observations do not map well to the predicted surface.
+4|Good fit|The comment describes performance as OK and perhaps as desired without mentioning a mismatch.
+5|Not stated|The comment only describes observations clustered at the kink.
+6|Not stated|The comment only describes observations clustered at and above the kink.
+7|Not stated|The comment contradicts itself by describing both improved and worse performance.
+8|Poor fit|The comment explicitly describes the regime as completely broken.
+9|Not stated|The comment only describes observations clustered just above the kink.
+10|Not stated|The comment only describes observations clustered at the kink.
