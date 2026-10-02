@@ -1,0 +1,109 @@
+scenario,seed,period,decision,expected,correct
+A,1,paper: 2020-02-21 to 2020-03-13,Holds,Holds,True
+A,1,paper: 2020-03-14 to 2020-04-05,Holds,Holds,True
+A,1,paper: 2020-04-06 to 2020-04-21,Holds,Holds,True
+A,1,new: 2020-05 to 2020-12,Holds,Holds,True
+A,1,new: 2021,Holds,Holds,True
+A,1,new: 2022,Holds,Holds,True
+A,1,new: 2023,Holds,Holds,True
+A,1,new: 2024,Holds,Holds,True
+A,1,new: 2025-01 to 2025-11,Holds,Holds,True
+A,2,paper: 2020-02-21 to 2020-03-13,Holds,Holds,True
+A,2,paper: 2020-03-14 to 2020-04-05,Holds,Holds,True
+A,2,paper: 2020-04-06 to 2020-04-21,Holds,Holds,True
+A,2,new: 2020-05 to 2020-12,Holds,Holds,True
+A,2,new: 2021,Holds,Holds,True
+A,2,new: 2022,Holds,Holds,True
+A,2,new: 2023,Holds,Holds,True
+A,2,new: 2024,Holds,Holds,True
+A,2,new: 2025-01 to 2025-11,Holds,Holds,True
+A,3,paper: 2020-02-21 to 2020-03-13,Holds,Holds,True
+A,3,paper: 2020-03-14 to 2020-04-05,Holds,Holds,True
+A,3,paper: 2020-04-06 to 2020-04-21,Holds,Holds,True
+A,3,new: 2020-05 to 2020-12,Holds,Holds,True
+A,3,new: 2021,Holds,Holds,True
+A,3,new: 2022,Holds,Holds,True
+A,3,new: 2023,Holds,Holds,True
+A,3,new: 2024,Holds,Holds,True
+A,3,new: 2025-01 to 2025-11,Holds,Holds,True
+B,1,paper: 2020-02-21 to 2020-03-13,Does not hold,Does not hold,True
+B,1,paper: 2020-03-14 to 2020-04-05,Does not hold,Does not hold,True
+B,1,paper: 2020-04-06 to 2020-04-21,Does not hold,Does not hold,True
+B,1,new: 2020-05 to 2020-12,Does not hold,Does not hold,True
+B,1,new: 2021,Does not hold,Does not hold,True
+B,1,new: 2022,Does not hold,Does not hold,True
+B,1,new: 2023,Does not hold,Does not hold,True
+B,1,new: 2024,Does not hold,Does not hold,True
+B,1,new: 2025-01 to 2025-11,Does not hold,Does not hold,True
+B,2,paper: 2020-02-21 to 2020-03-13,Does not hold,Does not hold,True
+B,2,paper: 2020-03-14 to 2020-04-05,Does not hold,Does not hold,True
+B,2,paper: 2020-04-06 to 2020-04-21,Does not hold,Does not hold,True
+B,2,new: 2020-05 to 2020-12,Does not hold,Does not hold,True
+B,2,new: 2021,Does not hold,Does not hold,True
+B,2,new: 2022,Does not hold,Does not hold,True
+B,2,new: 2023,Does not hold,Does not hold,True
+B,2,new: 2024,Does not hold,Does not hold,True
+B,2,new: 2025-01 to 2025-11,Does not hold,Does not hold,True
+B,3,paper: 2020-02-21 to 2020-03-13,Does not hold,Does not hold,True
+B,3,paper: 2020-03-14 to 2020-04-05,Does not hold,Does not hold,True
+B,3,paper: 2020-04-06 to 2020-04-21,Does not hold,Does not hold,True
+B,3,new: 2020-05 to 2020-12,Does not hold,Does not hold,True
+B,3,new: 2021,Does not hold,Does not hold,True
+B,3,new: 2022,Does not hold,Does not hold,True
+B,3,new: 2023,Does not hold,Does not hold,True
+B,3,new: 2024,Does not hold,Does not hold,True
+B,3,new: 2025-01 to 2025-11,Does not hold,Does not hold,True
+C,1,paper: 2020-02-21 to 2020-03-13,Does not hold,Does not hold,True
+C,1,paper: 2020-03-14 to 2020-04-05,Does not hold,Does not hold,True
+C,1,paper: 2020-04-06 to 2020-04-21,Does not hold,Does not hold,True
+C,1,new: 2020-05 to 2020-12,Does not hold,Does not hold,True
+C,1,new: 2021,Does not hold,Does not hold,True
+C,1,new: 2022,Does not hold,Does not hold,True
+C,1,new: 2023,Does not hold,Does not hold,True
+C,1,new: 2024,Does not hold,Does not hold,True
+C,1,new: 2025-01 to 2025-11,Does not hold,Does not hold,True
+C,2,paper: 2020-02-21 to 2020-03-13,Does not hold,Does not hold,True
+C,2,paper: 2020-03-14 to 2020-04-05,Does not hold,Does not hold,True
+C,2,paper: 2020-04-06 to 2020-04-21,Does not hold,Does not hold,True
+C,2,new: 2020-05 to 2020-12,Does not hold,Does not hold,True
+C,2,new: 2021,Does not hold,Does not hold,True
+C,2,new: 2022,Does not hold,Does not hold,True
+C,2,new: 2023,Does not hold,Does not hold,True
+C,2,new: 2024,Does not hold,Does not hold,True
+C,2,new: 2025-01 to 2025-11,Does not hold,Does not hold,True
+C,3,paper: 2020-02-21 to 2020-03-13,Does not hold,Does not hold,True
+C,3,paper: 2020-03-14 to 2020-04-05,Does not hold,Does not hold,True
+C,3,paper: 2020-04-06 to 2020-04-21,Does not hold,Does not hold,True
+C,3,new: 2020-05 to 2020-12,Does not hold,Does not hold,True
+C,3,new: 2021,Does not hold,Does not hold,True
+C,3,new: 2022,Does not hold,Does not hold,True
+C,3,new: 2023,Does not hold,Does not hold,True
+C,3,new: 2024,Does not hold,Does not hold,True
+C,3,new: 2025-01 to 2025-11,Does not hold,Does not hold,True
+D,1,paper: 2020-02-21 to 2020-03-13,"Holds, but not robustly",,
+D,1,paper: 2020-03-14 to 2020-04-05,Holds,,
+D,1,paper: 2020-04-06 to 2020-04-21,Does not hold,,
+D,1,new: 2020-05 to 2020-12,Does not hold,,
+D,1,new: 2021,Does not hold,,
+D,1,new: 2022,Does not hold,,
+D,1,new: 2023,"Holds, but not robustly",,
+D,1,new: 2024,Holds,,
+D,1,new: 2025-01 to 2025-11,Does not hold,,
+D,2,paper: 2020-02-21 to 2020-03-13,"Holds, but not robustly",,
+D,2,paper: 2020-03-14 to 2020-04-05,Does not hold,,
+D,2,paper: 2020-04-06 to 2020-04-21,Does not hold,,
+D,2,new: 2020-05 to 2020-12,Does not hold,,
+D,2,new: 2021,Does not hold,,
+D,2,new: 2022,"Holds, but not robustly",,
+D,2,new: 2023,Does not hold,,
+D,2,new: 2024,Does not hold,,
+D,2,new: 2025-01 to 2025-11,Does not hold,,
+D,3,paper: 2020-02-21 to 2020-03-13,Holds,,
+D,3,paper: 2020-03-14 to 2020-04-05,Does not hold,,
+D,3,paper: 2020-04-06 to 2020-04-21,Does not hold,,
+D,3,new: 2020-05 to 2020-12,Holds,,
+D,3,new: 2021,Does not hold,,
+D,3,new: 2022,"Holds, but not robustly",,
+D,3,new: 2023,Holds,,
+D,3,new: 2024,"Holds, but not robustly",,
+D,3,new: 2025-01 to 2025-11,Does not hold,,

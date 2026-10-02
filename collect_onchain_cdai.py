@@ -26,9 +26,13 @@ It can be interrupted and re-run: rows already in the output file are skipped.
 
 Usage (from the repository root, archive-capable RPC endpoint required):
     export ETH_RPC_URL="https://eth-mainnet.g.alchemy.com/v2/<key>"
-    python collect_onchain_cdai.py
+    python collect_onchain_cdai.py                     # main panel, about daily, 2019-11 to 2025-11
+    python collect_onchain_cdai.py --dense-2020        # about hourly, 2020-02-21 to 2020-04-21
+The dense panel covers the three periods analysed in Section 5.2 of the paper,
+which are too short for a daily sample.
 """
 
+import argparse
 import csv
 import json
 import os
@@ -47,6 +51,11 @@ OUT_PATH = 'data/onchain/cdai_panel.csv'
 META_PATH = 'data/onchain/cdai_panel_provenance.json'
 PAUSE_SECONDS = 1.0
 MAX_RETRIES = 6
+
+DENSE_START_DATE = '2020-02-21'
+DENSE_END_DATE = '2020-04-22'
+DENSE_STEP = 300                 # about one sample per hour in 2020
+DENSE_OUT_PATH = 'data/onchain/cdai_panel_dense_2020.csv'
 
 CDAI_GETTERS = ['borrowRatePerBlock()', 'supplyRatePerBlock()', 'getCash()', 'totalBorrows()',
                 'totalReserves()', 'reserveFactorMantissa()', 'interestRateModel()']
@@ -109,20 +118,25 @@ def block_timestamp(url, block):
     return int(result['timestamp'], 16)
 
 
-def find_end_block(url, end_date):
-    """Last block before END_DATE (UTC), by binary search on block timestamps."""
-    target = int(datetime.fromisoformat(end_date).replace(tzinfo=timezone.utc).timestamp())
+def first_block_at_or_after(url, date):
+    """First block with a timestamp at or after `date` (UTC), by binary search."""
+    target = int(datetime.fromisoformat(date).replace(tzinfo=timezone.utc).timestamp())
     (latest,) = rpc_batch(url, [('eth_blockNumber', [])])
     lo, hi = START_BLOCK, int(latest, 16)
     if block_timestamp(url, hi) < target:
-        return hi
+        return hi + 1
     while lo < hi:
         mid = (lo + hi) // 2
         if block_timestamp(url, mid) < target:
             lo = mid + 1
         else:
             hi = mid
-    return lo - 1
+    return lo
+
+
+def find_end_block(url, end_date):
+    """Last block before `end_date` (UTC)."""
+    return first_block_at_or_after(url, end_date) - 1
 
 
 def sample_block(url, block):
@@ -153,21 +167,33 @@ def already_done(path):
         return {int(r['block']) for r in csv.DictReader(f)}
 
 
-def main():
+def main(argv=None):
+    parser = argparse.ArgumentParser(description='Collect the on-chain cDAI panel.')
+    parser.add_argument('--dense-2020', action='store_true',
+                        help='collect the about-hourly panel for 2020-02-21 to 2020-04-21 instead')
+    args = parser.parse_args(argv)
     url = os.environ.get('ETH_RPC_URL')
     if not url:
         sys.exit('Set the ETH_RPC_URL environment variable first (see the docstring).')
-    os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
 
-    end_block = find_end_block(url, END_DATE)
-    blocks = list(range(START_BLOCK, end_block + 1, BLOCK_STEP))
-    done = already_done(OUT_PATH)
+    if args.dense_2020:
+        out_path, meta_path, step, end_date = (DENSE_OUT_PATH, DENSE_OUT_PATH.replace('.csv', '_provenance.json'),
+                                               DENSE_STEP, DENSE_END_DATE)
+        start_block = first_block_at_or_after(url, DENSE_START_DATE)
+    else:
+        out_path, meta_path, step, end_date = OUT_PATH, META_PATH, BLOCK_STEP, END_DATE
+        start_block = START_BLOCK
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+
+    end_block = find_end_block(url, end_date)
+    blocks = list(range(start_block, end_block + 1, step))
+    done = already_done(out_path)
     todo = [b for b in blocks if b not in done]
-    print(f'Blocks {START_BLOCK} to {end_block}, step {BLOCK_STEP}: {len(blocks)} samples, '
+    print(f'Blocks {start_block} to {end_block}, step {step}: {len(blocks)} samples, '
           f'{len(done)} already collected, {len(todo)} to go.')
 
-    new_file = not os.path.exists(OUT_PATH)
-    with open(OUT_PATH, 'a', newline='') as f:
+    new_file = not os.path.exists(out_path)
+    with open(out_path, 'a', newline='') as f:
         writer = csv.writer(f)
         if new_file:
             writer.writerow(COLUMNS)
@@ -178,19 +204,19 @@ def main():
                 print(f'  {i}/{len(todo)} samples')
             time.sleep(PAUSE_SECONDS)
 
-    with open(META_PATH, 'w') as f:
+    with open(meta_path, 'w') as f:
         json.dump({'source': 'Ethereum mainnet state read via eth_call at historical blocks',
                    'rpc_provider': requests.utils.urlparse(url).hostname,
                    'collected_utc': datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S'),
-                   'contract': CDAI, 'start_block': START_BLOCK, 'end_block': end_block,
-                   'end_date_exclusive': END_DATE, 'block_step': BLOCK_STEP, 'rows': len(blocks),
+                   'contract': CDAI, 'start_block': start_block, 'end_block': end_block,
+                   'end_date_exclusive': end_date, 'block_step': step, 'rows': len(blocks),
                    'columns': COLUMNS,
                    'notes': ['All on-chain integers are exact decimal strings; rates are per block, scaled by 1e18.',
                              'Compound V2 annualises with 2,102,400 blocks per year (15 s blocks); actual block '
                              'times were about 13 s before September 2022 and 12 s after.',
                              'Blank model fields mean the model contract has no such getter.']},
                   f, indent=2)
-    print(f'Saved {OUT_PATH} and {META_PATH}')
+    print(f'Saved {out_path} and {meta_path}')
 
 
 if __name__ == '__main__':
