@@ -1,0 +1,472 @@
+{
+  "criterion": "analysis_plans/aave_kink_criterion.md",
+  "subgraph_panel": "data/aave_v3/aave_v3_daily_panel.csv",
+  "chain_params": "data/aave_v3/aave_v3_rate_params_daily.csv",
+  "bin_width_pp": 5.0,
+  "results": [
+    {
+      "period": "USDC 2023-02 to 2023-12",
+      "start": "2023-02-01",
+      "end_exclusive": "2024-01-01",
+      "n_samples": 334,
+      "excluded": {},
+      "decision": "Holds",
+      "kink_bin_share": 0.4940119760479042,
+      "modal_bin_range_pp": [
+        -2.5,
+        2.5
+      ],
+      "modal_bin_share": 0.4940119760479042,
+      "share_above_kink_bin": 0.0029940119760479044,
+      "bootstrap_mode_proportion": 0.9985,
+      "sensitivity_kink_is_mode": {
+        "2pp": true,
+        "10pp": true
+      },
+      "median_distance_pp": -2.5835955000000013,
+      "symbol": "USDC",
+      "utilisation_source": "subgraph",
+      "validation": {
+        "n_validation_days": 48,
+        "median_abs_util_gap_pp": 0.08267415705620351,
+        "max_abs_util_gap_pp": 0.2479170811963911,
+        "share_rate_exactly_equal": 0.39820359281437123,
+        "passes": true
+      },
+      "secondary": {
+        "share_rate_within_0.25pp_of_kink_rate": 0.31137724550898205,
+        "median_slope_below_kink_pp_per_100pp": 3.5000000000000004,
+        "median_slope_above_kink_pp_per_100pp": 60.0,
+        "median_staleness_days": 0.006539351851851852,
+        "max_staleness_days": 0.1348726851851852
+      }
+    },
+    {
+      "period": "USDC 2024",
+      "start": "2024-01-01",
+      "end_exclusive": "2025-01-01",
+      "n_samples": 366,
+      "excluded": {},
+      "decision": "Holds",
+      "kink_bin_share": 0.4808743169398907,
+      "modal_bin_range_pp": [
+        -2.5,
+        2.5
+      ],
+      "modal_bin_share": 0.4808743169398907,
+      "share_above_kink_bin": 0.11748633879781421,
+      "bootstrap_mode_proportion": 0.998,
+      "sensitivity_kink_is_mode": {
+        "2pp": true,
+        "10pp": true
+      },
+      "median_distance_pp": -0.9325339999999969,
+      "symbol": "USDC",
+      "utilisation_source": "subgraph",
+      "validation": {
+        "n_validation_days": 52,
+        "median_abs_util_gap_pp": 0.2188373970853945,
+        "max_abs_util_gap_pp": 0.8024617531315954,
+        "share_rate_exactly_equal": 0.42349726775956287,
+        "passes": true
+      },
+      "secondary": {
+        "share_rate_within_0.25pp_of_kink_rate": 0.2103825136612022,
+        "median_slope_below_kink_pp_per_100pp": 6.0,
+        "median_slope_above_kink_pp_per_100pp": 60.0,
+        "median_staleness_days": 0.0022337962962962962,
+        "max_staleness_days": 0.033344907407407406
+      }
+    },
+    {
+      "period": "USDC 2025-01 to 2025-11",
+      "start": "2025-01-01",
+      "end_exclusive": "2025-12-01",
+      "n_samples": 48,
+      "excluded": {},
+      "decision": "Does not hold",
+      "kink_bin_share": 0.0,
+      "modal_bin_range_pp": [
+        -7.5,
+        -2.5
+      ],
+      "modal_bin_share": 0.3333333333333333,
+      "share_above_kink_bin": 0.0,
+      "bootstrap_mode_proportion": 0.0,
+      "sensitivity_kink_is_mode": {
+        "2pp": false,
+        "10pp": false
+      },
+      "median_distance_pp": -10.476755341352245,
+      "symbol": "USDC",
+      "utilisation_source": "chain (weekly)",
+      "validation": {
+        "n_validation_days": 48,
+        "median_abs_util_gap_pp": 0.6605147551308548,
+        "max_abs_util_gap_pp": 2.250992185896685,
+        "share_rate_exactly_equal": 0.46407185628742514,
+        "passes": false
+      },
+      "secondary": {
+        "share_rate_within_0.25pp_of_kink_rate": 0.08383233532934131,
+        "median_slope_below_kink_pp_per_100pp": 6.0,
+        "median_slope_above_kink_pp_per_100pp": 35.0,
+        "median_staleness_days": 0.0005671296296296297,
+        "max_staleness_days": 0.011956018518518519
+      }
+    },
+    {
+      "period": "USDT 2023-02 to 2023-12",
+      "start": "2023-02-01",
+      "end_exclusive": "2024-01-01",
+      "n_samples": 321,
+      "excluded": {
+        "missing in one source": 13
+      },
+      "decision": "Holds",
+      "kink_bin_share": 0.40186915887850466,
+      "modal_bin_range_pp": [
+        -2.5,
+        2.5
+      ],
+      "modal_bin_share": 0.40186915887850466,
+      "share_above_kink_bin": 0.021806853582554516,
+      "bootstrap_mode_proportion": 0.9855,
+      "sensitivity_kink_is_mode": {
+        "2pp": true,
+        "10pp": true
+      },
+      "median_distance_pp": -4.431256999999988,
+      "symbol": "USDT",
+      "utilisation_source": "subgraph",
+      "validation": {
+        "n_validation_days": 46,
+        "median_abs_util_gap_pp": 0.11702288061687938,
+        "max_abs_util_gap_pp": 0.21834147119329828,
+        "share_rate_exactly_equal": 0.3582554517133956,
+        "passes": true
+      },
+      "secondary": {
+        "share_rate_within_0.25pp_of_kink_rate": 0.2616822429906542,
+        "median_slope_below_kink_pp_per_100pp": 4.0,
+        "median_slope_above_kink_pp_per_100pp": 75.0,
+        "median_staleness_days": 0.016122685185185184,
+        "max_staleness_days": 0.44515046296296296
+      }
+    },
+    {
+      "period": "USDT 2024",
+      "start": "2024-01-01",
+      "end_exclusive": "2025-01-01",
+      "n_samples": 366,
+      "excluded": {},
+      "decision": "Holds",
+      "kink_bin_share": 0.35792349726775957,
+      "modal_bin_range_pp": [
+        -2.5,
+        2.5
+      ],
+      "modal_bin_share": 0.35792349726775957,
+      "share_above_kink_bin": 0.01092896174863388,
+      "bootstrap_mode_proportion": 0.9225,
+      "sensitivity_kink_is_mode": {
+        "2pp": true,
+        "10pp": true
+      },
+      "median_distance_pp": -5.4839839999999995,
+      "symbol": "USDT",
+      "utilisation_source": "subgraph",
+      "validation": {
+        "n_validation_days": 52,
+        "median_abs_util_gap_pp": 0.273712188774077,
+        "max_abs_util_gap_pp": 1.0726897467031051,
+        "share_rate_exactly_equal": 0.27049180327868855,
+        "passes": true
+      },
+      "secondary": {
+        "share_rate_within_0.25pp_of_kink_rate": 0.15846994535519127,
+        "median_slope_below_kink_pp_per_100pp": 6.0,
+        "median_slope_above_kink_pp_per_100pp": 75.0,
+        "median_staleness_days": 0.002928240740740741,
+        "max_staleness_days": 0.04681712962962963
+      }
+    },
+    {
+      "period": "USDT 2025-01 to 2025-11",
+      "start": "2025-01-01",
+      "end_exclusive": "2025-12-01",
+      "n_samples": 48,
+      "excluded": {},
+      "decision": "Does not hold",
+      "kink_bin_share": 0.14583333333333334,
+      "modal_bin_range_pp": [
+        -17.5,
+        -12.5
+      ],
+      "modal_bin_share": 0.2708333333333333,
+      "share_above_kink_bin": 0.0,
+      "bootstrap_mode_proportion": 0.0535,
+      "sensitivity_kink_is_mode": {
+        "2pp": false,
+        "10pp": false
+      },
+      "median_distance_pp": -13.900587169986203,
+      "symbol": "USDT",
+      "utilisation_source": "chain (weekly)",
+      "validation": {
+        "n_validation_days": 48,
+        "median_abs_util_gap_pp": 0.7278789807537223,
+        "max_abs_util_gap_pp": 2.0467882691796433,
+        "share_rate_exactly_equal": 0.36227544910179643,
+        "passes": false
+      },
+      "secondary": {
+        "share_rate_within_0.25pp_of_kink_rate": 0.07784431137724551,
+        "median_slope_below_kink_pp_per_100pp": 6.0,
+        "median_slope_above_kink_pp_per_100pp": 22.5,
+        "median_staleness_days": 0.0008449074074074074,
+        "max_staleness_days": 0.011400462962962963
+      }
+    },
+    {
+      "period": "DAI 2023-02 to 2023-12",
+      "start": "2023-02-01",
+      "end_exclusive": "2024-01-01",
+      "n_samples": 334,
+      "excluded": {},
+      "decision": "Holds",
+      "kink_bin_share": 0.2874251497005988,
+      "modal_bin_range_pp": [
+        -2.5,
+        2.5
+      ],
+      "modal_bin_share": 0.2874251497005988,
+      "share_above_kink_bin": 0.10778443113772455,
+      "bootstrap_mode_proportion": 0.892,
+      "sensitivity_kink_is_mode": {
+        "2pp": false,
+        "10pp": true
+      },
+      "median_distance_pp": -5.436270999999998,
+      "symbol": "DAI",
+      "utilisation_source": "subgraph",
+      "validation": {
+        "n_validation_days": 48,
+        "median_abs_util_gap_pp": 0.16921381829697424,
+        "max_abs_util_gap_pp": 3.069811946321721,
+        "share_rate_exactly_equal": 0.5119760479041916,
+        "passes": true
+      },
+      "secondary": {
+        "share_rate_within_0.25pp_of_kink_rate": 0.2125748502994012,
+        "median_slope_below_kink_pp_per_100pp": 4.0,
+        "median_slope_above_kink_pp_per_100pp": 75.0,
+        "median_staleness_days": 0.03258101851851852,
+        "max_staleness_days": 0.42876157407407406
+      }
+    },
+    {
+      "period": "DAI 2024",
+      "start": "2024-01-01",
+      "end_exclusive": "2025-01-01",
+      "n_samples": 52,
+      "excluded": {},
+      "decision": "Holds",
+      "kink_bin_share": 0.5961538461538461,
+      "modal_bin_range_pp": [
+        -2.5,
+        2.5
+      ],
+      "modal_bin_share": 0.5961538461538461,
+      "share_above_kink_bin": 0.019230769230769232,
+      "bootstrap_mode_proportion": 0.9975,
+      "sensitivity_kink_is_mode": {
+        "2pp": true,
+        "10pp": true
+      },
+      "median_distance_pp": -1.8045731899264084,
+      "symbol": "DAI",
+      "utilisation_source": "chain (weekly)",
+      "validation": {
+        "n_validation_days": 52,
+        "median_abs_util_gap_pp": 1.8984484493195382,
+        "max_abs_util_gap_pp": 44.50526328107357,
+        "share_rate_exactly_equal": 0.453551912568306,
+        "passes": false
+      },
+      "secondary": {
+        "share_rate_within_0.25pp_of_kink_rate": 0.28688524590163933,
+        "median_slope_below_kink_pp_per_100pp": 6.0,
+        "median_slope_above_kink_pp_per_100pp": 75.0,
+        "median_staleness_days": 0.01653935185185185,
+        "max_staleness_days": 0.19626157407407407
+      }
+    },
+    {
+      "period": "DAI 2025-01 to 2025-11",
+      "start": "2025-01-01",
+      "end_exclusive": "2025-12-01",
+      "n_samples": 48,
+      "excluded": {},
+      "decision": "Does not hold",
+      "kink_bin_share": 0.020833333333333332,
+      "modal_bin_range_pp": [
+        -12.5,
+        -7.5
+      ],
+      "modal_bin_share": 0.4583333333333333,
+      "share_above_kink_bin": 0.0,
+      "bootstrap_mode_proportion": 0.0,
+      "sensitivity_kink_is_mode": {
+        "2pp": false,
+        "10pp": false
+      },
+      "median_distance_pp": -11.241566269172381,
+      "symbol": "DAI",
+      "utilisation_source": "chain (weekly)",
+      "validation": {
+        "n_validation_days": 48,
+        "median_abs_util_gap_pp": 1.038914670694922,
+        "max_abs_util_gap_pp": 32.71106674237316,
+        "share_rate_exactly_equal": 0.46407185628742514,
+        "passes": false
+      },
+      "secondary": {
+        "share_rate_within_0.25pp_of_kink_rate": 0.059880239520958084,
+        "median_slope_below_kink_pp_per_100pp": 6.0,
+        "median_slope_above_kink_pp_per_100pp": 35.0,
+        "median_staleness_days": 0.01494212962962963,
+        "max_staleness_days": 0.22181712962962963
+      }
+    },
+    {
+      "period": "WETH 2023-02 to 2023-12",
+      "start": "2023-02-01",
+      "end_exclusive": "2024-01-01",
+      "n_samples": 334,
+      "excluded": {},
+      "decision": "Does not hold",
+      "kink_bin_share": 0.08682634730538923,
+      "modal_bin_range_pp": [
+        -27.5,
+        -22.5
+      ],
+      "modal_bin_share": 0.2245508982035928,
+      "share_above_kink_bin": 0.0,
+      "bootstrap_mode_proportion": 0.007,
+      "sensitivity_kink_is_mode": {
+        "2pp": false,
+        "10pp": false
+      },
+      "median_distance_pp": -18.903092,
+      "symbol": "WETH",
+      "utilisation_source": "subgraph",
+      "validation": {
+        "n_validation_days": 48,
+        "median_abs_util_gap_pp": 0.22290004305813227,
+        "max_abs_util_gap_pp": 0.42057738419125457,
+        "share_rate_exactly_equal": 0.7455089820359282,
+        "passes": true
+      },
+      "secondary": {
+        "share_rate_within_0.25pp_of_kink_rate": 0.1347305389221557,
+        "median_slope_below_kink_pp_per_100pp": 3.8,
+        "median_slope_above_kink_pp_per_100pp": 80.0,
+        "median_staleness_days": 0.006122685185185185,
+        "max_staleness_days": 0.07334490740740741
+      }
+    },
+    {
+      "period": "WETH 2024",
+      "start": "2024-01-01",
+      "end_exclusive": "2025-01-01",
+      "n_samples": 366,
+      "excluded": {},
+      "decision": "Holds",
+      "kink_bin_share": 0.3333333333333333,
+      "modal_bin_range_pp": [
+        -2.5,
+        2.5
+      ],
+      "modal_bin_share": 0.3333333333333333,
+      "share_above_kink_bin": 0.0,
+      "bootstrap_mode_proportion": 0.813,
+      "sensitivity_kink_is_mode": {
+        "2pp": true,
+        "10pp": true
+      },
+      "median_distance_pp": -4.977214000000004,
+      "symbol": "WETH",
+      "utilisation_source": "subgraph",
+      "validation": {
+        "n_validation_days": 52,
+        "median_abs_util_gap_pp": 0.17379898018668172,
+        "max_abs_util_gap_pp": 0.3891160163481402,
+        "share_rate_exactly_equal": 0.7622950819672131,
+        "passes": true
+      },
+      "secondary": {
+        "share_rate_within_0.25pp_of_kink_rate": 0.5765027322404371,
+        "median_slope_below_kink_pp_per_100pp": 2.7,
+        "median_slope_above_kink_pp_per_100pp": 80.0,
+        "median_staleness_days": 0.0021643518518518518,
+        "max_staleness_days": 0.02834490740740741
+      }
+    },
+    {
+      "period": "WETH 2025-01 to 2025-11",
+      "start": "2025-01-01",
+      "end_exclusive": "2025-12-01",
+      "n_samples": 334,
+      "excluded": {},
+      "decision": "Does not hold",
+      "kink_bin_share": 0.2754491017964072,
+      "modal_bin_range_pp": [
+        -7.5,
+        -2.5
+      ],
+      "modal_bin_share": 0.5359281437125748,
+      "share_above_kink_bin": 0.0029940119760479044,
+      "bootstrap_mode_proportion": 0.012,
+      "sensitivity_kink_is_mode": {
+        "2pp": false,
+        "10pp": true
+      },
+      "median_distance_pp": -4.050514999999997,
+      "symbol": "WETH",
+      "utilisation_source": "subgraph",
+      "validation": {
+        "n_validation_days": 48,
+        "median_abs_util_gap_pp": 0.19512840047524094,
+        "max_abs_util_gap_pp": 0.7564251843622287,
+        "share_rate_exactly_equal": 0.7155688622754491,
+        "passes": true
+      },
+      "secondary": {
+        "share_rate_within_0.25pp_of_kink_rate": 0.8143712574850299,
+        "median_slope_below_kink_pp_per_100pp": 2.7,
+        "median_slope_above_kink_pp_per_100pp": 80.0,
+        "median_staleness_days": 0.0008449074074074074,
+        "max_staleness_days": 0.010983796296296297
+      }
+    }
+  ],
+  "summary": {
+    "periods_holding": 7,
+    "periods_total": 12,
+    "periods_holding_per_reserve": {
+      "USDC": 2,
+      "USDT": 2,
+      "DAI": 2,
+      "WETH": 1
+    },
+    "reserves_holding_in_at_least_2_of_3": 3,
+    "verdict": "mixed evidence"
+  },
+  "bootstrap": {
+    "block_samples_daily": 14,
+    "block_samples_weekly": 2,
+    "reps": 2000,
+    "seed": 20261002
+  }
+}
