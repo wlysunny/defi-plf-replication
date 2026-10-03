@@ -1,0 +1,44 @@
+{
+  "source": "Ethereum mainnet state read via eth_call at historical blocks",
+  "rpc_provider": "eth-mainnet.g.alchemy.com",
+  "collected_utc": "2026-10-03T12:54:34Z",
+  "pool": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2",
+  "sampling": "last block at or before each day 00:00 UTC",
+  "strategy_versions_seen": {
+    "0xdd1bac6a713c5b0ec42ba39d0c5e4582975de6d6": 1,
+    "0xc82df96432346cfb632473eb619db3b8ac280234": 1,
+    "0x588b62c84533232e3a881e096e5d639fa754f093": 1,
+    "0xc77576b02d74bbf9cdc26f3b86fd09d134416df2": 1,
+    "0xc7b53c7d24164fb78f57ea3b5d056bd2e541013d": 1,
+    "0xca719585f2e07bde82c4a05d6e7c0e446c2d6601": 1,
+    "0x8b370b0bbfdcae3ee31ce2b33f3d3e8b8810927f": 1,
+    "0x847a3364cc5fe389283bd821cfc8a477288d9e82": 2,
+    "0x9ec6f08190dea04a54f8afc53db96134e5e3fdfb": 2
+  },
+  "samples_before_listing": {
+    "USDT": 13
+  },
+  "validation_every_days": 7,
+  "columns": [
+    "symbol",
+    "asset",
+    "sample_utc",
+    "block",
+    "block_timestamp",
+    "strategy",
+    "strategy_version",
+    "pool_currentVariableBorrowRate",
+    "irm_optimalUsageRatio",
+    "irm_baseVariableBorrowRate",
+    "irm_variableRateSlope1",
+    "irm_variableRateSlope2",
+    "val_aToken_totalSupply",
+    "val_variableDebt_totalSupply",
+    "val_stableDebt_totalSupply",
+    "val_underlying_balanceOf_aToken"
+  ],
+  "notes": [
+    "Rates and model parameters are annual, in ray (1e27); token amounts in token units.",
+    "Strategy version 1 = Aave V3.0 interface (no arguments); version 2 = DefaultReserveInterestRateStrategyV2 (reserve address argument)."
+  ]
+}

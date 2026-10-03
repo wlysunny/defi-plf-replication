@@ -45,6 +45,7 @@ from collect_aave_v3_subgraph import RESERVES_PATH, sample_times
 
 POOL = '0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2'      # Aave V3 Ethereum Core Pool (proxy)
 OUT_PATH = 'data/aave_v3/aave_v3_rate_params_daily.csv'
+BLOCKS_PATH = 'data/aave_v3/aave_v3_sample_blocks.csv'   # sample time -> block, cached
 META_PATH = 'data/aave_v3/aave_v3_rate_params_daily_provenance.json'
 BATCH = 10
 PAUSE_SECONDS = 0.5
@@ -95,25 +96,59 @@ def timestamps(url, blocks):
 
 
 def blocks_at_or_before(url, targets):
-    """For each target timestamp, the last block whose timestamp is <= target."""
-    (latest,) = rpc_batch(url, [('eth_blockNumber', [])])
-    latest = int(latest, 16)
-    latest_ts = timestamps(url, [latest])[latest]
-    est = {t: latest - (latest_ts - t) // 12 for t in targets}       # 12 s slots since September 2022
-    for _ in range(30):
-        ts = timestamps(url, [b for b in est.values()] + [b + 1 for b in est.values()])
-        pending = 0
-        for t, b in est.items():
-            if ts[b] > t:
-                est[t] = b - max(1, (ts[b] - t + 11) // 12)
-                pending += 1
-            elif ts[b + 1] <= t:
-                est[t] = b + 1 + (t - ts[b + 1]) // 12
-                pending += 1
-        print(f'  block search: {pending} dates not yet resolved')
-        if pending == 0:
-            return est, ts
-    sys.exit('Block search did not converge.')
+    """
+    For each target timestamp, the last block whose timestamp is <= target.
+
+    Jumps of (time difference / 12 s) converge quickly, but missed slots can make
+    an estimate oscillate between two blocks; a date that revisits an estimate is
+    then resolved by stepping one block at a time. Only unresolved dates are
+    queried in each round, and resolved blocks are cached in BLOCKS_PATH so that
+    an interrupted run does not repeat the search.
+    """
+    cache = {}
+    if os.path.exists(BLOCKS_PATH):
+        with open(BLOCKS_PATH, newline='') as f:
+            cache = {int(r['target_timestamp']): (int(r['block']), int(r['block_timestamp']))
+                     for r in csv.DictReader(f)}
+    pending = [t for t in targets if t not in cache]
+    if pending:
+        (latest,) = rpc_batch(url, [('eth_blockNumber', [])])
+        latest = int(latest, 16)
+        latest_ts = timestamps(url, [latest])[latest]
+        est = {t: latest - (latest_ts - t) // 12 for t in pending}      # 12 s slots since September 2022
+        seen = {t: set() for t in pending}
+        stepping = set()
+        for _ in range(60):
+            ts = timestamps(url, list(est.values()) + [b + 1 for b in est.values()])
+            for t, b in list(est.items()):
+                if ts[b] <= t < ts[b + 1]:
+                    cache[t] = (b, ts[b])
+                    del est[t]
+                    continue
+                seen[t].add(b)
+                too_late = ts[b] > t
+                if t in stepping:
+                    nxt = b - 1 if too_late else b + 1
+                elif too_late:
+                    nxt = b - max(1, (ts[b] - t + 11) // 12)
+                else:
+                    nxt = b + 1 + (t - ts[b + 1]) // 12
+                if nxt in seen[t]:                    # oscillating: step one block at a time
+                    stepping.add(t)
+                    nxt = b - 1 if too_late else b + 1
+                est[t] = nxt
+            print(f'  block search: {len(est)} dates not yet resolved')
+            if not est:
+                break
+        else:
+            sys.exit('Block search did not converge.')
+        with open(BLOCKS_PATH, 'w', newline='') as f:
+            w = csv.writer(f)
+            w.writerow(['target_timestamp', 'target_utc', 'block', 'block_timestamp'])
+            for t in sorted(cache):
+                w.writerow([t, datetime.fromtimestamp(t, tz=timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+                            cache[t][0], cache[t][1]])
+    return {t: cache[t][0] for t in targets}, {cache[t][0]: cache[t][1] for t in targets}
 
 
 def strategy_version(url, strategy, asset, block):
@@ -151,7 +186,7 @@ def main():
     block_of, ts_of = blocks_at_or_before(url, targets)
 
     versions = {}
-    token_cache = {}
+    not_listed = {}
     new_file = not os.path.exists(OUT_PATH)
     with open(OUT_PATH, 'a', newline='') as f:
         writer = csv.writer(f)
@@ -166,6 +201,13 @@ def main():
                 tag = hex(block)
                 strategy = address_from_word(word(rd, 11))
                 variable_rate = int(word(rd, 4), 16)
+                if int(strategy, 16) == 0:
+                    # Reserve not yet listed on the Pool at this block (e.g. USDT was listed after
+                    # the market's launch). Recorded with blank fields so that it is not re-queried.
+                    writer.writerow([symbol, asset, t.strftime('%Y-%m-%dT%H:%M:%SZ'), block, ts_of[block],
+                                     'not listed', '', ''] + [''] * 8)
+                    not_listed[symbol] = not_listed.get(symbol, 0) + 1
+                    continue
                 if strategy not in versions:
                     versions[strategy] = strategy_version(url, strategy, asset, block)
                 if versions[strategy] == 1:
@@ -198,7 +240,7 @@ def main():
                    'rpc_provider': requests.utils.urlparse(url).hostname,
                    'collected_utc': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
                    'pool': POOL, 'sampling': 'last block at or before each day 00:00 UTC',
-                   'strategy_versions_seen': versions, 'validation_every_days': VALIDATION_EVERY,
+                   'strategy_versions_seen': versions, 'samples_before_listing': not_listed, 'validation_every_days': VALIDATION_EVERY,
                    'columns': COLUMNS,
                    'notes': ['Rates and model parameters are annual, in ray (1e27); token amounts in token units.',
                              'Strategy version 1 = Aave V3.0 interface (no arguments); '
