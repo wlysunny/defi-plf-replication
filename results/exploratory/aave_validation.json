@@ -1,0 +1,341 @@
+{
+  "status": "exploratory, post hoc",
+  "periods": [
+    {
+      "period": "USDC 2023-02 to 2023-12",
+      "median_abs_rate_gap_bp": 0.005126475756522808,
+      "p90_abs_rate_gap_bp": 1.0143193559031125,
+      "share_rate_exactly_equal": 0.39820359281437123,
+      "median_abs_util_subgraph_vs_implied_pp": 0.08823750660883434,
+      "median_abs_util_balance_vs_implied_pp": 7.803741496559269e-06,
+      "median_kink_pct": 90.0,
+      "median_util_implied_pct": 87.5444877277103,
+      "rule_on_subgraph_daily": {
+        "decision": "Holds",
+        "n": 334,
+        "kink_bin_share": 0.4940119760479042,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      },
+      "rule_on_implied_daily": {
+        "decision": "Holds",
+        "n": 334,
+        "kink_bin_share": 0.5,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      }
+    },
+    {
+      "period": "USDC 2024",
+      "median_abs_rate_gap_bp": 0.0008600351430132491,
+      "p90_abs_rate_gap_bp": 2.2828690904103333,
+      "share_rate_exactly_equal": 0.42349726775956287,
+      "median_abs_util_subgraph_vs_implied_pp": 0.21390600588161846,
+      "median_abs_util_balance_vs_implied_pp": 2.4123427692757105e-05,
+      "median_kink_pct": 92.0,
+      "median_util_implied_pct": 90.30934662793908,
+      "rule_on_subgraph_daily": {
+        "decision": "Holds",
+        "n": 366,
+        "kink_bin_share": 0.4808743169398907,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      },
+      "rule_on_implied_daily": {
+        "decision": "Holds",
+        "n": 366,
+        "kink_bin_share": 0.48360655737704916,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      }
+    },
+    {
+      "period": "USDC 2025-01 to 2025-11",
+      "median_abs_rate_gap_bp": 7.2004053386365285e-06,
+      "p90_abs_rate_gap_bp": 0.03450348103626762,
+      "share_rate_exactly_equal": 0.46407185628742514,
+      "median_abs_util_subgraph_vs_implied_pp": 0.7067730828587955,
+      "median_abs_util_balance_vs_implied_pp": 0.00013902168942081516,
+      "median_kink_pct": 92.0,
+      "median_util_implied_pct": 80.96592109024746,
+      "rule_on_subgraph_daily": {
+        "decision": "Does not hold",
+        "n": 334,
+        "kink_bin_share": 0.05089820359281437,
+        "modal_bin_range_pp": [
+          -12.5,
+          -7.5
+        ]
+      },
+      "rule_on_implied_daily": {
+        "decision": "Does not hold",
+        "n": 334,
+        "kink_bin_share": 0.05688622754491018,
+        "modal_bin_range_pp": [
+          -12.5,
+          -7.5
+        ]
+      }
+    },
+    {
+      "period": "USDT 2023-02 to 2023-12",
+      "median_abs_rate_gap_bp": 0.00750265362170488,
+      "p90_abs_rate_gap_bp": 2.7512861553674828,
+      "share_rate_exactly_equal": 0.3582554517133956,
+      "median_abs_util_subgraph_vs_implied_pp": 0.11154335703766094,
+      "median_abs_util_balance_vs_implied_pp": 2.609287729882226e-05,
+      "median_kink_pct": 80.0,
+      "median_util_implied_pct": 78.3648573930679,
+      "rule_on_subgraph_daily": {
+        "decision": "Holds",
+        "n": 321,
+        "kink_bin_share": 0.40186915887850466,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      },
+      "rule_on_implied_daily": {
+        "decision": "Holds",
+        "n": 321,
+        "kink_bin_share": 0.40498442367601245,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      }
+    },
+    {
+      "period": "USDT 2024",
+      "median_abs_rate_gap_bp": 0.0016522791199236053,
+      "p90_abs_rate_gap_bp": 1.2148739931934216,
+      "share_rate_exactly_equal": 0.27049180327868855,
+      "median_abs_util_subgraph_vs_implied_pp": 0.2563310712504716,
+      "median_abs_util_balance_vs_implied_pp": 2.2686102404634312e-05,
+      "median_kink_pct": 92.0,
+      "median_util_implied_pct": 86.40471215158944,
+      "rule_on_subgraph_daily": {
+        "decision": "Holds",
+        "n": 366,
+        "kink_bin_share": 0.35792349726775957,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      },
+      "rule_on_implied_daily": {
+        "decision": "Holds",
+        "n": 366,
+        "kink_bin_share": 0.36065573770491804,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      }
+    },
+    {
+      "period": "USDT 2025-01 to 2025-11",
+      "median_abs_rate_gap_bp": 0.00010518062079079016,
+      "p90_abs_rate_gap_bp": 0.029091052659175883,
+      "share_rate_exactly_equal": 0.36227544910179643,
+      "median_abs_util_subgraph_vs_implied_pp": 0.7005949826459741,
+      "median_abs_util_balance_vs_implied_pp": 1.6860661837370117e-05,
+      "median_kink_pct": 92.0,
+      "median_util_implied_pct": 78.07080158492718,
+      "rule_on_subgraph_daily": {
+        "decision": "Does not hold",
+        "n": 334,
+        "kink_bin_share": 0.0718562874251497,
+        "modal_bin_range_pp": [
+          -17.5,
+          -12.5
+        ]
+      },
+      "rule_on_implied_daily": {
+        "decision": "Does not hold",
+        "n": 334,
+        "kink_bin_share": 0.08383233532934131,
+        "modal_bin_range_pp": [
+          -17.5,
+          -12.5
+        ]
+      }
+    },
+    {
+      "period": "DAI 2023-02 to 2023-12",
+      "median_abs_rate_gap_bp": 0.0,
+      "p90_abs_rate_gap_bp": 5.825309649328306,
+      "share_rate_exactly_equal": 0.5119760479041916,
+      "median_abs_util_subgraph_vs_implied_pp": 0.18497403233001464,
+      "median_abs_util_balance_vs_implied_pp": 7.590080694797052e-05,
+      "median_kink_pct": 80.0,
+      "median_util_implied_pct": 76.9032060188565,
+      "rule_on_subgraph_daily": {
+        "decision": "Holds",
+        "n": 334,
+        "kink_bin_share": 0.2874251497005988,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      },
+      "rule_on_implied_daily": {
+        "decision": "Holds",
+        "n": 334,
+        "kink_bin_share": 0.32934131736526945,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      }
+    },
+    {
+      "period": "DAI 2024",
+      "median_abs_rate_gap_bp": 0.0031908688415960285,
+      "p90_abs_rate_gap_bp": 70.82501062808069,
+      "share_rate_exactly_equal": 0.453551912568306,
+      "median_abs_util_subgraph_vs_implied_pp": 1.8869321546556108,
+      "median_abs_util_balance_vs_implied_pp": 2.0094439300066824e-05,
+      "median_kink_pct": 92.0,
+      "median_util_implied_pct": 90.33211328035271,
+      "rule_on_subgraph_daily": {
+        "decision": "Holds",
+        "n": 366,
+        "kink_bin_share": 0.4808743169398907,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      },
+      "rule_on_implied_daily": {
+        "decision": "Holds",
+        "n": 366,
+        "kink_bin_share": 0.6311475409836066,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      }
+    },
+    {
+      "period": "DAI 2025-01 to 2025-11",
+      "median_abs_rate_gap_bp": 0.0001495314518873414,
+      "p90_abs_rate_gap_bp": 3.7273756478182416,
+      "share_rate_exactly_equal": 0.46407185628742514,
+      "median_abs_util_subgraph_vs_implied_pp": 1.0496325333298202,
+      "median_abs_util_balance_vs_implied_pp": 1.6306661031251224e-05,
+      "median_kink_pct": 92.0,
+      "median_util_implied_pct": 81.07027440751719,
+      "rule_on_subgraph_daily": {
+        "decision": "Does not hold",
+        "n": 334,
+        "kink_bin_share": 0.08982035928143713,
+        "modal_bin_range_pp": [
+          -12.5,
+          -7.5
+        ]
+      },
+      "rule_on_implied_daily": {
+        "decision": "Does not hold",
+        "n": 334,
+        "kink_bin_share": 0.03592814371257485,
+        "modal_bin_range_pp": [
+          -12.5,
+          -7.5
+        ]
+      }
+    },
+    {
+      "period": "WETH 2023-02 to 2023-12",
+      "median_abs_rate_gap_bp": 0.0,
+      "p90_abs_rate_gap_bp": 0.01830115040366559,
+      "share_rate_exactly_equal": 0.7455089820359282,
+      "median_abs_util_subgraph_vs_implied_pp": 0.23309434120592698,
+      "median_abs_util_balance_vs_implied_pp": 1.126112137939117e-05,
+      "median_kink_pct": 80.0,
+      "median_util_implied_pct": 63.142797424399035,
+      "rule_on_subgraph_daily": {
+        "decision": "Does not hold",
+        "n": 334,
+        "kink_bin_share": 0.08682634730538923,
+        "modal_bin_range_pp": [
+          -27.5,
+          -22.5
+        ]
+      },
+      "rule_on_implied_daily": {
+        "decision": "Does not hold",
+        "n": 334,
+        "kink_bin_share": 0.09880239520958084,
+        "modal_bin_range_pp": [
+          -22.5,
+          -17.5
+        ]
+      }
+    },
+    {
+      "period": "WETH 2024",
+      "median_abs_rate_gap_bp": 0.0,
+      "p90_abs_rate_gap_bp": 0.009315262645293032,
+      "share_rate_exactly_equal": 0.7622950819672131,
+      "median_abs_util_subgraph_vs_implied_pp": 0.1651536347744269,
+      "median_abs_util_balance_vs_implied_pp": 1.6852619637575117e-06,
+      "median_kink_pct": 90.0,
+      "median_util_implied_pct": 84.8710450208818,
+      "rule_on_subgraph_daily": {
+        "decision": "Holds, but not robustly",
+        "n": 366,
+        "kink_bin_share": 0.3333333333333333,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      },
+      "rule_on_implied_daily": {
+        "decision": "Holds",
+        "n": 366,
+        "kink_bin_share": 0.3442622950819672,
+        "modal_bin_range_pp": [
+          -2.5,
+          2.5
+        ]
+      }
+    },
+    {
+      "period": "WETH 2025-01 to 2025-11",
+      "median_abs_rate_gap_bp": 0.0,
+      "p90_abs_rate_gap_bp": 0.0010607767119541476,
+      "share_rate_exactly_equal": 0.7155688622754491,
+      "median_abs_util_subgraph_vs_implied_pp": 0.19392467075304864,
+      "median_abs_util_balance_vs_implied_pp": 3.99987428068016e-07,
+      "median_kink_pct": 90.0,
+      "median_util_implied_pct": 86.53800082429137,
+      "rule_on_subgraph_daily": {
+        "decision": "Does not hold",
+        "n": 334,
+        "kink_bin_share": 0.2754491017964072,
+        "modal_bin_range_pp": [
+          -7.5,
+          -2.5
+        ]
+      },
+      "rule_on_implied_daily": {
+        "decision": "Does not hold",
+        "n": 334,
+        "kink_bin_share": 0.2904191616766467,
+        "modal_bin_range_pp": [
+          -7.5,
+          -2.5
+        ]
+      }
+    }
+  ]
+}
