@@ -1,0 +1,34 @@
+{
+  "source": "Aave V3 subgraph (Ethereum mainnet), The Graph network",
+  "subgraph_id": "Cd2gEDVeqnjBn1hSeqFMitw8Q1iiyV9FYUZkLNRcL87g",
+  "subgraph_meta_at_start": {
+    "deployment": "QmX2VfvEspbShTdcjefWeG3CKBVXKWm9naxH6TVhqPb9qY",
+    "hasIndexingErrors": false,
+    "block": {
+      "number": 26104208,
+      "timestamp": 1790938895,
+      "hash": "0xbe9728eefe3661c823116881683ae49629f2d95eb721600f6cbe8d2cda54feea"
+    }
+  },
+  "subgraph_meta_at_end": {
+    "deployment": "QmX2VfvEspbShTdcjefWeG3CKBVXKWm9naxH6TVhqPb9qY",
+    "hasIndexingErrors": false,
+    "block": {
+      "number": 26104224,
+      "timestamp": 1790939087,
+      "hash": "0xac73793f1e39bdf58539e83e58eed2c5dde92b31e49520634b2b6675b0637d51"
+    }
+  },
+  "collected_utc": "2026-10-02T11:04:51Z",
+  "symbols": [
+    "USDC",
+    "USDT",
+    "DAI",
+    "WETH"
+  ],
+  "start_date": "2023-02-01",
+  "end_date_exclusive": "2025-12-01",
+  "sampling": "last ReserveParamsHistoryItem at or before each day 00:00 UTC",
+  "script": "collect_aave_v3_subgraph.py",
+  "note": "API key deliberately not recorded."
+}
