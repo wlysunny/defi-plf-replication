@@ -37,3 +37,11 @@ On-chain changes that fall inside a regime and match none of the authors' start 
 - The reliability threshold is a judgement. The median difference itself is reported so that readers can apply another threshold.
 - Times converted to blocks carry the error of the block-time table, which is small relative to regime lengths.
 - Regime 0 uses an earlier model type whose parameters are partly given in a different form (`jump` rather than a jump multiplier); only parameters with the same meaning are compared.
+
+## Post-hoc note (2026-10-03, written after the annotation was run)
+
+This note does not change the rules or the reported labels. It records a weakness in label 1 found when the output was read.
+
+When an author's start time lies inside no change interval, the rule takes the nearest on-chain change within 7 days, without checking the type of the change and without preventing two regimes from being matched to the same change. For regime 10 this selects the in-model update of about 21 April 2020 (−5.4 days), which is also the change matched to regime 9. The on-chain change that introduces the parameters the authors give for regime 10 is the new model contract of 2 to 3 May 2020 (about +5.6 days), which the output lists among the changes that match no regime. Label 3 for regime 10 (multiplier does not match) is consistent with this reading: between the authors' date and early May the chain still applied the earlier parameters.
+
+A better rule would match each regime to the change whose resulting parameters equal the authors' parameters. That rule was not specified in advance and is not applied here; the reading above is reported as an interpretation.
