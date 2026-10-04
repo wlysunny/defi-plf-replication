@@ -26,9 +26,9 @@ No summary statistics are printed. Re-running resumes where it stopped.
 
 Usage (from the repository root, archive-capable RPC endpoint required):
     export ETH_RPC_URL="https://eth-mainnet.g.alchemy.com/v2/<key>"
-    python collect_aave_v3_rate_params.py
+    python scripts/collect_aave_v3_rate_params.py
 Requires data/aave_v3/aave_v3_reserves.json from
-    python collect_aave_v3_subgraph.py --list-reserves
+    python scripts/collect_aave_v3_subgraph.py --list-reserves
 """
 
 import csv

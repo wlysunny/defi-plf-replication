@@ -20,7 +20,7 @@ The kink changes from 90% to 80% in mid-2022 in every scenario, to check that
 distances are measured from the kink active at each sample.
 
 Run from the repository root:
-    python simulate_kink_clustering.py
+    python scripts/simulate_kink_clustering.py
 """
 
 import os

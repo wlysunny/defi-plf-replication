@@ -9,7 +9,7 @@ Outputs:
   results/regime_annotation.json         both, with the thresholds used
 
 Run from the repository root:
-    python annotate_regimes.py
+    python scripts/annotate_regimes.py
 """
 
 import gzip

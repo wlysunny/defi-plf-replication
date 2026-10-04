@@ -15,7 +15,7 @@ Steps:
      of the rate at the kink, and the model's slope below and above the kink.
 
 Run from the repository root:
-    python aave_kink_analysis.py
+    python scripts/aave_kink_analysis.py
 """
 
 import json

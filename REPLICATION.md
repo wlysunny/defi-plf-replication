@@ -58,7 +58,7 @@ conda activate defi-plf
 The exchange-rate inputs are then prepared from the repository root. The cleaning script produces the REP and SAI series from the raw downloads:
 
 ```bash
-python clean_manual_prices.py
+python scripts/clean_manual_prices.py
 ```
 
 The DefiLlama prices for the remaining tokens are fetched and cached by the second cell of `notebooks/compound/5_uip_compound.ipynb`, which calls `cache_all_token_usd_prices` with the sample window defined above. An existing cache is reused only if it covers the full window.

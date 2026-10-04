@@ -16,7 +16,7 @@ The sample window is imported from fetch_exchange_rates_defillama.py so that
 all exchange-rate inputs share one definition of the UIP sample period.
 
 Run from the repository root:
-    python clean_manual_prices.py
+    python scripts/clean_manual_prices.py
 """
 
 import os

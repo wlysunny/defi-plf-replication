@@ -19,7 +19,7 @@ Scenarios (all four reserves, three periods each):
 The overall verdict is checked as well as each period decision.
 
 Run from the repository root:
-    python simulate_aave_kink.py
+    python scripts/simulate_aave_kink.py
 """
 
 import os

@@ -3,7 +3,7 @@ Test whether cDAI utilisation clusters at the kink of the interest-rate model,
 implementing analysis_plans/kink_clustering_criterion.md.
 
 Run from the repository root, after the on-chain panel has been collected:
-    python kink_clustering_analysis.py
+    python scripts/kink_clustering_analysis.py
 """
 
 import json

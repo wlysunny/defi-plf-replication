@@ -19,7 +19,7 @@ directly at historical blocks:
 
 Requires an archive-capable RPC endpoint in ETH_RPC_URL (Alchemy's free plan
 serves historical state). Run from the repository root:
-    python exploratory_onchain_check.py
+    python scripts/exploratory_onchain_check.py
 """
 
 import gzip

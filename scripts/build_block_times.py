@@ -21,7 +21,7 @@ and the interpolation error on those blocks is reported.
 
 Usage (from the repository root):
     export ETH_RPC_URL="https://eth-mainnet.g.alchemy.com/v2/<your-key>"
-    python build_block_times.py
+    python scripts/build_block_times.py
 
 The RPC URL contains a private key, so it is read from an environment
 variable and must never be written into code or committed.

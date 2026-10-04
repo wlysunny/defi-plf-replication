@@ -17,7 +17,7 @@ Scenarios:
      Expected: inconclusive (construct validity fails).
 
 Run from the repository root:
-    python simulate_regime1.py
+    python scripts/simulate_regime1.py
 """
 
 import os

@@ -15,7 +15,7 @@ notebook on the current branch, and reports for each of the four regressions
 It also writes all pair-level values to results/uip_comparison.csv.
 
 Run from the repository root after executing 5_uip_compound.ipynb:
-    python compare_uip.py
+    python scripts/compare_uip.py
 """
 
 import csv

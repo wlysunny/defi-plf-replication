@@ -33,8 +33,8 @@ not kept historically by the subgraph; they are read from the chain separately.
 
 Usage (from the repository root; a Graph API key is required, never commit it):
     export GRAPH_API_KEY="<key from Subgraph Studio>"
-    python collect_aave_v3_subgraph.py --list-reserves   # step 1: check reserve ids
-    python collect_aave_v3_subgraph.py                    # step 2: collect
+    python scripts/collect_aave_v3_subgraph.py --list-reserves   # step 1: check reserve ids
+    python scripts/collect_aave_v3_subgraph.py                    # step 2: collect
 """
 
 import argparse

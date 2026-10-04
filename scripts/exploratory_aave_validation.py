@@ -21,7 +21,7 @@ For each reserve-period it reports:
   - the pre-specified rule applied to each utilisation measure (reported, no decision).
 
 Run from the repository root:
-    python exploratory_aave_validation.py
+    python scripts/exploratory_aave_validation.py
 """
 
 import json

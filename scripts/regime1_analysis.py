@@ -16,7 +16,7 @@ Steps, in the order the criterion specifies:
   6. Apply the decision rules and save all results.
 
 Run from the repository root:
-    python regime1_analysis.py
+    python scripts/regime1_analysis.py
 """
 
 import json

@@ -26,8 +26,8 @@ It can be interrupted and re-run: rows already in the output file are skipped.
 
 Usage (from the repository root, archive-capable RPC endpoint required):
     export ETH_RPC_URL="https://eth-mainnet.g.alchemy.com/v2/<key>"
-    python collect_onchain_cdai.py                     # main panel, about daily, 2019-11 to 2025-11
-    python collect_onchain_cdai.py --dense-2020        # about hourly, 2020-02-21 to 2020-04-21
+    python scripts/collect_onchain_cdai.py                     # main panel, about daily, 2019-11 to 2025-11
+    python scripts/collect_onchain_cdai.py --dense-2020        # about hourly, 2020-02-21 to 2020-04-21
 The dense panel covers the three periods analysed in Section 5.2 of the paper,
 which are too short for a daily sample.
 """

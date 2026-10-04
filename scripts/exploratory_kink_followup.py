@@ -16,7 +16,7 @@ three parts:
      model parameters read on-chain in each period.
 
 Run from the repository root:
-    python exploratory_kink_followup.py
+    python scripts/exploratory_kink_followup.py
 """
 
 import json
