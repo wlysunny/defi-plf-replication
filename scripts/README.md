@@ -23,6 +23,7 @@ The exchange-rate fetcher that replaces CryptoCompare is part of the original pa
 | `simulate_regime1.py` | synthetic | `results/regime1_simulation_check.csv` | `regime1_criterion.md` |
 | `regime1_analysis.py` | `data/compound/cdai.pkl`, LLM labels | `results/regime1_results.json`, `results/regime1_error_by_regime.csv` | `regime1_criterion.md` (with Amendment 1) |
 | `exploratory_onchain_check.py` | chain | `results/exploratory/onchain_rate_check.json` | exploratory |
+| `exploratory_timelock_check.py` | chain (Timelock events in narrow windows) | `results/exploratory/timelock_check.json` | exploratory |
 | `annotate_regimes.py` | on-chain panels, `cdai.pkl`, event log | `results/regime_annotation.*`, `results/regime_onchain_changes.csv` | `regime_annotation_rules.md` |
 
 ## 3. Newly constructed dataset: on-chain cDAI panel

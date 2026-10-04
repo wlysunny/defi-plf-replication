@@ -1,0 +1,62 @@
+{
+  "status": "exploratory, post hoc",
+  "admin": "0x6d903f6003cca6255D85CcA4D3B5E5146dC33925",
+  "delay_seconds": 172800,
+  "actions_on_cdai": [
+    {
+      "signature": "_setReserveFactor(uint256)",
+      "argument": "100000000000000000",
+      "queued_utc": "2019-11-24 22:13:38",
+      "eta_utc": "2019-11-26 22:16:26",
+      "executed_utc": "2019-11-27 23:10:05",
+      "nearest_author_regime": 0,
+      "author_start": "2019-11-23 00:59:25",
+      "author_minus_queued_hours": -45.24,
+      "author_minus_executed_hours": -118.18
+    },
+    {
+      "signature": "_setInterestRateModel(address)",
+      "argument": "0xec163986cc9a6593d6addcbff5509430d348030f",
+      "queued_utc": "2019-12-17 23:41:27",
+      "eta_utc": "2019-12-19 23:42:54",
+      "executed_utc": "2019-12-20 00:26:19",
+      "nearest_author_regime": 1,
+      "author_start": "2019-12-17 21:57:22",
+      "author_minus_queued_hours": -1.73,
+      "author_minus_executed_hours": -50.48
+    },
+    {
+      "signature": "_setImplementation(address,bool,bytes)",
+      "argument": "",
+      "queued_utc": "2019-12-17 23:45:39",
+      "eta_utc": "2019-12-19 23:47:36",
+      "executed_utc": "2019-12-20 00:31:26",
+      "nearest_author_regime": 1,
+      "author_start": "2019-12-17 21:57:22",
+      "author_minus_queued_hours": -1.8,
+      "author_minus_executed_hours": -50.57
+    },
+    {
+      "signature": "_setReserveFactor(uint256)",
+      "argument": "50000000000000000",
+      "queued_utc": "2019-12-18 00:32:29",
+      "eta_utc": "2019-12-20 00:34:26",
+      "executed_utc": "2019-12-20 00:38:39",
+      "nearest_author_regime": 1,
+      "author_start": "2019-12-17 21:57:22",
+      "author_minus_queued_hours": -2.59,
+      "author_minus_executed_hours": -50.69
+    },
+    {
+      "signature": "_setInterestRateModel(address)",
+      "argument": "0x000000007675b5e1da008f037a0800b309e0c493",
+      "queued_utc": "2020-04-30 13:46:48",
+      "eta_utc": "2020-05-02 13:46:48",
+      "executed_utc": "2020-05-02 13:56:43",
+      "nearest_author_regime": 10,
+      "author_start": "2020-04-27 04:38:25",
+      "author_minus_queued_hours": -81.14,
+      "author_minus_executed_hours": -129.31
+    }
+  ]
+}
