@@ -1,0 +1,138 @@
+{
+  "status": "exploratory, post hoc",
+  "readings": [
+    "raw",
+    "apy_N",
+    "apy_d"
+  ],
+  "regimes": [
+    {
+      "regime": 0,
+      "n": 24,
+      "borrow_gap_pp_raw": 0.9443675578260449,
+      "supply_gap_pp_raw": 1.4935279785529287,
+      "borrow_gap_pp_apy_N": 0.8568528011413553,
+      "supply_gap_pp_apy_N": 1.4485521597997255,
+      "borrow_gap_pp_apy_d": 0.4367246505618285,
+      "supply_gap_pp_apy_d": 1.3043770877520953
+    },
+    {
+      "regime": 1,
+      "n": 19,
+      "borrow_gap_pp_raw": 2.199808700025758,
+      "supply_gap_pp_raw": 2.0939638879675107,
+      "borrow_gap_pp_apy_N": 2.0059912993937923,
+      "supply_gap_pp_apy_N": 1.9173391321375828,
+      "borrow_gap_pp_apy_d": 1.2467819178042052,
+      "supply_gap_pp_apy_d": 1.192184323886833
+    },
+    {
+      "regime": 2,
+      "n": 20,
+      "borrow_gap_pp_raw": 2.0367812960341025,
+      "supply_gap_pp_raw": 1.9211916561587299,
+      "borrow_gap_pp_apy_N": 1.7173912717494573,
+      "supply_gap_pp_apy_N": 1.6309688116778964,
+      "borrow_gap_pp_apy_d": 0.7501800641936704,
+      "supply_gap_pp_apy_d": 0.7149928221361852
+    },
+    {
+      "regime": 3,
+      "n": 10,
+      "borrow_gap_pp_raw": 0.10823207657042547,
+      "supply_gap_pp_raw": 0.05971786086370334,
+      "borrow_gap_pp_apy_N": 0.19733319541851563,
+      "supply_gap_pp_apy_N": 0.21693866402428402,
+      "borrow_gap_pp_apy_d": 1.1430187304674335,
+      "supply_gap_pp_apy_d": 1.114614315943658
+    },
+    {
+      "regime": 4,
+      "n": 4,
+      "borrow_gap_pp_raw": 0.8642563567141062,
+      "supply_gap_pp_raw": 0.8668601672374938,
+      "borrow_gap_pp_apy_N": 1.1677779751587902,
+      "supply_gap_pp_apy_N": 1.1404639683275395,
+      "borrow_gap_pp_apy_d": 2.1153255692391237,
+      "supply_gap_pp_apy_d": 2.040718080601552
+    },
+    {
+      "regime": 5,
+      "n": 34,
+      "borrow_gap_pp_raw": 0.7678991062877241,
+      "supply_gap_pp_raw": 0.741384488801114,
+      "borrow_gap_pp_apy_N": 0.42708112548578425,
+      "supply_gap_pp_apy_N": 0.4317892495309075,
+      "borrow_gap_pp_apy_d": 0.5761854005730815,
+      "supply_gap_pp_apy_d": 0.5250389874951245
+    },
+    {
+      "regime": 6,
+      "n": 490,
+      "borrow_gap_pp_raw": 0.34396342699093485,
+      "supply_gap_pp_raw": 0.31867948416481673,
+      "borrow_gap_pp_apy_N": 0.004381460348615307,
+      "supply_gap_pp_apy_N": 0.009983753219418995,
+      "borrow_gap_pp_apy_d": 1.0053934503050532,
+      "supply_gap_pp_apy_d": 0.960318595968733
+    },
+    {
+      "regime": 7,
+      "n": 529,
+      "borrow_gap_pp_raw": 0.08724247568553667,
+      "supply_gap_pp_raw": 0.9256057413863678,
+      "borrow_gap_pp_apy_N": 0.013945799080788274,
+      "supply_gap_pp_apy_N": 0.9596701056093039,
+      "borrow_gap_pp_apy_d": 0.5266273778339867,
+      "supply_gap_pp_apy_d": 1.255282270368089
+    },
+    {
+      "regime": 8,
+      "n": 329,
+      "borrow_gap_pp_raw": 0.041006290837861545,
+      "supply_gap_pp_raw": 0.06270406815259608,
+      "borrow_gap_pp_apy_N": 0.0396515516456389,
+      "supply_gap_pp_apy_N": 0.06181479166405767,
+      "borrow_gap_pp_apy_d": 0.05823481463482347,
+      "supply_gap_pp_apy_d": 0.045036774586880865
+    },
+    {
+      "regime": 9,
+      "n": 22,
+      "borrow_gap_pp_raw": 3.264456948988992,
+      "supply_gap_pp_raw": 2.9696679116021114,
+      "borrow_gap_pp_apy_N": 3.2821390530154275,
+      "supply_gap_pp_apy_N": 2.9859849283565376,
+      "borrow_gap_pp_apy_d": 3.534267092798345,
+      "supply_gap_pp_apy_d": 3.2056396897158597
+    },
+    {
+      "regime": 10,
+      "n": 12,
+      "borrow_gap_pp_raw": 0.21965641859049806,
+      "supply_gap_pp_raw": 0.20330668011376424,
+      "borrow_gap_pp_apy_N": 0.20998942188687658,
+      "supply_gap_pp_apy_N": 0.19408254162060504,
+      "borrow_gap_pp_apy_d": 0.21617900847879712,
+      "supply_gap_pp_apy_d": 0.1523493786090785
+    }
+  ],
+  "paper_period_1_rate_minus_kink": {
+    "raw": {
+      "median": 0.3323298179649506,
+      "share_within_0.25pp": 0.00998003992015968,
+      "share_above_0.25pp": 0.8522954091816367
+    },
+    "apy_N": {
+      "median": -0.008379255680032727,
+      "share_within_0.25pp": 0.6007984031936128,
+      "share_above_0.25pp": 0.2554890219560878
+    },
+    "apy_d": {
+      "median": -1.0114877597665024,
+      "share_within_0.25pp": 0.041916167664670656,
+      "share_above_0.25pp": 0.13373253493013973
+    }
+  },
+  "paper_period_1_chain_minus_kink_median_pp": -0.008071223240159464
+}
