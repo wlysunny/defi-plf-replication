@@ -47,7 +47,7 @@ def load_data(filepath=FILEPATH):
         currency_df = pd.read_csv(filename)
         currency_name = path.splitext(path.basename(filename))[0]
         currency_df["symbol"] = currency_name
-        df = df.append(currency_df)
+        df = pd.concat([df, currency_df])
 
     df["datetime"] = pd.to_datetime(df["timestamp"], unit="s")
     return df.rename(utils.capitalize_camel_case, axis="columns")

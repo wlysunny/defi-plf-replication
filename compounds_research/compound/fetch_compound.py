@@ -114,7 +114,7 @@ def make_dataframe(token: str, days):
         df['utilization_ratio'] = df['total_borrows_history'] / df['total_supply_history']
         df['spread'] = df['borrow_rates']- df['supply_rates']
 
-        master_df = master_df.append(df)
+        master_df = pd.concat([master_df, df])
     
     master_df.to_pickle('./data/' + str(token) +'_new.pkl')
 
