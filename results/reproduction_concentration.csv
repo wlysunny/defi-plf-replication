@@ -1,0 +1,7 @@
+version,market,paper_pct,ours_pct,accounts_positive,verdict
+all events,cdai,50.3,32.56,11104,(not judged)
+all events,ceth,60.0,31.163,9929,(not judged)
+all events,cusdc,47.3,49.879,6604,(not judged)
+to 2020-06-04,cdai,50.3,50.635,6330,numerical
+to 2020-06-04,ceth,60.0,59.929,5283,numerical
+to 2020-06-04,cusdc,47.3,47.966,4709,numerical
