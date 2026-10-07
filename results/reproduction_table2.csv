@@ -1,0 +1,16 @@
+platform,market,paper_musd,ours_musd,verdict
+compound,eth,76.58,76.5839,exact
+compound,usdc,31.54,31.5435,exact
+compound,dai,24.82,24.8215,exact
+compound,sai,36.94,36.942,exact
+compound,bat,0.95,0.9503,exact
+aave,eth,4.8,4.8009,exact
+aave,usdc,4.12,4.1161,exact
+aave,dai,0.95,0.9549,exact
+aave,usdt,3.92,3.9182,exact
+aave,bat,0.08,0.0805,exact
+aave,lend,3.6,3.6034,exact
+aave,link,12.21,12.2127,exact
+dydx,eth,19.41,19141643586946.633,not reproduced
+dydx,usdc,6.58,6.5802,exact
+dydx,dai,4.64,4638364073673.212,not reproduced
