@@ -37,3 +37,15 @@ A search of the whole repository found the code for the cross-protocol results i
 - **Figure 1**: visual comparison of the regenerated figure with the paper's; reproduced if every market shows the same ordering of the three protocols in average utilisation and in average borrow rate.
 
 If the notebook stores outputs from the authors' own run, they are compared with both the paper and the regenerated outputs, and any difference between the stored outputs and the paper is reported separately, since it would indicate that the paper was produced from a different state of the code or data.
+
+
+## Amendment 2 (2026-10-07, written after `compound-wealth.ipynb` was run and before any share was computed)
+
+The notebook does not print the shares held by the largest accounts; it only plots cumulative distributions, whose y-axis labels are misplaced under the current version of matplotlib (the notebook sets tick labels without fixing tick positions, and matplotlib warns that they may be mislabelled). The shares are therefore computed by `scripts/reproduce_concentration.py`, which executes the notebook's cells that load events and compute balances unchanged and applies the same rule as the plotting function (`utils.plot_cumulative_hist` keeps positive balances only): the share of the three largest positive balances in the sum of positive balances.
+
+The paper states the date of the distribution as 2020-06-04, whereas the committed event logs extend beyond it (to August 2020 for cDAI). Two versions are reported:
+
+1. **As the notebook runs**: all committed events. This is what the authors' code produces today.
+2. **At the paper's date**: only events in blocks up to the end of 2020-06-04 UTC, with block times interpolated from `data/derived/eth_block_times_sampled.csv`. This is the comparison with the paper; the verdict in the criterion above (exact at one decimal, numerical within one percentage point) is applied to this version.
+
+As a secondary check, the number of accounts with a positive balance is compared with the right end of the x-axis of Figure 6, read approximately from the paper.
