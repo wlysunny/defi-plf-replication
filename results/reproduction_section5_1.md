@@ -44,3 +44,21 @@ Differences that do not affect the content:
 ## What this implies
 
 The paper's Section 5.1 results are reproduced from the authors' data and code. The differences in units, titles and formatting indicate that the published figures and Table 2 were produced from a state of the code that is not identical to any committed version; the repository's final version does not run as stored and gives wrong units for two dYdX markets.
+
+## Fund concentration (Section 5.1.3, Figure 6)
+
+Criteria: Amendment 2 (bc8ec0f), committed before the shares were computed. Output: `scripts/reproduce_concentration.py`, `results/reproduction_concentration.csv`.
+
+`notebooks/compound/compound-wealth.ipynb` plots the cumulative distributions but does not print the shares quoted in the text. The script executes, unchanged, the notebook cells that load the event logs and replay `Transfer` events into balances, and computes the share of the three largest positive balances.
+
+| Market | Paper | All committed events | Events to 2020-06-04 | Verdict |
+|---|---|---|---|---|
+| DAI | 50.3 | 32.56 | 50.63 | numerical (+0.33 pp) |
+| ETH | 60.0 | 31.16 | 59.93 | numerical (−0.07 pp) |
+| USDC | 47.3 | 49.88 | 47.97 | numerical (+0.67 pp) |
+
+All three shares are reproduced within one percentage point at the paper's date, none exactly at one decimal. The numbers of accounts with a positive balance at that date (6,330 for DAI, 5,283 for ETH, 4,709 for USDC) agree with the right ends of the x-axes in Figure 6 (about 6,300, 5,280 and 4,730).
+
+Run as committed, the notebook uses event logs that extend to 5 August 2020 and gives very different shares (32.6, 31.2 and 49.9 per cent), because the markets changed after June 2020; the number of DAI accounts with a positive balance, for example, rose from 6,330 to 11,104. The date of the snapshot therefore has to be imposed for the figure to be reproduced; it is stated in the paper's caption but not in the code. The remaining differences are small and their cause is not known; the exact time of day of the authors' snapshot is one possibility that cannot be checked.
+
+The notebook's y-axis labels are misplaced under the current version of matplotlib (labels are set without fixing tick positions), so the regenerated figures should not be read for values.
