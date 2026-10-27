@@ -1,0 +1,1177 @@
+-------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/wangluyao/defi-plf-analysis/results/vecm/vecm_log.txt
+  log type:  text
+ opened on:  27 Oct 2026, 17:06:59
+
+. clear
+
+. set scheme s1mono
+
+. //////////////////////////////DAI/////////////////////////////////////
+> 
+. import delimited "data/stata/interest_rates_dai.csv", encoding(ISO-8859-2)
+(4 vars, 121 obs)
+
+. gen date=date(v1,"YMD###")
+
+. format %tdDD/NN/CCYY date
+
+. tsset date
+
+Time variable: date, 08/01/2020 to 07/05/2020
+        Delta: 1 day
+
+. 
+. label variable c_dai `"Compound DAI"'
+
+. label variable a_dai `"Aave DAI"'
+
+. label variable d_dai `"dYdX DAI"'
+
+. 
+. 
+. //Plots
+. twoway (line c_dai date, lwidth(medium)) (line a_dai date, lpattern(shortdash) lwidth(medium)) (line d_dai date, 
+> lpattern(longdash) lwidth(medium)), ytitle("Borrow interest rate") xtitle("")
+
+. graph export results/vecm/DAI.pdf, replace
+file /Users/wangluyao/defi-plf-analysis/results/vecm/DAI.pdf saved as PDF format
+
+. 
+. //Stationarity testing - levels
+. 
+. dfuller c_dai, regress //appropriate number of lags
+
+Dickey–Fuller test for unit root          Number of obs  = 120
+Variable: c_dai                           Number of lags =   0
+
+H0: Random walk without drift, d = 0
+
+                                       Dickey–Fuller
+                   Test      -------- critical value ---------
+              statistic           1%           5%          10%
+--------------------------------------------------------------
+ Z(t)            -2.961       -3.503       -2.889       -2.579
+--------------------------------------------------------------
+MacKinnon approximate p-value for Z(t) = 0.0387.
+
+Regression table
+------------------------------------------------------------------------------
+     D.c_dai | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       c_dai |
+         L1. |  -.1457335   .0492255    -2.96   0.004    -.2432133   -.0482537
+             |
+       _cons |   .0083917    .003416     2.46   0.015     .0016271    .0151563
+------------------------------------------------------------------------------
+
+. // Non-stationary
+. 
+. dfuller a_dai, regress //appropriate number of lags
+
+Dickey–Fuller test for unit root          Number of obs  = 120
+Variable: a_dai                           Number of lags =   0
+
+H0: Random walk without drift, d = 0
+
+                                       Dickey–Fuller
+                   Test      -------- critical value ---------
+              statistic           1%           5%          10%
+--------------------------------------------------------------
+ Z(t)            -4.746       -3.503       -2.889       -2.579
+--------------------------------------------------------------
+MacKinnon approximate p-value for Z(t) = 0.0001.
+
+Regression table
+------------------------------------------------------------------------------
+     D.a_dai | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       a_dai |
+         L1. |  -.3173143   .0668584    -4.75   0.000    -.4497122   -.1849164
+             |
+       _cons |   .0236828   .0056305     4.21   0.000     .0125329    .0348326
+------------------------------------------------------------------------------
+
+. // Stationary
+. 
+. dfuller d_dai, lags (1) regress //appropriate number of lags
+
+Augmented Dickey–Fuller test for unit root
+
+Variable: d_dai                           Number of obs  = 119
+                                          Number of lags =   1
+
+H0: Random walk without drift, d = 0
+
+                                       Dickey–Fuller
+                   Test      -------- critical value ---------
+              statistic           1%           5%          10%
+--------------------------------------------------------------
+ Z(t)            -2.929       -3.504       -2.889       -2.579
+--------------------------------------------------------------
+MacKinnon approximate p-value for Z(t) = 0.0421.
+
+Regression table
+------------------------------------------------------------------------------
+     D.d_dai | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       d_dai |
+         L1. |  -.1799678   .0614532    -2.93   0.004    -.3016836    -.058252
+         LD. |  -.2279615    .090214    -2.53   0.013    -.4066418   -.0492813
+             |
+       _cons |    .014092   .0054205     2.60   0.011     .0033561    .0248279
+------------------------------------------------------------------------------
+
+. // Non-stationary
+. 
+. //Stationarity testing - differences
+. 
+. dfuller d.c_dai, lags (1) trend regress
+
+Augmented Dickey–Fuller test for unit root
+
+Variable: D.c_dai                         Number of obs  = 118
+                                          Number of lags =   1
+
+H0: Random walk with or without drift
+
+                                       Dickey–Fuller
+                   Test      -------- critical value ---------
+              statistic           1%           5%          10%
+--------------------------------------------------------------
+ Z(t)            -9.212       -4.034       -3.448       -3.148
+--------------------------------------------------------------
+MacKinnon approximate p-value for Z(t) = 0.0000.
+
+Regression table
+------------------------------------------------------------------------------
+    D2.c_dai | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       c_dai |
+         LD. |   -1.33196   .1445953    -9.21   0.000    -1.618403   -1.045518
+        LD2. |   .1054448   .0931443     1.13   0.260    -.0790734     .289963
+             |
+      _trend |  -.0000251    .000051    -0.49   0.624    -.0001261    .0000759
+       _cons |   .0009496   .0035371     0.27   0.789    -.0060573    .0079565
+------------------------------------------------------------------------------
+
+. // Stationary
+. 
+. dfuller d.a_dai, lags (1) trend regress
+
+Augmented Dickey–Fuller test for unit root
+
+Variable: D.a_dai                         Number of obs  = 118
+                                          Number of lags =   1
+
+H0: Random walk with or without drift
+
+                                       Dickey–Fuller
+                   Test      -------- critical value ---------
+              statistic           1%           5%          10%
+--------------------------------------------------------------
+ Z(t)           -10.988       -4.034       -3.448       -3.148
+--------------------------------------------------------------
+MacKinnon approximate p-value for Z(t) = 0.0000.
+
+Regression table
+------------------------------------------------------------------------------
+    D2.a_dai | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       a_dai |
+         LD. |  -1.388083    .126329   -10.99   0.000     -1.63834   -1.137826
+        LD2. |   .2928711   .0855956     3.42   0.001     .1233069    .4624353
+             |
+      _trend |   .0000285   .0000774     0.37   0.714    -.0001248    .0001817
+       _cons |  -.0027292   .0053702    -0.51   0.612    -.0133676    .0079093
+------------------------------------------------------------------------------
+
+. // Stationary
+. 
+. dfuller d.d_dai, lags (1) trend regress
+
+Augmented Dickey–Fuller test for unit root
+
+Variable: D.d_dai                         Number of obs  = 118
+                                          Number of lags =   1
+
+H0: Random walk with or without drift
+
+                                       Dickey–Fuller
+                   Test      -------- critical value ---------
+              statistic           1%           5%          10%
+--------------------------------------------------------------
+ Z(t)            -9.680       -4.034       -3.448       -3.148
+--------------------------------------------------------------
+MacKinnon approximate p-value for Z(t) = 0.0000.
+
+Regression table
+------------------------------------------------------------------------------
+    D2.d_dai | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       d_dai |
+         LD. |   -1.46106   .1509327    -9.68   0.000    -1.760057   -1.162064
+        LD2. |   .1071689   .0929362     1.15   0.251     -.076937    .2912748
+             |
+      _trend |  -.0000201   .0000785    -0.26   0.799    -.0001756    .0001355
+       _cons |   .0011626     .00545     0.21   0.831    -.0096338     .011959
+------------------------------------------------------------------------------
+
+. // Stationary
+. 
+. //Lag selection
+. varsoc c_dai a_dai d_dai
+
+Lag-order selection criteria
+
+   Sample: 12/01/2020 thru 07/05/2020                      Number of obs = 117
+  +---------------------------------------------------------------------------+
+  | Lag |    LL      LR      df    p     FPE       AIC      HQIC      SBIC    |
+  |-----+---------------------------------------------------------------------|
+  |   0 |  671.761                     2.2e-09  -11.4318  -11.4031   -11.361  |
+  |   1 |  822.468  301.41    9  0.000 1.9e-10  -13.8542  -13.7391  -13.5709* |
+  |   2 |  843.502  42.068    9  0.000 1.6e-10  -14.0599  -13.8586* -13.5641  |
+  |   3 |  846.012  5.0192    9  0.833 1.8e-10  -13.9489  -13.6614  -13.2407  |
+  |   4 |  861.833  31.644*   9  0.000 1.6e-10* -14.0655* -13.6917  -13.1448  |
+  +---------------------------------------------------------------------------+
+   * optimal lag
+   Endogenous: c_dai a_dai d_dai
+    Exogenous: _cons
+
+. //suggests to use 4 lags. However this results in some misspeccifation in later testing, so increase so 5. 
+. 
+. //Cointegrating equations
+. vecrank a_dai c_dai d_dai, lags(5) // suggests 1 cointegrating equations - Johansen test. Fail to reject null of 
+> at most 2 cointegrating equation. 
+
+Johansen tests for cointegration
+Trend: Constant                           Number of obs  = 116
+Sample: 13/01/2020 thru 07/05/2020        Number of lags =   5
+--------------------------------------------------------------
+                                                      Critical
+Maximum                                        Trace     value
+   rank  Params           LL  Eigenvalue   statistic        5%
+      0      39    853.57128           .     56.9123     29.68
+      1      44    872.07353     0.27313     19.9078     15.41
+      2      47    881.40472     0.14861      1.2454*     3.76
+      3      48    882.02744     0.01068
+--------------------------------------------------------------
+* selected rank
+
+. 
+. // VECM fitting
+. vec c_dai a_dai d_dai, rank(2) lags(5)
+
+Vector error-correction model
+
+Sample: 13/01/2020 thru 07/05/2020              Number of obs     =        116
+                                                AIC               =  -14.38629
+Log likelihood =  881.4047                      HQIC              =  -13.93339
+Det(Sigma_ml)  =  5.04e-11                      SBIC              =  -13.27061
+
+Equation           Parms      RMSE     R-sq      chi2     P>chi2
+----------------------------------------------------------------
+D_c_dai              15     .017369   0.2879   40.83525   0.0003
+D_a_dai              15     .024466   0.3784   61.47197   0.0000
+D_d_dai              15     .020861   0.5906   145.6779   0.0000
+----------------------------------------------------------------
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+D_c_dai      |
+        _ce1 |
+         L1. |  -.0694897   .0581205    -1.20   0.232    -.1834038    .0444244
+             |
+        _ce2 |
+         L1. |   .1431082   .0893636     1.60   0.109    -.0320412    .3182576
+             |
+       c_dai |
+         LD. |  -.2155406   .1114829    -1.93   0.053     -.434043    .0029618
+        L2D. |  -.1863541   .1057082    -1.76   0.078    -.3935382    .0208301
+        L3D. |  -.4132442   .1039145    -3.98   0.000    -.6169129   -.2095755
+        L4D. |   .0857386   .1056404     0.81   0.417    -.1213128    .2927901
+             |
+       a_dai |
+         LD. |  -.1646417   .0895476    -1.84   0.066    -.3401518    .0108684
+        L2D. |  -.1149286      .0829    -1.39   0.166    -.2774097    .0475525
+        L3D. |  -.1187157   .0741297    -1.60   0.109    -.2640072    .0265758
+        L4D. |  -.0301752   .0688416    -0.44   0.661    -.1651023    .1047519
+             |
+       d_dai |
+         LD. |   .0456993   .0760262     0.60   0.548    -.1033093    .1947079
+        L2D. |  -.0597451   .0694996    -0.86   0.390    -.1959618    .0764716
+        L3D. |  -.0800291   .0662748    -1.21   0.227    -.2099253    .0498672
+        L4D. |  -.0181612   .0616214    -0.29   0.768    -.1389368    .1026145
+             |
+       _cons |  -.0010154   .0016225    -0.63   0.531    -.0041953    .0021646
+-------------+----------------------------------------------------------------
+D_a_dai      |
+        _ce1 |
+         L1. |   .3813523    .081871     4.66   0.000     .2208881    .5418165
+             |
+        _ce2 |
+         L1. |  -.5328737   .1258813    -4.23   0.000    -.7795966   -.2861508
+             |
+       c_dai |
+         LD. |  -.4445704   .1570395    -2.83   0.005    -.7523622   -.1367786
+        L2D. |  -.0525686    .148905    -0.35   0.724     -.344417    .2392799
+        L3D. |  -.0603148   .1463784    -0.41   0.680    -.3472112    .2265816
+        L4D. |  -.4947879   .1488096    -3.32   0.001    -.7864493   -.2031264
+             |
+       a_dai |
+         LD. |   .1706773   .1261406     1.35   0.176    -.0765537    .4179083
+        L2D. |   .0764542   .1167765     0.65   0.513    -.1524235     .305332
+        L3D. |    .057009   .1044222     0.55   0.585    -.1476549    .2616728
+        L4D. |  -.0170102   .0969732    -0.18   0.861    -.2070742    .1730539
+             |
+       d_dai |
+         LD. |   .0914777   .1070938     0.85   0.393    -.1184222    .3013776
+        L2D. |  -.0658599   .0979001    -0.67   0.501    -.2577405    .1260207
+        L3D. |   .0207425   .0933575     0.22   0.824    -.1622349    .2037199
+        L4D. |    .059874   .0868025     0.69   0.490    -.1102557    .2300037
+             |
+       _cons |  -.0002821   .0022855    -0.12   0.902    -.0047616    .0041973
+-------------+----------------------------------------------------------------
+D_d_dai      |
+        _ce1 |
+         L1. |   .2843347   .0698081     4.07   0.000     .1475134    .4211561
+             |
+        _ce2 |
+         L1. |  -.0386663   .1073339    -0.36   0.719    -.2490369    .1717042
+             |
+       c_dai |
+         LD. |  -.7225857   .1339012    -5.40   0.000    -.9850272   -.4601441
+        L2D. |  -.1458091   .1269653    -1.15   0.251    -.3946565    .1030382
+        L3D. |  -.0032315   .1248109    -0.03   0.979    -.2478564    .2413935
+        L4D. |  -.7877453   .1268839    -6.21   0.000    -1.036433   -.5390574
+             |
+       a_dai |
+         LD. |  -.1084598    .107555    -1.01   0.313    -.3192636     .102344
+        L2D. |    .191548   .0995706     1.92   0.054    -.0036068    .3867027
+        L3D. |   .3330914   .0890366     3.74   0.000     .1585828    .5075999
+        L4D. |   .0856216   .0826851     1.04   0.300    -.0764383    .2476815
+             |
+       d_dai |
+         LD. |  -.1466755   .0913145    -1.61   0.108    -.3256486    .0322977
+        L2D. |   .1415954   .0834754     1.70   0.090    -.0220134    .3052042
+        L3D. |   .0523731   .0796022     0.66   0.511    -.1036443    .2083905
+        L4D. |   .0068128   .0740129     0.09   0.927    -.1382499    .1518755
+             |
+       _cons |   .0001303   .0019487     0.07   0.947    -.0036892    .0039497
+------------------------------------------------------------------------------
+
+Cointegrating equations
+
+Equation           Parms    chi2     P>chi2
+-------------------------------------------
+_ce1                  1   33.06491   0.0000
+_ce2                  1    35.2493   0.0000
+-------------------------------------------
+
+Identification:  beta is exactly identified
+
+                 Johansen normalization restrictions imposed
+------------------------------------------------------------------------------
+        beta | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+_ce1         |
+       c_dai |          1          .        .       .            .           .
+       a_dai |   1.11e-16          .        .       .            .           .
+       d_dai |  -1.150746   .2001224    -5.75   0.000    -1.542979   -.7585133
+       _cons |   .0295595          .        .       .            .           .
+-------------+----------------------------------------------------------------
+_ce2         |
+       c_dai |          0  (omitted)
+       a_dai |          1          .        .       .            .           .
+       d_dai |  -.9906127   .1668509    -5.94   0.000    -1.317634   -.6635908
+       _cons |   .0050677          .        .       .            .           .
+------------------------------------------------------------------------------
+
+. eststo: quietly vec c_dai a_dai d_dai, rank(2) lags(5)
+(est1 stored)
+
+. esttab using results/vecm/stata_results_dai_original.tex, label replace booktabs
+(file results/vecm/stata_results_dai_original.tex not found)
+(output written to results/vecm/stata_results_dai_original.tex)
+
+. 
+. //Specification testing
+. predict ce, ce equ(#1)
+
+. twoway line ce date, lwidth(medium) xtitle("")
+
+. graph export results/vecm/DAI_CE_1.pdf, replace
+file /Users/wangluyao/defi-plf-analysis/results/vecm/DAI_CE_1.pdf saved as PDF format
+
+. 
+. predict ce1, ce equ(#2)
+
+. twoway line ce1 date, lwidth(medium) xtitle("")
+
+. graph export results/vecm/DAI_CE_2.pdf, replace
+file /Users/wangluyao/defi-plf-analysis/results/vecm/DAI_CE_2.pdf saved as PDF format
+
+. 
+. //Check whether we have correctly specified the number of cointegrating equations
+. vecstable, graph
+
+   Eigenvalue stability condition
+  +----------------------------------------+
+  |        Eigenvalue        |   Modulus   |
+  |--------------------------+-------------|
+  |          1               |         1   |
+  |   .7986483 +   .299937i  |   .853113   |
+  |   .7986483 -   .299937i  |   .853113   |
+  |  -.8003501               |    .80035   |
+  |   .2750624 +  .7393882i  |   .788894   |
+  |   .2750624 -  .7393882i  |   .788894   |
+  |  -.2029086 +  .6937045i  |   .722771   |
+  |  -.2029086 -  .6937045i  |   .722771   |
+  |   .4266622 +  .5266753i  |   .677811   |
+  |   .4266622 -  .5266753i  |   .677811   |
+  |   .6679991               |   .667999   |
+  |  -.5381947               |   .538195   |
+  |   -.354508 +  .2764294i  |   .449543   |
+  |   -.354508 -  .2764294i  |   .449543   |
+  |  -.2981627               |   .298163   |
+  +----------------------------------------+
+   The VECM specification imposes a unit modulus.
+
+. graph export results/vecm/DAI_vecstable.pdf, replace
+file /Users/wangluyao/defi-plf-analysis/results/vecm/DAI_vecstable.pdf saved as PDF format
+
+. //looks good
+. 
+. //Check for serial correlation in the residuals
+. veclmar, mlag(5) 
+
+   Lagrange-multiplier test
+  +--------------------------------------+
+  | lag  |      chi2    df   Prob > chi2 |
+  |------+-------------------------------|
+  |   1  |   12.9326     9     0.16568   |
+  |   2  |   18.5645     9     0.02916   |
+  |   3  |   32.9071     9     0.00014   |
+  |   4  |    8.5431     9     0.48047   |
+  |   5  |   12.7461     9     0.17443   |
+  +--------------------------------------+
+   H0: no autocorrelation at lag order
+
+. // looks good
+. 
+. //Check that the errors are normally distributed
+. vecnorm 
+
+   Jarque-Bera test
+  +--------------------------------------------------------+
+  |           Equation |            chi2   df  Prob > chi2 |
+  |--------------------+-----------------------------------|
+  |            D_c_dai |          348.440   2    0.00000   |
+  |            D_a_dai |          189.986   2    0.00000   |
+  |            D_d_dai |           79.288   2    0.00000   |
+  |                ALL |          617.715   6    0.00000   |
+  +--------------------------------------------------------+
+
+   Skewness test
+  +--------------------------------------------------------+
+  |           Equation | Skewness   chi2   df  Prob > chi2 |
+  |--------------------+-----------------------------------|
+  |            D_c_dai |  .84361   13.759   1    0.00021   |
+  |            D_a_dai |  1.0202   20.121   1    0.00001   |
+  |            D_d_dai |  1.0953   23.194   1    0.00000   |
+  |                ALL |           57.075   3    0.00000   |
+  +--------------------------------------------------------+
+
+   Kurtosis test
+  +--------------------------------------------------------+
+  |           Equation | Kurtosis   chi2   df  Prob > chi2 |
+  |--------------------+-----------------------------------|
+  |            D_c_dai |  11.321  334.681   1    0.00000   |
+  |            D_a_dai |  8.9283  169.865   1    0.00000   |
+  |            D_d_dai |  6.4067   56.094   1    0.00000   |
+  |                ALL |          560.640   3    0.00000   |
+  +--------------------------------------------------------+
+
+. // Strongly reject normality
+. 
+. // //Generate IRF
+. irf create vec1, set(results/vecm/vecintro, replace) step(24)
+(file results/vecm/vecintro.irf created)
+(file results/vecm/vecintro.irf now active)
+(file results/vecm/vecintro.irf updated)
+
+. // irf graph oirf, impulse(c_dai) response(a_dai) yline(0) xtitle("Steps from shock")
+. // graph export results/vecm/I_CDAI_R_DAI.pdf, replace
+. // // shock to cdai has a permanent effect on a_dai
+. //
+. // irf graph oirf, impulse(a_dai) response(c_dai) yline(0) xtitle("Steps from shock")
+. // graph export results/vecm/I_ADAI_R_CDAI.pdf, replace
+. // // same, vice versa
+. //
+. // irf graph oirf, impulse(d_dai) response(c_dai) yline(0) xtitle("Steps from shock")
+. // graph export results/vecm/I_DDAI_R_CDAI.pdf, replace
+. // // same
+. //
+. // irf graph oirf, impulse(d_dai) response(a_dai) yline(0) xtitle("Steps from shock")
+. // graph export results/vecm/I_DDAI_R_ADAI.pdf, replace
+. // // same, strong
+. 
+. irf graph oirf, impulse(c_dai) response(a_dai d_dai) yline(0) xtitle("Steps from shock")
+
+. graph export results/vecm/I_CDAI_R_DDAIADAI.pdf, replace
+file /Users/wangluyao/defi-plf-analysis/results/vecm/I_CDAI_R_DDAIADAI.pdf saved as PDF format
+
+. 
+. ///////////////////////////USDC//////////////////////////////////////////
+> 
+. clear
+
+. import delimited "data/stata/interest_rates_usdc.csv", encoding(ISO-8859-2)
+(4 vars, 122 obs)
+
+. gen date=date(v1,"YMD###")
+
+. format %tdDD/NN/CCYY date
+
+. tsset date
+
+Time variable: date, 08/01/2020 to 08/05/2020
+        Delta: 1 day
+
+. 
+. label variable c_usdc `"Compound USDC"'
+
+. label variable a_usdc `"Aave USDC"'
+
+. label variable d_usdc `"dYdX USDC"'
+
+. 
+. 
+. //Plots
+. twoway (line c_usdc date, lwidth(medium)) (line a_usdc date, lpattern(shortdash) lwidth(medium)) (line d_usdc dat
+> e, lpattern(longdash) lwidth(medium)), ytitle("Borrow interest rate") xtitle("")
+
+. graph export results/vecm/USDC.pdf, replace
+file /Users/wangluyao/defi-plf-analysis/results/vecm/USDC.pdf saved as PDF format
+
+. 
+. //Stationarity testing - levels
+. dfuller c_usdc, lags (1) regress 
+
+Augmented Dickey–Fuller test for unit root
+
+Variable: c_usdc                          Number of obs  = 120
+                                          Number of lags =   1
+
+H0: Random walk without drift, d = 0
+
+                                       Dickey–Fuller
+                   Test      -------- critical value ---------
+              statistic           1%           5%          10%
+--------------------------------------------------------------
+ Z(t)            -2.201       -3.503       -2.889       -2.579
+--------------------------------------------------------------
+MacKinnon approximate p-value for Z(t) = 0.2059.
+
+Regression table
+------------------------------------------------------------------------------
+    D.c_usdc | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      c_usdc |
+         L1. |  -.0328866   .0149424    -2.20   0.030    -.0624792    -.003294
+         LD. |   .1528974   .0895025     1.71   0.090    -.0243576    .3301523
+             |
+       _cons |   .0014626    .000906     1.61   0.109    -.0003316    .0032569
+------------------------------------------------------------------------------
+
+. // unit root
+. 
+. dfuller a_usdc, lags (1)  regress
+
+Augmented Dickey–Fuller test for unit root
+
+Variable: a_usdc                          Number of obs  = 120
+                                          Number of lags =   1
+
+H0: Random walk without drift, d = 0
+
+                                       Dickey–Fuller
+                   Test      -------- critical value ---------
+              statistic           1%           5%          10%
+--------------------------------------------------------------
+ Z(t)            -3.832       -3.503       -2.889       -2.579
+--------------------------------------------------------------
+MacKinnon approximate p-value for Z(t) = 0.0026.
+
+Regression table
+------------------------------------------------------------------------------
+    D.a_usdc | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      a_usdc |
+         L1. |  -.3312573   .0864505    -3.83   0.000     -.502468   -.1600465
+         LD. |  -.3579779   .0854588    -4.19   0.000    -.5272246   -.1887312
+             |
+       _cons |   .0201673   .0057097     3.53   0.001     .0088596    .0314749
+------------------------------------------------------------------------------
+
+. // Stationary
+. dfuller d_usdc, lags (1)  regress 
+
+Augmented Dickey–Fuller test for unit root
+
+Variable: d_usdc                          Number of obs  = 120
+                                          Number of lags =   1
+
+H0: Random walk without drift, d = 0
+
+                                       Dickey–Fuller
+                   Test      -------- critical value ---------
+              statistic           1%           5%          10%
+--------------------------------------------------------------
+ Z(t)            -1.858       -3.503       -2.889       -2.579
+--------------------------------------------------------------
+MacKinnon approximate p-value for Z(t) = 0.3522.
+
+Regression table
+------------------------------------------------------------------------------
+    D.d_usdc | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      d_usdc |
+         L1. |   -.050609   .0272425    -1.86   0.066    -.1045614    .0033434
+         LD. |   .1370601   .0915516     1.50   0.137     -.044253    .3183732
+             |
+       _cons |     .00236   .0013661     1.73   0.087    -.0003454    .0050654
+------------------------------------------------------------------------------
+
+. // unit root
+. 
+. //Stationarity testing - differences
+. dfuller d.c_usdc, lags (1) trend regress 
+
+Augmented Dickey–Fuller test for unit root
+
+Variable: D.c_usdc                        Number of obs  = 119
+                                          Number of lags =   1
+
+H0: Random walk with or without drift
+
+                                       Dickey–Fuller
+                   Test      -------- critical value ---------
+              statistic           1%           5%          10%
+--------------------------------------------------------------
+ Z(t)           -11.076       -4.034       -3.447       -3.147
+--------------------------------------------------------------
+MacKinnon approximate p-value for Z(t) = 0.0000.
+
+Regression table
+------------------------------------------------------------------------------
+   D2.c_usdc | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      c_usdc |
+         LD. |   -.876126    .079103   -11.08   0.000    -1.032814   -.7194382
+        LD2. |   .0091272   .0602811     0.15   0.880     -.110278    .1285324
+             |
+      _trend |   2.43e-06   6.49e-06     0.37   0.709    -.0000104    .0000153
+       _cons |   -.000303   .0004605    -0.66   0.512    -.0012151    .0006092
+------------------------------------------------------------------------------
+
+. // Stationary
+. 
+. dfuller d.a_usdc, lags (1) trend regress 
+
+Augmented Dickey–Fuller test for unit root
+
+Variable: D.a_usdc                        Number of obs  = 119
+                                          Number of lags =   1
+
+H0: Random walk with or without drift
+
+                                       Dickey–Fuller
+                   Test      -------- critical value ---------
+              statistic           1%           5%          10%
+--------------------------------------------------------------
+ Z(t)           -12.195       -4.034       -3.447       -3.147
+--------------------------------------------------------------
+MacKinnon approximate p-value for Z(t) = 0.0000.
+
+Regression table
+------------------------------------------------------------------------------
+   D2.a_usdc | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      a_usdc |
+         LD. |   -1.82075   .1493029   -12.20   0.000     -2.11649   -1.525009
+        LD2. |   .1837934   .0854995     2.15   0.034     .0144354    .3531514
+             |
+      _trend |   6.53e-06   .0000675     0.10   0.923    -.0001272    .0001402
+       _cons |  -.0009554    .004726    -0.20   0.840    -.0103168     .008406
+------------------------------------------------------------------------------
+
+. // Stationary
+. dfuller d.d_usdc, lags (1) trend regress 
+
+Augmented Dickey–Fuller test for unit root
+
+Variable: D.d_usdc                        Number of obs  = 119
+                                          Number of lags =   1
+
+H0: Random walk with or without drift
+
+                                       Dickey–Fuller
+                   Test      -------- critical value ---------
+              statistic           1%           5%          10%
+--------------------------------------------------------------
+ Z(t)            -7.267       -4.034       -3.447       -3.147
+--------------------------------------------------------------
+MacKinnon approximate p-value for Z(t) = 0.0000.
+
+Regression table
+------------------------------------------------------------------------------
+   D2.d_usdc | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      d_usdc |
+         LD. |  -.9026728    .124222    -7.27   0.000    -1.148733    -.656613
+        LD2. |   .0156713   .0931885     0.17   0.867    -.1689172    .2002599
+             |
+      _trend |  -6.52e-06   .0000156    -0.42   0.676    -.0000373    .0000243
+       _cons |   .0004309   .0010895     0.40   0.693    -.0017271    .0025889
+------------------------------------------------------------------------------
+
+. // Stationary
+. 
+. //Lag selection
+. varsoc c_usdc a_usdc d_usdc 
+
+Lag-order selection criteria
+
+   Sample: 12/01/2020 thru 08/05/2020                      Number of obs = 118
+  +---------------------------------------------------------------------------+
+  | Lag |    LL      LR      df    p     FPE       AIC      HQIC      SBIC    |
+  |-----+---------------------------------------------------------------------|
+  |   0 |  919.022                     3.6e-11  -15.5258  -15.4972  -15.4554  |
+  |   1 |  1281.18  724.32    9  0.000 9.1e-14  -21.5115  -21.3971* -21.2298* |
+  |   2 |  1291.57  20.777*   9  0.014 8.9e-14* -21.5351* -21.3349   -21.042  |
+  |   3 |  1294.17   5.211    9  0.816 9.9e-14  -21.4267  -21.1407  -20.7223  |
+  |   4 |   1301.1  13.851    9  0.128 1.0e-13  -21.3915  -21.0197  -20.4758  |
+  +---------------------------------------------------------------------------+
+   * optimal lag
+   Endogenous: c_usdc a_usdc d_usdc
+    Exogenous: _cons
+
+. //suggests to use 2 lags. 
+. 
+. //Cointegrating equations
+. vecrank c_usdc a_usdc d_usdc, lags(2) levela 
+
+Johansen tests for cointegration
+Trend: Constant                                            Number of obs  = 120
+Sample: 10/01/2020 thru 08/05/2020                         Number of lags =   2
+-------------------------------------------------------------------------------
+Maximum                                        Trace     ----Critical value----
+   rank  Params           LL  Eigenvalue   statistic            5%           1%
+      0      12    1221.3557                 78.6344         29.68        35.65
+      1      17    1249.9536     0.37913     21.4386         15.41        20.04
+      2      20    1259.3067     0.14434      2.7323*1*5      3.76         6.65
+      3      21    1260.6729     0.02251
+-------------------------------------------------------------------------------
+* selected rank
+
+. // suggests 2 cointegrating equations - Johansen test. Fail to reject null of at most 2 cointegrating equations. 
+. 
+. //VECM fitting
+. vec c_usdc a_usdc d_usdc, rank(2) lags(2)
+
+Vector error-correction model
+
+Sample: 10/01/2020 thru 08/05/2020              Number of obs     =        120
+                                                AIC               =  -20.65511
+Log likelihood =  1259.307                      HQIC              =  -20.46644
+Det(Sigma_ml)  =  1.54e-13                      SBIC              =  -20.19053
+
+Equation           Parms      RMSE     R-sq      chi2     P>chi2
+----------------------------------------------------------------
+D_c_usdc              6     .003395   0.2064   29.64718   0.0000
+D_a_usdc              6     .023164   0.4904   109.6932   0.0000
+D_d_usdc              6     .005421   0.1551   20.92717   0.0019
+----------------------------------------------------------------
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+D_c_usdc     |
+        _ce1 |
+         L1. |    -.08348   .0233351    -3.58   0.000     -.129216    -.037744
+             |
+        _ce2 |
+         L1. |   .0771731   .0168802     4.57   0.000     .0440885    .1102576
+             |
+      c_usdc |
+         LD. |    .149696   .0859521     1.74   0.082    -.0187671    .3181591
+             |
+      a_usdc |
+         LD. |  -.0443562    .012908    -3.44   0.001    -.0696554    -.019057
+             |
+      d_usdc |
+         LD. |  -.0249644   .0544479    -0.46   0.647    -.1316803    .0817516
+             |
+       _cons |    -.00039   .0003128    -1.25   0.212     -.001003     .000223
+-------------+----------------------------------------------------------------
+D_a_usdc     |
+        _ce1 |
+         L1. |   .7915765   .1592302     4.97   0.000      .479491    1.103662
+             |
+        _ce2 |
+         L1. |  -.7694373   .1151839    -6.68   0.000    -.9951936    -.543681
+             |
+      c_usdc |
+         LD. |  -.4209671   .5865051    -0.72   0.473    -1.570496    .7285618
+             |
+      a_usdc |
+         LD. |  -.1590123   .0880793    -1.81   0.071    -.3316446      .01362
+             |
+      d_usdc |
+         LD. |   .2255203   .3715321     0.61   0.544    -.5026693    .9537099
+             |
+       _cons |  -.0000397   .0021343    -0.02   0.985    -.0042228    .0041434
+-------------+----------------------------------------------------------------
+D_d_usdc     |
+        _ce1 |
+         L1. |   .0986686   .0372645     2.65   0.008     .0256315    .1717057
+             |
+        _ce2 |
+         L1. |   .0397758   .0269564     1.48   0.140    -.0130578    .0926093
+             |
+      c_usdc |
+         LD. |  -.0823132   .1372593    -0.60   0.549    -.3513365    .1867101
+             |
+      a_usdc |
+         LD. |  -.0234856   .0206131    -1.14   0.255    -.0638866    .0169154
+             |
+      d_usdc |
+         LD. |   .1501502   .0869494     1.73   0.084    -.0202674    .3205679
+             |
+       _cons |  -.0000114   .0004995    -0.02   0.982    -.0009904    .0009675
+------------------------------------------------------------------------------
+
+Cointegrating equations
+
+Equation           Parms    chi2     P>chi2
+-------------------------------------------
+_ce1                  1    42.8287   0.0000
+_ce2                  1   35.93082   0.0000
+-------------------------------------------
+
+Identification:  beta is exactly identified
+
+                 Johansen normalization restrictions imposed
+------------------------------------------------------------------------------
+        beta | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+_ce1         |
+      c_usdc |          1          .        .       .            .           .
+      a_usdc |  -2.78e-17          .        .       .            .           .
+      d_usdc |  -1.212416   .1852611    -6.54   0.000    -1.575521   -.8493108
+       _cons |  -.0003926          .        .       .            .           .
+-------------+----------------------------------------------------------------
+_ce2         |
+      c_usdc |  -2.22e-16          .        .       .            .           .
+      a_usdc |          1          .        .       .            .           .
+      d_usdc |   -1.31864   .2199848    -5.99   0.000    -1.749802   -.8874775
+       _cons |   .0008011          .        .       .            .           .
+------------------------------------------------------------------------------
+
+. 
+. //Specification testing
+. predict ce1, ce equ(#1)
+
+. twoway line ce1 date, lwidth(medium) xtitle("")
+
+. 
+. predict ce2, ce equ(#2)
+
+. twoway line ce2 date, lwidth(medium) xtitle("")
+
+. 
+. //Check whether we have correctly specified the number of cointegrating equations
+. vecstable, graph //looks good
+
+   Eigenvalue stability condition
+  +----------------------------------------+
+  |        Eigenvalue        |   Modulus   |
+  |--------------------------+-------------|
+  |          1               |         1   |
+  |   .7810676               |   .781068   |
+  |  -.3685563               |   .368556   |
+  |    .282264 +  .1936376i  |   .342299   |
+  |    .282264 -  .1936376i  |   .342299   |
+  |   .1388001               |     .1388   |
+  +----------------------------------------+
+   The VECM specification imposes a unit modulus.
+
+. 
+. //Check for serial correlation in the residuals
+. veclmar, mlag(4) // looks like there's some SC. increase lags to 3
+
+   Lagrange-multiplier test
+  +--------------------------------------+
+  | lag  |      chi2    df   Prob > chi2 |
+  |------+-------------------------------|
+  |   1  |   84.2455     9     0.00000   |
+  |   2  |   56.6636     9     0.00000   |
+  |   3  |    8.7224     9     0.46329   |
+  |   4  |    8.3124     9     0.50299   |
+  +--------------------------------------+
+   H0: no autocorrelation at lag order
+
+. 
+. vecrank c_usdc a_usdc d_usdc, lags(3) levela  
+
+Johansen tests for cointegration
+Trend: Constant                                            Number of obs  = 119
+Sample: 11/01/2020 thru 08/05/2020                         Number of lags =   3
+-------------------------------------------------------------------------------
+Maximum                                        Trace     ----Critical value----
+   rank  Params           LL  Eigenvalue   statistic            5%           1%
+      0      21    1274.7771                 57.0671         29.68        35.65
+      1      26    1292.5621     0.25837     21.4972         15.41        20.04
+      2      29    1302.6902     0.15652      1.2410*1*5      3.76         6.65
+      3      30    1303.3107     0.01037
+-------------------------------------------------------------------------------
+* selected rank
+
+. 
+. //New Spec
+. vec c_usdc a_usdc d_usdc, rank(2) lags(3)
+
+Vector error-correction model
+
+Sample: 11/01/2020 thru 08/05/2020              Number of obs     =        119
+                                                AIC               =  -21.40656
+Log likelihood =   1302.69                      HQIC              =  -21.13154
+Det(Sigma_ml)  =  6.23e-14                      SBIC              =  -20.72929
+
+Equation           Parms      RMSE     R-sq      chi2     P>chi2
+----------------------------------------------------------------
+D_c_usdc              9     .002289   0.1594   20.86205   0.0133
+D_a_usdc              9     .023054   0.4761   99.97513   0.0000
+D_d_usdc              9     .005427   0.1821   24.48915   0.0036
+----------------------------------------------------------------
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+D_c_usdc     |
+        _ce1 |
+         L1. |   .0146124   .0176261     0.83   0.407     -.019934    .0491589
+             |
+        _ce2 |
+         L1. |   .0271308   .0143913     1.89   0.059    -.0010757    .0553374
+             |
+      c_usdc |
+         LD. |   .0994663   .0605178     1.64   0.100    -.0191464     .218079
+        L2D. |  -.0148709   .0590938    -0.25   0.801    -.1306926    .1009508
+             |
+      a_usdc |
+         LD. |  -.0202772   .0126771    -1.60   0.110    -.0451239    .0045695
+        L2D. |  -.0074199   .0093116    -0.80   0.426    -.0256702    .0108304
+             |
+      d_usdc |
+         LD. |  -.0129788   .0369714    -0.35   0.726    -.0854414    .0594838
+        L2D. |  -.0332294   .0374343    -0.89   0.375    -.1065993    .0401406
+             |
+       _cons |  -.0001893   .0002137    -0.89   0.376     -.000608    .0002295
+-------------+----------------------------------------------------------------
+D_a_usdc     |
+        _ce1 |
+         L1. |    .607335      .1775     3.42   0.001     .2594413    .9552286
+             |
+        _ce2 |
+         L1. |  -.7199041   .1449255    -4.97   0.000    -1.003953   -.4358553
+             |
+      c_usdc |
+         LD. |  -.3973223   .6094335    -0.65   0.514     -1.59179    .7971454
+        L2D. |   .4626497   .5950935     0.78   0.437    -.7037121    1.629012
+             |
+      a_usdc |
+         LD. |  -.1639696   .1276627    -1.28   0.199    -.4141839    .0862446
+        L2D. |   .0424667   .0937704     0.45   0.651    -.1413199    .2262533
+             |
+      d_usdc |
+         LD. |   .2562888   .3723138     0.69   0.491    -.4734328    .9860103
+        L2D. |  -.1663579   .3769757    -0.44   0.659    -.9052167     .572501
+             |
+       _cons |  -5.64e-06   .0021517    -0.00   0.998    -.0042228    .0042116
+-------------+----------------------------------------------------------------
+D_d_usdc     |
+        _ce1 |
+         L1. |   .1150542   .0417815     2.75   0.006      .033164    .1969445
+             |
+        _ce2 |
+         L1. |   .0200318   .0341138     0.59   0.557    -.0468301    .0868937
+             |
+      c_usdc |
+         LD. |  -.1073079   .1434538    -0.75   0.454    -.3884722    .1738564
+        L2D. |   .1716213   .1400783     1.23   0.221    -.1029272    .4461698
+             |
+      a_usdc |
+         LD. |  -.0089217   .0300504    -0.30   0.767    -.0678193     .049976
+        L2D. |   .0099344   .0220725     0.45   0.653    -.0333269    .0531957
+             |
+      d_usdc |
+         LD. |    .153962   .0876385     1.76   0.079    -.0178063    .3257303
+        L2D. |   .0348736   .0887359     0.39   0.694    -.1390455    .2087927
+             |
+       _cons |   .0000538   .0005065     0.11   0.915    -.0009389    .0010465
+------------------------------------------------------------------------------
+
+Cointegrating equations
+
+Equation           Parms    chi2     P>chi2
+-------------------------------------------
+_ce1                  1   60.33819   0.0000
+_ce2                  1   63.24081   0.0000
+-------------------------------------------
+
+Identification:  beta is exactly identified
+
+                 Johansen normalization restrictions imposed
+------------------------------------------------------------------------------
+        beta | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+_ce1         |
+      c_usdc |          1          .        .       .            .           .
+      a_usdc |          0  (omitted)
+      d_usdc |  -1.352902   .1741687    -7.77   0.000    -1.694266   -1.011537
+       _cons |   .0066397          .        .       .            .           .
+-------------+----------------------------------------------------------------
+_ce2         |
+      c_usdc |  -2.78e-17          .        .       .            .           .
+      a_usdc |          1          .        .       .            .           .
+      d_usdc |  -1.346542    .169325    -7.95   0.000    -1.678413   -1.014671
+       _cons |   .0028394          .        .       .            .           .
+------------------------------------------------------------------------------
+
+. eststo clear
+
+. eststo: quietly vec c_usdc a_usdc d_usdc, rank(2) lags(3)
+(est1 stored)
+
+. esttab using results/vecm/stata_results_usdc_original.tex, label replace booktabs
+(file results/vecm/stata_results_usdc_original.tex not found)
+(output written to results/vecm/stata_results_usdc_original.tex)
+
+. 
+. predict ce3, ce equ(#1)
+
+. twoway line ce3 date, lwidth(medium) xtitle("")
+
+. graph export results/vecm/USDC_CE_1.pdf, replace
+file /Users/wangluyao/defi-plf-analysis/results/vecm/USDC_CE_1.pdf saved as PDF format
+
+. 
+. predict ce4, ce equ(#2)
+
+. twoway line ce4 date, lwidth(medium) xtitle("")
+
+. graph export results/vecm/USDC_CE_2.pdf, replace
+file /Users/wangluyao/defi-plf-analysis/results/vecm/USDC_CE_2.pdf saved as PDF format
+
+. 
+. vecstable, graph //looks good
+
+   Eigenvalue stability condition
+  +----------------------------------------+
+  |        Eigenvalue        |   Modulus   |
+  |--------------------------+-------------|
+  |          1               |         1   |
+  |   .7789416               |   .778942   |
+  |  -.4334461               |   .433446   |
+  |    .400689 + .08436709i  |   .409475   |
+  |    .400689 - .08436709i  |   .409475   |
+  |   .2358871 +  .2395838i  |   .336219   |
+  |   .2358871 -  .2395838i  |   .336219   |
+  |  -.2085557 +  .1225229i  |   .241883   |
+  |  -.2085557 -  .1225229i  |   .241883   |
+  +----------------------------------------+
+   The VECM specification imposes a unit modulus.
+
+. graph export results/vecm/USDC_vecstable.pdf, replace
+file /Users/wangluyao/defi-plf-analysis/results/vecm/USDC_vecstable.pdf saved as PDF format
+
+. 
+. veclmar, mlag(4) //looks good
+
+   Lagrange-multiplier test
+  +--------------------------------------+
+  | lag  |      chi2    df   Prob > chi2 |
+  |------+-------------------------------|
+  |   1  |   14.9236     9     0.09306   |
+  |   2  |   10.9366     9     0.28008   |
+  |   3  |   24.1042     9     0.00414   |
+  |   4  |    4.9727     9     0.83669   |
+  +--------------------------------------+
+   H0: no autocorrelation at lag order
+
+. 
+. //Check that the errors are normally distributed
+. vecnorm // Strongly reject normality
+
+   Jarque-Bera test
+  +--------------------------------------------------------+
+  |           Equation |            chi2   df  Prob > chi2 |
+  |--------------------+-----------------------------------|
+  |           D_c_usdc |          233.713   2    0.00000   |
+  |           D_a_usdc |          233.167   2    0.00000   |
+  |           D_d_usdc |          135.219   2    0.00000   |
+  |                ALL |          602.098   6    0.00000   |
+  +--------------------------------------------------------+
+
+   Skewness test
+  +--------------------------------------------------------+
+  |           Equation | Skewness   chi2   df  Prob > chi2 |
+  |--------------------+-----------------------------------|
+  |           D_c_usdc | -1.5668   48.689   1    0.00000   |
+  |           D_a_usdc |  1.4635   42.478   1    0.00000   |
+  |           D_d_usdc |  .69197    9.497   1    0.00206   |
+  |                ALL |          100.663   3    0.00000   |
+  +--------------------------------------------------------+
+
+   Kurtosis test
+  +--------------------------------------------------------+
+  |           Equation | Kurtosis   chi2   df  Prob > chi2 |
+  |--------------------+-----------------------------------|
+  |           D_c_usdc |  9.1087  185.024   1    0.00000   |
+  |           D_a_usdc |  9.2015  190.689   1    0.00000   |
+  |           D_d_usdc |  8.0355  125.722   1    0.00000   |
+  |                ALL |          501.435   3    0.00000   |
+  +--------------------------------------------------------+
+
+. 
+. //Generate IRF
+. irf create vec1, set(results/vecm/vecintro, replace) step(24)
+(file results/vecm/vecintro.irf created)
+(file results/vecm/vecintro.irf now active)
+(file results/vecm/vecintro.irf updated)
+
+. 
+. // irf graph oirf, impulse(c_usdc d_usdc) response(a_usdc) yline(0) xtitle("Steps from shock")
+. // graph export results/vecm/I_CUSDCDUSDC_R_AUSDC.pdf, replace
+. //
+. // irf graph oirf, impulse(a_usdc d_usdc) response(c_usdc) yline(0) xtitle("Steps from shock") 
+. // graph export results/vecm/I_AUSDCDUSDC_R_CUSDC.pdf, replace
+. //
+. // irf graph oirf, impulse(c_usdc a_usdc) response(d_usdc) yline(0) xtitle("Steps from shock")
+. // graph export results/vecm/I_AUSDCCUSDC_R_DUSDC.pdf, replace
+. 
+. irf graph oirf, impulse(c_usdc) response(a_usdc d_usdc) yline(0) xtitle("Steps from shock")
+
+. graph export results/vecm/I_CUSDC_R_DUSDCAUSDC.pdf, replace
+file /Users/wangluyao/defi-plf-analysis/results/vecm/I_CUSDC_R_DUSDCAUSDC.pdf saved as PDF format
+
+. log close
+      name:  <unnamed>
+       log:  /Users/wangluyao/defi-plf-analysis/results/vecm/vecm_log.txt
+  log type:  text
+ closed on:  27 Oct 2026, 17:07:07
+-------------------------------------------------------------------------------------------------------------------

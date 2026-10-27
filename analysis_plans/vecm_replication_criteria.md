@@ -22,3 +22,9 @@ Written before `notebooks/VECM.do` was run in this project.
 - Johansen trace test: the rank it selects at the 5% level, compared with the paper's statement of "at most two" cointegrating relationships.
 - `varsoc`: the lag length each criterion suggests, compared with the lags used.
 - Diagnostics: whether all companion-matrix roots lie inside the unit circle (`vecstable`), the LM test for residual autocorrelation (`veclmar`), and the normality test (`vecnorm`).
+
+## Post-hoc note (2026-10-27, written after the run)
+
+This note does not change the criteria or the verdicts. DAI meets criterion 2 (numerical reproduction). USDC meets criterion 3 but not criterion 2: the constant of the second cointegrating equation is 0.0028394, which rounds to 0.00284, against 0.00283 in Table A7.
+
+The tables produced by the authors' `esttab` commands (`results/vecm/stata_results_*_original.tex`) contain the adjustment coefficients, the lagged differences and the short-run constants, but no long-run coefficients. Tables A6 and A7 in the paper omit the lagged differences and short-run constants and add the long-run coefficients, so the long-run part of each table was not produced by the committed code and was presumably transcribed by hand. Truncation of 0.0028394 would give 0.00283; this is an interpretation, not established.
