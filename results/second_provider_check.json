@@ -1,0 +1,309 @@
+{
+  "check": "main run (second provider)",
+  "criterion": "analysis_plans/second_provider_check_criterion.md",
+  "repository_head": "a9df96551a0a81b0579a51306de257dddfc20b34",
+  "criterion_sha256": "1919f153668a73abd13a40931c9ebfaf25c0b5c4929e44b56e4e2ea5572bd7c2",
+  "script_sha256": "d0dc05abcbf89aa1b06a4eb1e871de7290c1507960083e3197089ca98c8bef3e",
+  "input_sha256": {
+    "data/onchain/cdai_panel.csv": "75c661c6540fbf648309ff0a9e372468a22a438522e9d8bf9587d0178ea6f060",
+    "data/onchain/cdai_panel_dense_2020.csv": "ff68728af8c77e0bbe8503ef31dae812e14e3194a8efeb75a0f830a105eef26b",
+    "data/aave_v3/aave_v3_rate_params_daily.csv": "12f22421afb1ec897121da8ca84764ce950d0220145634e5ca62f0d6a01f1ec7"
+  },
+  "provider_host": "mainnet.infura.io",
+  "run_utc": "2026-10-29T04:54:43Z",
+  "seed": 20261029,
+  "n_rows": 30,
+  "rows_with_differences": 0,
+  "rows_incomplete": 0,
+  "verdict": "Pass",
+  "coverage": {
+    "aave_rows_compared": 10,
+    "aave_rows_with_validation_compared": 1,
+    "aave_validation_values_compared": 4
+  },
+  "rows": [
+    {
+      "dataset": "cdai_long",
+      "block": 22093575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 19861575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 14527575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 17557575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 20287575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 15949575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 13429575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 20245575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 19405575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 11119575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 15649575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 15409575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 12601575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 19393575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_long",
+      "block": 14659575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_dense",
+      "block": 9830759,
+      "asset": "cDAI",
+      "errors": [
+        "attempt 1: RuntimeError: RPC error for ('eth_call', [{'to': '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 'data': '0xae9d70b0'}, '0x960167']): {'code': -32603, 'message': 'Internal error'}"
+      ],
+      "status": "compared",
+      "attempts": 2,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_dense",
+      "block": 9605459,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_dense",
+      "block": 9679859,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_dense",
+      "block": 9745859,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_dense",
+      "block": 9882659,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "aave_v3",
+      "block": 22641841,
+      "asset": "DAI",
+      "validation_fields_populated": 0,
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "aave_v3",
+      "block": 23443482,
+      "asset": "USDC",
+      "validation_fields_populated": 0,
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "aave_v3",
+      "block": 21475764,
+      "asset": "DAI",
+      "validation_fields_populated": 4,
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "aave_v3",
+      "block": 20036226,
+      "asset": "WETH",
+      "validation_fields_populated": 0,
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "aave_v3",
+      "block": 18137928,
+      "asset": "WETH",
+      "validation_fields_populated": 0,
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "aave_v3",
+      "block": 20566114,
+      "asset": "USDC",
+      "validation_fields_populated": 0,
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "aave_v3",
+      "block": 20186462,
+      "asset": "USDT",
+      "validation_fields_populated": 0,
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "aave_v3",
+      "block": 17638224,
+      "asset": "USDT",
+      "validation_fields_populated": 0,
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "aave_v3",
+      "block": 20960089,
+      "asset": "USDC",
+      "validation_fields_populated": 0,
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "aave_v3",
+      "block": 20766617,
+      "asset": "USDC",
+      "validation_fields_populated": 0,
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    }
+  ]
+}

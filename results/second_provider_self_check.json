@@ -1,0 +1,54 @@
+{
+  "check": "self-check (original provider)",
+  "criterion": "analysis_plans/second_provider_check_criterion.md",
+  "repository_head": "a9df96551a0a81b0579a51306de257dddfc20b34",
+  "criterion_sha256": "1919f153668a73abd13a40931c9ebfaf25c0b5c4929e44b56e4e2ea5572bd7c2",
+  "script_sha256": "d0dc05abcbf89aa1b06a4eb1e871de7290c1507960083e3197089ca98c8bef3e",
+  "input_sha256": {
+    "data/onchain/cdai_panel.csv": "75c661c6540fbf648309ff0a9e372468a22a438522e9d8bf9587d0178ea6f060",
+    "data/onchain/cdai_panel_dense_2020.csv": "ff68728af8c77e0bbe8503ef31dae812e14e3194a8efeb75a0f830a105eef26b",
+    "data/aave_v3/aave_v3_rate_params_daily.csv": "12f22421afb1ec897121da8ca84764ce950d0220145634e5ca62f0d6a01f1ec7"
+  },
+  "provider_host": "eth-mainnet.g.alchemy.com",
+  "run_utc": "2026-10-29T04:51:58Z",
+  "seed": 20261029,
+  "n_rows": 3,
+  "rows_with_differences": 0,
+  "rows_incomplete": 0,
+  "verdict": "Pass",
+  "coverage": {
+    "aave_rows_compared": 1,
+    "aave_rows_with_validation_compared": 0,
+    "aave_validation_values_compared": 0
+  },
+  "rows": [
+    {
+      "dataset": "cdai_long",
+      "block": 22093575,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "cdai_dense",
+      "block": 9830759,
+      "asset": "cDAI",
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    },
+    {
+      "dataset": "aave_v3",
+      "block": 22641841,
+      "asset": "DAI",
+      "validation_fields_populated": 0,
+      "status": "compared",
+      "attempts": 1,
+      "n_differences": 0,
+      "differences": []
+    }
+  ]
+}
