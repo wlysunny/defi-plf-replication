@@ -22,3 +22,7 @@ Test: after each model, a Wald test that both adjustment coefficients of each pr
 Predictions:
 1. Each statistic is identical in the two orders.
 2. If Compound "has market power" in the paper's sense, the test for Compound is not rejected at 5%, for DAI and for USDC.
+
+## Result (written after the test, 2026-10-29)
+
+Prediction 1 holds: every statistic is identical in the two orders. Prediction 2 holds for DAI and fails for USDC. DAI: Compound chi2(2) = 2.565, p = 0.277 (not rejected); Aave and dYdX rejected (p < 0.001). USDC: Compound chi2(2) = 11.071, p = 0.004 (rejected); Aave and dYdX rejected (p < 0.001). The paper's statement that "again Compound has market power" is therefore supported for DAI but not for USDC, where all three protocols adjust. Because the residuals show autocorrelation at lag 3 and are not normal, the p-values are approximate.

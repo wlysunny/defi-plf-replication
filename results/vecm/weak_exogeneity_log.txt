@@ -1,0 +1,52 @@
+-------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/wangluyao/defi-plf-analysis/results/vecm/weak_exogeneity_log.txt
+  log type:  text
+ opened on:  29 Oct 2026, 14:22:06
+
+. foreach cur in dai usdc {
+  2.     clear
+  3.     quietly import delimited "data/stata/interest_rates_`cur'.csv", encoding(ISO-8859-2)
+  4.     quietly gen date = date(v1, "YMD###")
+  5.     quietly tsset date
+  6.     local L = cond("`cur'" == "dai", 5, 3)
+  7.     foreach order in "c a d" "d c a" {
+  8.         local vars
+  9.         foreach v of local order {
+ 10.             local vars `vars' `v'_`cur'
+ 11.         }
+ 12.         quietly vec `vars', rank(2) lags(`L')
+ 13.         display _n "`cur', variable order (`order'):"
+ 14.         foreach v in c a d {
+ 15.             quietly test [D_`v'_`cur']L._ce1 [D_`v'_`cur']L._ce2
+ 16.             display "   alpha = 0 for `v':  chi2(" r(df) ") = " %8.3f r(chi2) "   p = " %6.4f r(p)
+ 17.         }
+ 18.     }
+ 19. }
+
+dai, variable order (c a d):
+   alpha = 0 for c:  chi2(2) =    2.565   p = 0.2774
+   alpha = 0 for a:  chi2(2) =   22.977   p = 0.0000
+   alpha = 0 for d:  chi2(2) =   32.908   p = 0.0000
+
+dai, variable order (d c a):
+   alpha = 0 for c:  chi2(2) =    2.565   p = 0.2774
+   alpha = 0 for a:  chi2(2) =   22.977   p = 0.0000
+   alpha = 0 for d:  chi2(2) =   32.908   p = 0.0000
+
+usdc, variable order (c a d):
+   alpha = 0 for c:  chi2(2) =   11.071   p = 0.0039
+   alpha = 0 for a:  chi2(2) =   24.719   p = 0.0000
+   alpha = 0 for d:  chi2(2) =   17.681   p = 0.0001
+
+usdc, variable order (d c a):
+   alpha = 0 for c:  chi2(2) =   11.071   p = 0.0039
+   alpha = 0 for a:  chi2(2) =   24.719   p = 0.0000
+   alpha = 0 for d:  chi2(2) =   17.681   p = 0.0001
+
+. log close
+      name:  <unnamed>
+       log:  /Users/wangluyao/defi-plf-analysis/results/vecm/weak_exogeneity_log.txt
+  log type:  text
+ closed on:  29 Oct 2026, 14:22:06
+-------------------------------------------------------------------------------------------------------------------
