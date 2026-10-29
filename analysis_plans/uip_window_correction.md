@@ -25,3 +25,18 @@ If a prediction fails, the cause is investigated and documented before any furth
 ## What the correction does and does not establish
 
 The correction removes an identified truncation at the end of the weekly sample, a matter of aligning dates. It does not make the weekly series a better measure of the economic relationship: the week labelled 10 May contains interest rates only up to 7 or 8 May, as it would have in the authors' run under the same code. Matching the authors' number of observations does not show that the observation dates or the exchange-rate values are the same as theirs. Remaining differences in the coefficients therefore cannot be attributed wholly to the replacement exchange-rate source.
+
+## Results (appended after the re-run, 29 October 2026)
+
+The prediction note, code change and verification script were committed in `0eb5c28`; the updated prices in `5bd90bb`. Before the notebook could be executed, 17 duplicate copies of the cell tag `outputPrepend` (added by an editor) were removed from the notebook metadata, because the current `nbconvert` rejects duplicate tags; no code or output was changed by this.
+
+| Prediction | Outcome |
+|---|---|
+| 1. One record, 10 May 2020, appended to each DefiLlama cache; committed bytes unchanged | Holds: all six files pass `scripts/verify_uip_cache_append.py` |
+| 2. REP and SAI: existing prices unchanged; at most 9 and 10 May added | Holds: existing dates and prices identical in both; 10 May added to both; REP has no price for 9 May in the raw download, so none was added |
+| 3. Daily regressions identical | Holds: observations, coefficients and p-values identical in 40 of 40 tests |
+| 4. Weekly regressions gain one observation; equal to the authors' for pairs without DAI or REP | Holds: +1 in 40 of 40 tests; the 20 tests on pairs without DAI or REP now have the authors' number of observations |
+
+**Consequences for the comparison with the authors (not predicted).** Agreement in the test decision at the 1% level is unchanged (77 of 80), but at the 5% level it falls from 77 to 74 of 80. In three weekly tests the authors' p-values were close to 5% (BAT–ZRX borrow 0.102, ZRX–DAI borrow 0.058, ZRX–DAI supply 0.067); before the correction ours were also above 5% (0.072, 0.102, 0.093), and after it they are below (0.044, 0.026, 0.0496). Coefficients within 5% of the authors' rise from 8 to 14 of 80 and agreement in sign from 67 to 69 of 80.
+
+**Exploratory observation.** The restored observation, the week of 3 May 2020, is influential in some weekly regressions. For ZRX–USDC the coefficient changes from +0.091 to −0.615 (borrow; authors −0.562) and from +0.096 to −0.824 (supply; authors −0.820) when this single week is added. Its influence was not examined before the re-run and is reported as an observation, not as a pre-specified result.
