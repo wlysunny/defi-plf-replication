@@ -12,8 +12,9 @@ The self-check writes results/second_provider_self_check.json and exits with sta
 or cannot be read. The main run refuses to start unless that file records a passed self-check made with
 the same criterion, script and input files (SHA-256), and writes results/second_provider_check.json.
 Verdicts: Pass, Fail or Incomplete; Fail takes precedence over Incomplete (see the criterion).
-Only network and HTTP errors (requests exceptions) make a row incomplete; any other exception stops the
-script with a traceback and no verdict. No provider key is written anywhere.
+Query failures (requests exceptions, and JSON-RPC error responses raised by rpc_batch() as RuntimeError
+'RPC error for ...') are retried up to 3 attempts per row; a row that still fails is incomplete
+(criterion, Amendment 1). Any other exception stops the script with a traceback and no verdict. No provider key is written anywhere.
 """
 import csv
 import hashlib
@@ -22,6 +23,7 @@ import os
 import random
 import subprocess
 import sys
+import time
 import traceback
 from datetime import datetime, timezone
 from urllib.parse import urlparse
@@ -38,6 +40,8 @@ CDAI_DENSE = 'data/onchain/cdai_panel_dense_2020.csv'
 AAVE = 'data/aave_v3/aave_v3_rate_params_daily.csv'
 CRITERION = 'analysis_plans/second_provider_check_criterion.md'
 SELF_CHECK_OUT = 'results/second_provider_self_check.json'
+MAX_ATTEMPTS = 3
+RETRY_PAUSE_SECONDS = 5
 MAIN_OUT = 'results/second_provider_check.json'
 AAVE_COMPARED = ['strategy', 'strategy_version', 'pool_currentVariableBorrowRate',
                  'irm_optimalUsageRatio', 'irm_baseVariableBorrowRate', 'irm_variableRateSlope1',
@@ -67,6 +71,12 @@ def require_committed():
         if tracked.returncode != 0 or changed.stdout.strip():
             sys.exit(f'{path} is not committed, or has been modified since the last commit. Commit it first.')
     return subprocess.run(['git', 'rev-parse', 'HEAD'], capture_output=True, text=True, check=True).stdout.strip()
+
+
+def is_query_failure(e):
+    """Network/HTTP failure, or a JSON-RPC error response as raised by rpc_batch() (Amendment 1)."""
+    return (isinstance(e, requests.exceptions.RequestException)
+            or (type(e) is RuntimeError and str(e).startswith('RPC error for')))
 
 
 def read_rows(path):
@@ -144,18 +154,25 @@ def run(url, sample):
         entry = {'dataset': dataset, 'block': int(stored['block']), 'asset': stored.get('symbol', 'cDAI')}
         if dataset == 'aave_v3':
             entry['validation_fields_populated'] = sum(stored[c] != '' for c in AAVE_COMPARED if c.startswith('val_'))
-        try:
-            diffs = reread_cdai(url, columns, stored) if dataset != 'aave_v3' else reread_aave(url, stored)
-            entry.update(status='compared', n_differences=len(diffs), differences=diffs)
-        except requests.exceptions.RequestException as e:  # network/HTTP failure: incomplete, not a difference
-            entry.update(status='incomplete', error=f'{type(e).__name__}: {e}')
-        except BaseException:  # anything else is a defect to investigate, not a data result
-            traceback.print_exc()
-            sys.exit(f'Stopped without a verdict at {dataset} block {entry["block"]}: unexpected error '
-                     '(see traceback). Rows printed above were completed before the error.')
+        for attempt in range(1, MAX_ATTEMPTS + 1):
+            try:
+                diffs = reread_cdai(url, columns, stored) if dataset != 'aave_v3' else reread_aave(url, stored)
+                entry.update(status='compared', attempts=attempt, n_differences=len(diffs), differences=diffs)
+                break  # a completed comparison is final; differences are never re-read
+            except BaseException as e:
+                if not is_query_failure(e):  # anything else is a defect to investigate, not a data result
+                    traceback.print_exc()
+                    sys.exit(f'Stopped without a verdict at {dataset} block {entry["block"]}: unexpected error '
+                             '(see traceback). Rows printed above were completed before the error.')
+                entry.setdefault('errors', []).append(f'attempt {attempt}: {type(e).__name__}: {e}')
+                if attempt == MAX_ATTEMPTS:
+                    entry.update(status='incomplete', attempts=attempt)
+                else:
+                    time.sleep(RETRY_PAUSE_SECONDS)
         rows.append(entry)
         shown = entry.get('n_differences', 'INCOMPLETE')
-        print(f"{dataset:10} block {entry['block']:>9} {entry['asset']:5} differences: {shown}")
+        print(f"{dataset:10} block {entry['block']:>9} {entry['asset']:5} differences: {shown}"
+              f"  (attempts: {entry['attempts']})")
     n_incomplete = sum(r['status'] == 'incomplete' for r in rows)
     n_diff = sum(r.get('n_differences', 0) > 0 for r in rows)
     aave_done = [r for r in rows if r['dataset'] == 'aave_v3' and r['status'] == 'compared']
@@ -196,7 +213,7 @@ def main():
             for d in r.get('differences', []):
                 print('   ', r['dataset'], r['block'], d)
             if r['status'] == 'incomplete':
-                print('   ', r['dataset'], r['block'], r['error'])
+                print('   ', r['dataset'], r['block'], r['errors'])
         save(SELF_CHECK_OUT, url, rows, n_diff, n_inc, verdict, coverage, 'self-check (original provider)', commit)
         sys.exit(0 if verdict == 'Pass' else 1)
 

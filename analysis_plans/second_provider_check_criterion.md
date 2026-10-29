@@ -55,3 +55,13 @@ All differences are reported with both values. The stored data are not changed a
 - The check concerns the sampled blocks only. It does not establish that the sampling grids captured every transient on-chain event.
 - For Aave V3 only the columns listed above are checked; derived variables, timestamps and the completeness of the validation schedule are not reconstructed.
 - A pass supports the reproducibility of the selected stored values across providers. It does not establish the correctness or completeness of either dataset as a whole.
+
+## Amendment 1 (29 October 2026, written after a stopped run)
+
+**What happened.** The criterion and script were committed in `8bdd9c2` (15:48 Sydney time). The self-check then passed (3 rows, no differences). The main run compared four `cdai_panel.csv` rows (blocks 22,093,575, 19,861,575, 14,527,575 and 17,557,575; no differences) and then stopped without a verdict at block 20,287,575: the second provider answered one call in the batch (`totalReserves()` on cDAI) with JSON-RPC error -32603 "Internal error". The collection function `rpc_batch()` raises such responses as `RuntimeError`, not as a `requests` exception, so the script treated it as an unexpected error, as specified above.
+
+**Investigation.** The same call was then sent three times to each provider; all six answers succeeded and were identical. The complete row for that block was re-read twice from the second provider without error. The failure was therefore transient and not a property of the data.
+
+**Change.** A JSON-RPC error response from the provider (raised by `rpc_batch()` as a `RuntimeError` whose message begins "RPC error for") is classified as a query failure, like a network or HTTP error. A row whose reading fails in this way is re-read, up to three attempts in total, five seconds apart; if all attempts fail, the row is Incomplete. Retries apply only to failed queries: once a row has been read, its comparison is final, and a row with differences is never re-read. All other errors still stop the script without a verdict. The number of attempts is recorded for every row.
+
+**Unchanged.** The provider, seed, sample, compared fields, exact-equality rule, self-check and decision rules are unchanged. The sample is not redrawn, although its first four rows have already been seen. The self-check and the main run are repeated in full with the amended script.
