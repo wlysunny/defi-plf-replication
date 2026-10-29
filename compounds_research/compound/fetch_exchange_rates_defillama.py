@@ -29,13 +29,16 @@ exchange-rate window silently truncates the regression sample.
 import os
 import time
 
+import numpy as np
 import pandas as pd
 import requests
 
-# Single source of truth for the UIP sample period. One day of margin is
-# added on each side of the interest-rate data range.
+# Single source of truth for the UIP sample period. The start leaves one day of
+# margin before the interest-rate data. The end is 10 May 2020, the label of the
+# last weekly interest-rate period, so that the weekly sample is not truncated
+# (see analysis_plans/uip_window_correction.md).
 UIP_SAMPLE_START = '2019-04-01'
-UIP_SAMPLE_END = '2020-05-09'
+UIP_SAMPLE_END = '2020-05-10'
 
 CACHE_DIR = 'data/manual'
 MANUAL_TOKENS = ('rep', 'sai')
@@ -100,15 +103,43 @@ def cache_all_token_usd_prices(start_date: str = UIP_SAMPLE_START,
     """
     Fetch each DefiLlama token's USD price series once and save it to CSV.
 
-    An existing cache file is reused only if it covers the requested window.
-    Otherwise it is fetched again, so that changing the sample period can
-    never silently reuse data from a shorter window.
+    An existing cache file is reused only if it covers the requested window,
+    so that changing the sample period can never silently reuse data from a
+    shorter window. If an existing file starts at the start of the window and
+    ends earlier, only the missing days at the end are fetched and appended;
+    values already in the cache are never fetched again or rewritten. An
+    existing file that cannot be extended in this way is not overwritten: the
+    function stops, and the file must be removed deliberately to fetch it again.
     """
     os.makedirs(cache_dir, exist_ok=True)
     for token in TOKEN_CONTRACTS:
         out_path = f'{cache_dir}/{token}_usd_prices_cached.csv'
         if _cache_covers(out_path, start_date, end_date):
             print(f'{token}: cache covers {start_date} to {end_date}, skipping.')
+            continue
+        if os.path.exists(out_path):
+            idx = pd.read_csv(out_path, index_col=0, parse_dates=True).index
+            if not (isinstance(idx, pd.DatetimeIndex) and idx.tz is None and (idx == idx.normalize()).all()
+                    and idx.is_unique and idx.is_monotonic_increasing):
+                raise ValueError(f'{out_path}: index is not unique, sorted, timezone-free whole dates. Not changed.')
+            expected_old = pd.date_range(start_date, idx.max(), freq='D')
+            if not (idx.min() == pd.Timestamp(start_date) and idx.max() < pd.Timestamp(end_date)
+                    and idx.equals(expected_old)):
+                raise ValueError(f'{out_path}: does not cover {start_date} to {idx.max().date()} without gaps, '
+                                 f'or already reaches {end_date}. Not changed; remove it to fetch again.')
+            extra_start = (idx.max() + pd.Timedelta(days=1)).strftime('%Y-%m-%d')
+            extra = make_usd_price_series(token, extra_start, end_date)
+            if not (extra.index.equals(pd.date_range(extra_start, end_date, freq='D')) and np.isfinite(extra.to_numpy()).all() and (extra > 0).all()):
+                raise ValueError(f'{token}: prices for {extra_start} to {end_date} missing or not finite and positive: {extra.to_dict()}. '
+                                 'Cache not changed.')
+            with open(out_path, 'rb') as f:
+                f.seek(-1, os.SEEK_END)
+                ends_with_newline = f.read(1) == b'\n'
+            with open(out_path, 'a', newline='') as f:
+                if not ends_with_newline:
+                    f.write('\n')
+                extra.to_csv(f, header=False)
+            print(f'{token}: appended {len(extra)} days ({extra_start} to {end_date}) to the cache.')
             continue
         series = make_usd_price_series(token, start_date, end_date)
         series.to_csv(out_path)
