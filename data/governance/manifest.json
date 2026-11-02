@@ -1,0 +1,66 @@
+{
+  "12921": {
+    "label": "Gauntlet interest rate curve recommendations (2023-04-27)",
+    "url": "https://governance.aave.com/t/12921",
+    "raw_endpoint": "https://governance.aave.com/raw/12921",
+    "retrieved_utc": "2026-11-02T05:13:09Z",
+    "sha256": "42d7eb3013c45fa817a41b0094d8bd6495ef392500c3269dc44bf3e59eea3ebd",
+    "n_chars": 26523
+  },
+  "14410": {
+    "label": "sDAI Aave V3 onboarding (DAI and WETH optimal ratio)",
+    "url": "https://governance.aave.com/t/14410",
+    "raw_endpoint": "https://governance.aave.com/raw/14410",
+    "retrieved_utc": "2026-11-02T05:13:11Z",
+    "sha256": "e564d3cebc27c0b12c437cb9fb6023d071c3a83538e3581fbe7214c8402ea3ae",
+    "n_chars": 12624
+  },
+  "15096": {
+    "label": "Increase optimal borrow rates for Ethereum stablecoin markets",
+    "url": "https://governance.aave.com/t/15096",
+    "raw_endpoint": "https://governance.aave.com/raw/15096",
+    "retrieved_utc": "2026-11-02T05:13:13Z",
+    "sha256": "fa45dfba946403087d6784c087e6ea582e919493222c5ddddb4735d4c8dce3bf",
+    "n_chars": 16086
+  },
+  "15110": {
+    "label": "Upgrade Aave V3 ETH pool wETH parameters",
+    "url": "https://governance.aave.com/t/15110",
+    "raw_endpoint": "https://governance.aave.com/raw/15110",
+    "retrieved_utc": "2026-11-02T05:13:15Z",
+    "sha256": "6d1ddc55727bc81c474b8725117b9714aa2f302121258cfe5506cefe867cbcc9",
+    "n_chars": 5385
+  },
+  "16168": {
+    "label": "Update stETH and WETH risk params",
+    "url": "https://governance.aave.com/t/16168",
+    "raw_endpoint": "https://governance.aave.com/raw/16168",
+    "retrieved_utc": "2026-11-02T05:13:17Z",
+    "sha256": "8521b4d88bd37f7d9d5f96c5a050928223303381a4a349a3adc04b92831a9fad",
+    "n_chars": 8273
+  },
+  "16864": {
+    "label": "Stablecoin IR curve amendment on Aave V2 and V3",
+    "url": "https://governance.aave.com/t/16864",
+    "raw_endpoint": "https://governance.aave.com/raw/16864",
+    "retrieved_utc": "2026-11-02T05:13:19Z",
+    "sha256": "8ea698c1fa4a0b5e7109bc929ee04dc7cf7b834a95a63b1dd60fef2d4d8c641d",
+    "n_chars": 24278
+  },
+  "22279": {
+    "label": "Chaos Labs Risk Stewards - adjust USDT interest rate curve (2025 thread)",
+    "url": "https://governance.aave.com/t/22279",
+    "raw_endpoint": "https://governance.aave.com/raw/22279",
+    "retrieved_utc": "2026-11-02T05:13:21Z",
+    "sha256": "f1a266f6be0a98c78500dfd463f5b293bf2bb72f96ba3c46e1276e1a1fa42420",
+    "n_chars": 28311
+  },
+  "22625": {
+    "label": "Risk Stewards interest rate update - WETH and wstETH Ethereum (2025)",
+    "url": "https://governance.aave.com/t/22625",
+    "raw_endpoint": "https://governance.aave.com/raw/22625",
+    "retrieved_utc": "2026-11-02T05:13:24Z",
+    "sha256": "ae162eb6285076c0e00ca922c659957957d2739da7ffd366d4b18634f1a7463c",
+    "n_chars": 9862
+  }
+}
