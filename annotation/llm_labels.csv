@@ -1,0 +1,17 @@
+action,rationale,kink_framing,temporary,evidence,evidence_verbatim,attempts
+A01,LIQUIDITY_BUFFER,KEEP_BELOW,no,"High utilization is poor UX for suppliers, as it can restrict their ability to withdraw an asset from the pool.",True,1
+A02,CAPITAL_EFFICIENCY,KEEP_BELOW,no,wETH Optimal Ratio on V3 | from 80% to 90%,True,1
+A03,LIQUIDITY_BUFFER,KEEP_BELOW,no,"Additionally, we propose reducing the `optimalRatio` to 80% to mitigate liquidity risks.",True,1
+A04,CAPITAL_EFFICIENCY,KEEP_BELOW,no,"raise Uopt to 90% for USDC, USDT, DAI, FRAX, where applicable, across all v3 deployments",True,1
+A05,CAPITAL_EFFICIENCY,PARAMETER_ONLY,no,,False,1
+A06,CAPITAL_EFFICIENCY,KEEP_BELOW,no,"This enhancement is facilitated by the substantial increase in slope1 to align rates with market demand, achieved by raising the optimal utilization (Uoptimal) from 90% to 92%.",True,1
+A07,RATE_STABILITY,KEEP_BELOW,yes,"Raising the UOptimal to 95% will meaningfully reduce the magnitude of liquidity needed to revert utilization below the kink, thereby enhancing the responsiveness of interest rates.",True,1
+A08,CAPITAL_EFFICIENCY,KEEP_BELOW,no,"To account for this significant change in the market, we propose reverting USDT’s IR curve to its parameters from before the withdrawal was conducted: increasing Slope 2 and decreasing UOptimal.",True,1
+A09,RATE_STABILITY,KEEP_BELOW,yes,"These changes are intended as short-term measures to buffer market stability during this period of heightened utilization, with the original parameters to be reinstated upon the anticipated redeposit of USDT by Huobi.",True,1
+A10,ALIGNMENT,SETTLE_AT,no,We will move forward and implement these updates via the Risk Steward process.,True,1
+A11,RATE_STABILITY,KEEP_BELOW,yes,To mitigate short-term rate spikes we propose temporary adjustments to the interest rate curves. These changes aim to soften the slope beyond the kink and expand the buffer before high rates are triggered.,True,1
+A12,RATE_STABILITY,KEEP_BELOW,yes,To reduce interest rate volatility we propose temporary adjustments to the interest rate curves which aim to further soften the slope beyond UOptimal and reduce stress on borrowers.,True,1
+A13,RATE_STABILITY,KEEP_BELOW,no,"To reduce volatility in the market and prepare to return the market to its original UOptimal, we recommend “flattening” the IR curve by increasing Slope1 slightly, to 3%, and reducing Slope2. Additionally, we recommend increasing UOptimal by 1pp to mitigate current rate fluctuations.",True,1
+A14,LIQUIDITY_BUFFER,KEEP_BELOW,no,"With market conditions now more stable, and the WETH utilization on Ethereum Core dropped below 92% we recommend gradually rolling back the previous changes to reintroduce a sufficient liquidity buffer between UOptimal and full utilization.",True,1
+A15,LIQUIDITY_BUFFER,KEEP_BELOW,no,"We recommend continuing to gradually roll back the increases, reintroducing a sufficient liquidity buffer between UOptimal and full utilization.",False,1
+A16,CAPITAL_EFFICIENCY,KEEP_BELOW,no,"This adjustment proved effective, as utilization stabilized and interest rate volatility remained minimal.",True,1
