@@ -1,0 +1,61 @@
+{
+  "rationale": {
+    "n": 16,
+    "agreement": 12,
+    "percent_agreement": 75.0,
+    "cohen_kappa": 0.644,
+    "confusion_researcher_by_model": {
+      "ALIGNMENT | ALIGNMENT": 1,
+      "CAPITAL_EFFICIENCY | CAPITAL_EFFICIENCY": 4,
+      "CAPITAL_EFFICIENCY | LIQUIDITY_BUFFER": 1,
+      "LIQUIDITY_BUFFER | CAPITAL_EFFICIENCY": 1,
+      "LIQUIDITY_BUFFER | LIQUIDITY_BUFFER": 3,
+      "LIQUIDITY_BUFFER | RATE_STABILITY": 1,
+      "RATE_STABILITY | CAPITAL_EFFICIENCY": 1,
+      "RATE_STABILITY | RATE_STABILITY": 4
+    },
+    "disagreements": [
+      "A03",
+      "A04",
+      "A08",
+      "A13"
+    ]
+  },
+  "kink_framing": {
+    "n": 16,
+    "agreement": 8,
+    "percent_agreement": 50.0,
+    "cohen_kappa": 0.21,
+    "confusion_researcher_by_model": {
+      "KEEP_BELOW | KEEP_BELOW": 6,
+      "PARAMETER_ONLY | KEEP_BELOW": 5,
+      "PARAMETER_ONLY | PARAMETER_ONLY": 1,
+      "SETTLE_AT | KEEP_BELOW": 3,
+      "SETTLE_AT | SETTLE_AT": 1
+    },
+    "disagreements": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A13",
+      "A14",
+      "A15",
+      "A16"
+    ]
+  },
+  "temporary": {
+    "n": 16,
+    "agreement": 15,
+    "percent_agreement": 93.8,
+    "cohen_kappa": 0.846,
+    "confusion_researcher_by_model": {
+      "no | no": 11,
+      "yes | no": 1,
+      "yes | yes": 4
+    },
+    "disagreements": [
+      "A15"
+    ]
+  }
+}
