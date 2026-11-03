@@ -1,17 +1,17 @@
 action,rationale,kink_framing,temporary,note
-A01,,,,
-A02,,,,
-A03,,,,
-A04,,,,
-A05,,,,
-A06,,,,
-A07,,,,
-A08,,,,
-A09,,,,
-A10,,,,
-A11,,,,
-A12,,,,
-A13,,,,
-A14,,,,
-A15,,,,
-A16,,,,
+A01,LIQUIDITY_BUFFER,PARAMETER_ONLY,no,there are two primary reasons to adjust an interest rate curve: mitigate the risk of 100% utilization in a pool and build reserves via protocol revenue to cover insolvencies or other expenses in the future. This is the purpose of parameter adjustment.
+A02,CAPITAL_EFFICIENCY,PARAMETER_ONLY,no,"By integrating liquid DSR deposit tokens (sDAI) as a collateral-only asset in the Aave V3 Ethereum pool, Aave can offer users the dual benefit of earning DSR yield while utilizing their assets as collateral."
+A03,CAPITAL_EFFICIENCY,SETTLE_AT,no,The proposed adjustment will make leverage loops more profitable for users.This is the purpose of parameter adjustment.
+A04,LIQUIDITY_BUFFER,PARAMETER_ONLY,no,"The reduction in DAI borrow rate volatility can also be attributed to this Uopt increase, which allowed more borrowers to come in at slope 1 borrow rates."
+A05,CAPITAL_EFFICIENCY,PARAMETER_ONLY,no,We propose updating the stETH and WETH risk parameters to be optimal and competitive in the current market landscape. This will maintain Aave’s position as the prime liquidity protocol by increasing our protocol attractiveness for users looking to maximize their capital efficiency.
+A06,CAPITAL_EFFICIENCY,KEEP_BELOW,no,"The recent surge in both supply and demand in stablecoin markets, combined with the limited use of supplied stablecoins as collateral, provides an opportunity to enhance capital efficiency in the market."
+A07,RATE_STABILITY,KEEP_BELOW,yes,"Following a renewed wave of USDT withdrawals by Huobi, further exacerbating rate volatility, we propose temporary adjustments to the IR parameters for USDT on the Aave V3 Ethereum deployment."
+A08,RATE_STABILITY,KEEP_BELOW,no,"This is the reason for taking countermeasures: Earlier this week, HTX, the largest USDT supplier on Aave, withdrew approximately 800 million USDT, which abruptly pushed the market utilization to 100%, triggering the jump in variable borrow rates to above UOptimal and spiking borrowing costs to around 40%."
+A09,RATE_STABILITY,KEEP_BELOW,yes,"Following a renewed wave of 1B USDT withdrawals by Huobi, further exacerbating rate volatility, we propose temporary adjustments to the IR parameters for USDT on the Aave V3 Ethereum deployment. Specifically, Chaos Labs recommends increasing the UOptimal from 92% to 94% and concurrently reducing the Slope2 parameter from 22.5% to 14%."
+A10,ALIGNMENT,SETTLE_AT,no,"Following the recent inflow of $1B in redeposits originating from Huobi, an event that has contributed to market stabilization, Chaos Labs recommends restoring the Optimal Utilization parameter to its standard target of 92%."
+A11,RATE_STABILITY,KEEP_BELOW,yes,"Huobi withdrew approximately 700 million USDT and 30,000 WETH from Aave V3 Ethereum, sharply increasing utilization on both assets. These actions have led to heightened interest rate volatility and elevated borrowing costs, impacting users reliant on rate stability."
+A12,RATE_STABILITY,KEEP_BELOW,yes,Chaos Labs recommends reducing the Slope2 and increasing the UOptimal parameters for WETH on Aave V3 Ethereum Core and Prime following more withdrawals by HTX and increased demand for leverage.
+A13,LIQUIDITY_BUFFER,SETTLE_AT,no,"The associated demand response stemming from leveraged LST/LRT collateralized debt positions with such thin margins makes it such that the primary mechanism of action to neutralize interest rate spikes stems from deleveraging with significant notional size, leading to adverse second order affects such as market price deviations and liquidity contractions, and thus an uptick in protocol duration risk via exit-queue deposits."
+A14,LIQUIDITY_BUFFER,SETTLE_AT,no,"With market conditions now more stable, and the WETH utilization on Ethereum Core dropped below 92% we recommend gradually rolling back the previous changes to reintroduce a sufficient liquidity buffer between UOptimal and full utilization."
+A15,LIQUIDITY_BUFFER,PARAMETER_ONLY,yes,"With continuing stable market conditions and decreasing WETH utilization, we recommend continuing to gradually roll back the increases, reintroducing a sufficient liquidity buffer between UOptimal and full utilization. We therefore propose adjusting UOptimal to 93%."
+A16,CAPITAL_EFFICIENCY,PARAMETER_ONLY,no,"Our prior changes have reduced UOptimal from 95% to 93% and lowered Slope1 from 3.00% to 2.80%, reintroducing a healthier liquidity buffer while maintaining attractive yields at the target utilization."
