@@ -72,3 +72,13 @@ The report gives the distribution of each label (overall, and for the six change
 - The comparison between governance-vote actions (2023–2024) and Risk Steward actions (2025) is descriptive: governance process and calendar period coincide, so differences between the groups cannot be attributed to the process.
 - A post states the proposer's reasons; other participants sometimes disagreed (for example Gauntlet opposed the change in A05), and those views are not labelled.
 - A recommendation in the same thread to raise the USDT kink to 95% on 17 July 2025 (post 22279/7) has no corresponding change in the daily on-chain data and is not a unit; changes made and reversed within one day would not be detected by daily sampling.
+
+## Post-hoc note (3 November 2026, after the model labels and the agreement statistics)
+
+**Arbitration.** Each disagreement was resolved by the researcher, assisted by an AI assistant (Claude), using the codebook rules, the passages of each unit that concern the kink and the researcher's own labelling notes; the assistant drafted a decision and reason for each, and the researcher reviewed and accepted them (`annotation/arbitration.csv`). Of the 13 disagreements, the final label is the researcher's in 3, the model's in 5 and neither in 5. The agreement statistics (`results/governance_agreement.json`) were committed before arbitration and are unaffected.
+
+**Model behaviour.** The model assigned `KEEP_BELOW` to 14 of the 16 units, so most of the disagreements on `kink_framing` reflect this tendency; after arbitration, `KEEP_BELOW` is the final label for 7 units.
+
+**Limitation of the procedure.** Only disagreements were arbitrated, as specified. Labels on which the researcher and the model agreed were not reviewed and may share errors; for example, in A02 both assigned `CAPITAL_EFFICIENCY`, although the motivation of that post concerns the onboarding of sDAI rather than the kink change. These labels are not changed.
+
+**Run.** The first model run stopped after unit A01 because the local Ollama server closed the connection. As specified, the partial output was kept (`annotation/llm_raw_outputs_interrupted_20261103.jsonl`) and all 16 units were labelled again with the unchanged prompt; the A01 labels were identical in both runs.

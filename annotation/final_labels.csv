@@ -1,0 +1,17 @@
+action,rationale,rationale_source,kink_framing,kink_framing_source,temporary,temporary_source
+A01,LIQUIDITY_BUFFER,agreement,PARAMETER_ONLY,researcher,no,agreement
+A02,CAPITAL_EFFICIENCY,agreement,PARAMETER_ONLY,researcher,no,agreement
+A03,LIQUIDITY_BUFFER,model,PARAMETER_ONLY,neither,no,agreement
+A04,CAPITAL_EFFICIENCY,model,SETTLE_AT,neither,no,agreement
+A05,CAPITAL_EFFICIENCY,agreement,PARAMETER_ONLY,agreement,no,agreement
+A06,CAPITAL_EFFICIENCY,agreement,KEEP_BELOW,agreement,no,agreement
+A07,RATE_STABILITY,agreement,KEEP_BELOW,agreement,yes,agreement
+A08,ALIGNMENT,neither,KEEP_BELOW,agreement,no,agreement
+A09,RATE_STABILITY,agreement,KEEP_BELOW,agreement,yes,agreement
+A10,ALIGNMENT,agreement,SETTLE_AT,agreement,no,agreement
+A11,RATE_STABILITY,agreement,KEEP_BELOW,agreement,yes,agreement
+A12,RATE_STABILITY,agreement,KEEP_BELOW,agreement,yes,agreement
+A13,RATE_STABILITY,model,KEEP_BELOW,model,no,agreement
+A14,LIQUIDITY_BUFFER,agreement,SETTLE_AT,researcher,no,agreement
+A15,LIQUIDITY_BUFFER,agreement,SETTLE_AT,neither,no,model
+A16,CAPITAL_EFFICIENCY,agreement,SETTLE_AT,neither,no,agreement

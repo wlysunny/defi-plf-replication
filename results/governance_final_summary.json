@@ -1,0 +1,54 @@
+{
+  "all": {
+    "rationale": {
+      "CAPITAL_EFFICIENCY": 5,
+      "RATE_STABILITY": 5,
+      "LIQUIDITY_BUFFER": 4,
+      "ALIGNMENT": 2
+    },
+    "kink_framing": {
+      "KEEP_BELOW": 7,
+      "SETTLE_AT": 5,
+      "PARAMETER_ONLY": 4
+    },
+    "temporary": {
+      "no": 12,
+      "yes": 4
+    }
+  },
+  "governance_votes_2023_2024": {
+    "rationale": {
+      "CAPITAL_EFFICIENCY": 4,
+      "LIQUIDITY_BUFFER": 2
+    },
+    "kink_framing": {
+      "PARAMETER_ONLY": 4,
+      "SETTLE_AT": 1,
+      "KEEP_BELOW": 1
+    },
+    "temporary": {
+      "no": 6
+    }
+  },
+  "risk_steward_2025": {
+    "rationale": {
+      "RATE_STABILITY": 5,
+      "ALIGNMENT": 2,
+      "LIQUIDITY_BUFFER": 2,
+      "CAPITAL_EFFICIENCY": 1
+    },
+    "kink_framing": {
+      "KEEP_BELOW": 6,
+      "SETTLE_AT": 4
+    },
+    "temporary": {
+      "no": 6,
+      "yes": 4
+    }
+  },
+  "arbitration_outcomes": {
+    "researcher": 3,
+    "model": 5,
+    "neither": 5
+  }
+}
