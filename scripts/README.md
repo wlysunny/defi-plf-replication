@@ -75,6 +75,14 @@ The exchange-rate fetcher that replaces CryptoCompare is part of the original pa
 | `make_update_figures.py` | committed data | `figures/update/` (figures of the progress presentation) |
 | `make_fig9_paper_style.py` | committed data | `figures/update/` (the paper's Figure 9 in the authors' own format, for the progress presentation) |
 
+## 7. Licensing of forum posts
+
+| Script | Reads | Writes | Purpose |
+|---|---|---|---|
+| `redact_governance_texts.py` | `data/governance/`, `annotation/llm_raw_outputs*.jsonl` | same files; `data/governance/post_manifest.json`, `data/governance/redaction_record.json` | Keeps posts with a CC0 waiver; replaces the others by URL and SHA-256 |
+| `restore_governance_texts.py` | forum (public raw endpoint), the two records | restored originals | Downloads the replaced posts, checks each hash and restores the files byte for byte |
+| `rewrite_governance_history.py` | Git history | rewritten history | Removed the replaced texts from earlier commits before publication (run once) |
+
 ## Order of execution
 
 **1. Collection** (network access, slow; all collected data are committed except governance forum posts without a CC0 waiver, which are stored as URL and SHA-256 and restored with `scripts/restore_governance_texts.py`; so this step is only needed to rebuild the data): `build_block_times.py`, `collect_onchain_cdai.py` (twice, with and without `--dense-2020`), `collect_aave_v3_subgraph.py --list-reserves`, `collect_aave_v3_subgraph.py`, `collect_aave_v3_rate_params.py`, `collect_governance_threads.py`. The UIP price caches are filled by `compounds_research/compound/fetch_exchange_rates_defillama.py`; the REP and SAI prices were downloaded by hand into `data/manual/raw/`.

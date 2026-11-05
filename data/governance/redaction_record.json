@@ -1,0 +1,6 @@
+{
+ "raw_outputs_sha256_before_redaction": {
+  "annotation/llm_raw_outputs.jsonl": "3ff8f0006ce5bb0bfaba898f6a6213cdcfa332cfef737b89966cd0a2ff4eaee9",
+  "annotation/llm_raw_outputs_interrupted_20261103.jsonl": "180b936b320a9a5041872d53e86a3ac0e77fd4af396ef83500ddceb39c1f5ea5"
+ }
+}
