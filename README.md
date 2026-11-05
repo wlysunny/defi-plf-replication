@@ -27,6 +27,7 @@ The work was carried out by Luyao Wang for COMP8240 Applications of Data Science
 | `figures/compound/`, `figures/aave/` | Authors | The authors' figures |
 | `README_original.md` | Authors | The authors' README, unchanged |
 | `report/` | This project | Final report: PDF and LaTeX source |
+| `REPLICATION_commit_map.tsv` | This project | Original and published hash of every rewritten commit |
 | `REPLICATION.md` | This project | Results, provenance and the order of every commit that matters |
 | `analysis_plans/` | This project | Criteria committed **before** each test, with appended amendments and post-hoc notes; annotation rules; the first (web-model) labelling record |
 | `scripts/` | This project | All code written for the replication; [`scripts/README.md`](scripts/README.md) lists what each script reads and writes, and the order to run them |
@@ -68,7 +69,7 @@ The report compiles from `report/main.tex` (`cd report && latexmk -pdf main.tex`
 These commands only redraw figures. Rerunning the analyses themselves (the reproduction of Tables 2 and A2–A7, the
 investigation, the tests on new data and the annotation agreement) follows the order in `REPLICATION.md`
 ("Reproducing the results"); `scripts/README.md` lists what each script reads and writes.
-All collected data are committed, so no network access or API key is needed to rerun the analyses.
+All collected data are committed (governance posts without a CC0 waiver as URL and hash; see "Licences"), so no API key is needed to rerun the analyses.
 The VECM needs Stata (`do scripts/vecm_replication.do`), which is not part of the conda environment.
 Rebuilding the data from scratch needs an archive Ethereum RPC endpoint (`ETH_RPC_URL`) and, for the subgraph, a Graph API key
 (`GRAPH_API_KEY`); no key is stored in the repository.
@@ -77,7 +78,7 @@ Rebuilding the data from scratch needs an archive Ethereum RPC endpoint (`ETH_RP
 
 Each test followed a criterion committed before its first result, except the UIP comparison, whose criterion was fixed after a first run.
 The order is recorded in the commit history and summarised, with hashes, in `REPLICATION.md`.
-Commit times are an auditable record, not proof.
+Commit times are an auditable record, not proof. The history was rewritten before publication (to remove unlicensed forum text, a revoked key and a private e-mail address); commit dates are kept, and `REPLICATION_commit_map.tsv` maps original to published hashes (see `REPLICATION.md`, "History of this repository").
 
 ## Licences
 
