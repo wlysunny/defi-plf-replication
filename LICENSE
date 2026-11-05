@@ -1,0 +1,66 @@
+Licensing of this repository
+============================
+
+This repository is a GitHub fork of danhper/defi-plf-analysis. Its files fall
+into three groups, and each group is covered by different terms.
+
+1. Files written by the original authors
+   (everything inherited from danhper/defi-plf-analysis, listed in README.md
+   under "What is where" as "Authors")
+   The original repository has no licence. These files are included only as
+   part of a GitHub fork, under GitHub's Terms of Service (section D.5).
+   Nothing in this file grants any licence to them.
+
+2. Files written for this replication (listed in README.md as "This project")
+
+   a. Code (all files in scripts/)
+      are licensed under the MIT License:
+
+      MIT License
+
+      Copyright (c) 2026 Luyao Wang
+
+      Permission is hereby granted, free of charge, to any person obtaining a copy
+      of this software and associated documentation files (the "Software"), to deal
+      in the Software without restriction, including without limitation the rights
+      to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+      copies of the Software, and to permit persons to whom the Software is
+      furnished to do so, subject to the following conditions:
+
+      The above copyright notice and this permission notice shall be included in all
+      copies or substantial portions of the Software.
+
+      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+      IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+      AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+      SOFTWARE.
+
+   b. All other files written or constructed for this replication:
+      README.md, REPLICATION.md, report/ (except the ACL style files),
+      analysis_plans/, annotation/, results/, the constructed data in
+      data/onchain/, data/aave_v3/, data/derived/ and data/manual/ (except
+      data/manual/raw/), the files this project generated in data/governance/
+      (annotation units, manifests, hashes and records; not the forum posts),
+      and the figures this project produced (figures/report_*, figures/appx_*,
+      figures/reproduction/, figures/update/; see section 3 for the paper's
+      figures shown in figures/appx_vecm_*.pdf)
+      is licensed under the Creative Commons Attribution 4.0 International
+      License (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/
+      Please cite: Luyao Wang (2026), Replicating "DeFi Protocols for Loanable
+      Funds" (Gudgeon et al., AFT 2020), https://github.com/wlysunny/defi-plf-replication
+
+3. Third-party material
+   - Aave governance forum posts stored in full in data/governance/ carry a CC0
+     waiver from their authors and remain under CC0. Other posts are not
+     stored; only their URL and the SHA-256 of their text are kept.
+   - Raw price downloads in data/manual/raw/ remain subject to their providers'
+     terms.
+   - The paper's Figures 11-14 shown beside our reproduction in
+     figures/appx_vecm_rates.pdf and figures/appx_vecm_irf.pdf are reproduced
+     from Gudgeon et al. (2020) for comparison, with attribution; the paper
+     itself is not redistributed here.
+   - report/acl.sty and report/acl_natbib.bst are the ACL style files, under
+     their own terms.

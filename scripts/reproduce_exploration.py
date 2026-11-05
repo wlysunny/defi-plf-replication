@@ -31,6 +31,8 @@ Run from the repository root:
     python scripts/reproduce_exploration.py
 """
 
+import matplotlib
+matplotlib.rcParams['savefig.bbox'] = 'tight'  # keep axis labels inside the saved figure
 import json
 import os
 import sys
